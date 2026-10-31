@@ -65,3 +65,38 @@ Document Version: 1.0.0
 - **Consequences**:
   - Eliminates silent schema drift.
   - Guarantees that mock data and production payloads stay aligned.
+
+---
+
+## ADR-006: No User Accounts or Login (Single-Citizen Ephemeral Sessions)
+
+- **Date**: 2026-10-30
+- **Status**: **ACCEPTED**
+- **Decision**: The application will have **no user accounts, passwords, phone OTPs, signups, or login mechanisms**. The product serves exactly one citizen per session, operates entirely in-memory, and stores nothing across visits. The entry screen prompts the user for two selections only:
+  1. Preferred Language (Hindi or English).
+  2. Device Ownership Mode ("My own phone" vs "Someone else's / Shared phone").
+- **Reasons**:
+  - **Privacy Guarantee**: Citizens routinely refuse to sign up or fear entering phone numbers due to spam, surveillance, or fraud concerns.
+  - **Shared-Phone & Kiosk Reality**: Citizens frequently use a shopkeeper's, neighbor's, relative's, or CSC kiosk phone. Eliminating accounts guarantees no login session, password, or profile is left behind for the next user.
+  - **Simplicity & Zero Barrier**: Enables an immediate 30-second start with zero friction.
+- **Consequences**:
+  - No database or backend authentication infrastructure required.
+  - "Shared phone" mode activates heightened privacy protections (accelerated idle auto-wipe, immediate purge on tab blur).
+  - All data vanishes when the session terminates or when "Clear Data" is clicked.
+
+---
+
+## ADR-007: Independent Civic Branding & Anti-Impersonation Disclaimers
+
+- **Date**: 2026-10-30
+- **Status**: **ACCEPTED**
+- **Decision**: The application adopts standard, accessible civic-portal design conventions (clean cards, accessible high contrast, clear typography) but maintains **independent branding** using its own name ("Citizen Scheme Assistant / नागरिक योजना सहायक"), bespoke logo, and neutral civic color palette. We **never** use the National Emblem of India (State Emblem / Ashoka Lion Capital), state government seals, ministry crests, or visual assets of existing government portals (like myScheme or India.gov.in). Every screen must visibly include the disclaimer:
+  > *"Independent project, not an official government website."* / *"स्वतंत्र परियोजना, आधिकारिक सरकारी वेबसाइट नहीं।"*
+- **Reasons**:
+  - **Citizen Protection & Trust**: Prevents citizens from mistaking an advisory hackathon tool for an official government portal where formal applications are registered.
+  - **Legal & Ethical Compliance**: Strict adherence to the State Emblem of India (Prohibition of Improper Use) Act and ethical civic-tech design standards.
+- **Consequences**:
+  - All UI headers/footers must prominently display the disclaimer banner.
+  - Scheme results must clearly separate our independent evaluation from the clickable official government source link (`.gov.in`).
+
+

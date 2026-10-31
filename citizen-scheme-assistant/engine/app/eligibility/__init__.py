@@ -1,0 +1,1 @@
+"""Deterministic, ephemeral eligibility evaluation."""

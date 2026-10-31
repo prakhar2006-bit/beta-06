@@ -28,16 +28,18 @@ Do not cross boundaries. Each team member owns their dedicated directory:
 1. **Zero Scheme Logic in Frontend**: `frontend/` renders UI and collects answers. It must **never** contain scheme eligibility thresholds, conditions, or hardcoded scheme rules.
 2. **Rules Live Only in `data/schemes/`**: All scheme thresholds, age limits, required documents, and official URLs reside strictly in individual JSON files under `data/schemes/`.
 3. **No Hardcoded UI Strings**: All user-facing text in `frontend/` must use localized string keys (`hi` and `en`).
-4. **Never Guess or Invent**:
-   - Never say "Eligible" when data is missing or borderline; use status `"UNCERTAIN"`.
-   - Never hallucinate government URLs, income limits, or rules.
-5. **No Persistent PII Storage**: Assume the citizen is using a shopkeeper's or relative's phone. Never persist citizen inputs in permanent server databases. Provide an explicit "Clear Session" action.
-6. **Contracts are Sacred**: Changes to `contracts/` break cross-team integration. Any change requires unanimous team consent and an entry in `docs/DECISIONS.md`.
+4. **Never Guess or Invent**: Never say "Eligible" when data is missing/borderline (use `"UNCERTAIN"`). Never hallucinate government URLs, income limits, or rules.
+5. **No Accounts or Persistent PII**: Serves one citizen per session; stores zero data across visits. The entry screen asks only for Language (`hi`/`en`) and Device Mode (Own phone vs Shared phone).
+6. **Independent Branding & Disclaimer**: Use our own name, logo, and palette. Never use the National Emblem, official seals, or government logos. Every screen displays: *"Independent project, not an official government website."*
+7. **Contracts are Sacred**: Changes to `contracts/` break cross-team integration. Any change requires unanimous team consent and an entry in `docs/DECISIONS.md`.
 
 ---
 
 ## 4. How the Flow Works
 ```
+[Entry Screen: Language (hi/en) + Device Mode (Own vs Shared Phone)]
+           │
+           ▼
 [Citizen Answers via Voice/Tap]
            │
            ▼
@@ -51,6 +53,7 @@ Do not cross boundaries. Each team member owns their dedicated directory:
            │
            ▼
      frontend/ renders:
+     ├── Prominent Disclaimer: "Independent project, not an official government website"
      ├── Simple eligibility status (Eligible / Not Eligible / Uncertain)
      ├── "Why" rule explanation in Hindi/English
      ├── Printable / Downloadable Document Checklist
@@ -62,3 +65,4 @@ Do not cross boundaries. Each team member owns their dedicated directory:
 ## 5. Current Project Status
 - Phase: **Repository & Documentation Setup** (No application code is written yet).
 - Next Step: Finalize contracts and initial 5 scheme JSON definitions in `data/schemes/`.
+

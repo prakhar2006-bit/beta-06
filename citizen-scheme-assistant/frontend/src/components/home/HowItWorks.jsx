@@ -1,81 +1,35 @@
 import React from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
-import { UserCheck, Compass, FileCheck2 } from 'lucide-react';
 
 export const HowItWorks = ({ className = '' }) => {
   const { t } = useLanguage();
-
   const steps = [
-    {
-      number: '01',
-      icon: UserCheck,
-      titleKey: 'step1Title',
-      descKey: 'step1Desc',
-      accentColor: 'border-orange-200/80 text-orange-600 bg-orange-50/80',
-    },
-    {
-      number: '02',
-      icon: Compass,
-      titleKey: 'step2Title',
-      descKey: 'step2Desc',
-      accentColor: 'border-blue-200/80 text-blue-600 bg-blue-50/80',
-    },
-    {
-      number: '03',
-      icon: FileCheck2,
-      titleKey: 'step3Title',
-      descKey: 'step3Desc',
-      accentColor: 'border-emerald-200/80 text-emerald-700 bg-emerald-50/80',
-    },
+    { number: '01', titleKey: 'step1Title', descKey: 'step1Desc' },
+    { number: '02', titleKey: 'step2Title', descKey: 'step2Desc' },
+    { number: '03', titleKey: 'step3Title', descKey: 'step3Desc' },
   ];
 
   return (
-    <section id="how-it-works" className={`py-12 md:py-16 relative ${className}`}>
+    <section id="how-it-works" className={`py-24 md:py-32 relative bg-stone-100/70 ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Heading */}
-        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
-          <span className="inline-block px-3.5 py-1 rounded-full glass-card-subtle text-[11px] font-bold text-orange-700 uppercase tracking-wider mb-2">
-            Transparent Process
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        <div className="max-w-2xl mb-12 md:mb-16">
+          <p className="eyebrow mb-4">Transparent process</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mb-3">
             {t('howItWorksHeading', 'How Scheme Sahayak Works')}
           </h2>
-          <p className="text-sm text-slate-600">
+          <p className="text-base text-stone-500">
             {t('howItWorksSubheading', 'Three straightforward steps to identify and claim your citizen entitlements')}
           </p>
         </div>
-
-        {/* 3 Step Glass Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {steps.map((step, idx) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={step.number}
-                className="relative glass-panel rounded-[28px] p-6 shadow-glass flex flex-col"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-2xs ${step.accentColor}`}>
-                      <Icon className="w-6 h-6" aria-hidden="true" />
-                    </div>
-                    <span className="text-3xl font-black text-slate-300/80">{step.number}</span>
-                  </div>
-
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2">{t(step.titleKey)}</h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">{t(step.descKey)}</p>
-                </div>
-
-                <div className="mt-5 pt-3 border-t border-white/60 flex items-center justify-between text-xs font-semibold text-slate-400">
-                  <span>Step {idx + 1} of 3</span>
-                  <div className="w-2 h-2 rounded-full bg-orange-400" />
-                </div>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-stone-300">
+          {steps.map((step) => (
+            <div key={step.number} className="relative pt-6 md:pr-10 md:mr-10 border-b md:border-b-0 md:border-r border-stone-300 last:border-0 pb-8 md:pb-0">
+              <span className="text-sm font-mono text-orange-700 mb-5 block">{step.number}</span>
+              <h3 className="text-lg font-bold text-slate-950 mb-3">{t(step.titleKey)}</h3>
+              <p className="text-sm text-stone-600 leading-relaxed font-normal">{t(step.descKey)}</p>
+            </div>
+          ))}
         </div>
-
       </div>
     </section>
   );

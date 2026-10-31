@@ -46,13 +46,15 @@ Hundreds of millions of citizens across India qualify for central and state welf
 - Modular maintainability: Adding or updating a scheme must require only editing a single JSON file without altering application code.
 
 ### Non-Goals
+- We do **not** support user accounts, passwords, login, phone numbers, or registration. The tool serves one citizen per session and stores nothing across visits.
+- We do **not** use official-look branding or government impersonation. We never use the National Emblem of India, state/central seals, ministry logos, or existing portal branding (e.g., myScheme, India.gov.in). Every screen displays: *"Independent project, not an official government website."*
 - We are **not** an official application filing portal; we do not submit forms to government ministries.
 - We do **not** verify identity credentials (no biometric Aadhaar e-KYC or OTP banking integration).
 - We do **not** scrape live government portals in real-time during user queries (all rules are pre-structured and versioned to ensure determinism and zero downtime).
 
 ---
 
-## 4. Requirements Matrix (R1 – R10)
+## 4. Requirements Matrix (R1 – R11)
 
 | Req ID | Requirement Description | Acceptance Criteria | Priority | Owner |
 | :--- | :--- | :--- | :--- | :--- |
@@ -66,16 +68,18 @@ Hundreds of millions of citizens across India qualify for central and state welf
 | **R8** | **Zero-Code Scheme Extensibility** | • Adding or modifying a scheme requires creating/editing only one JSON file in `data/schemes/`.<br>• Requires no changes to `frontend/` or `engine/` logic.<br>• Strict automated schema validation via `contracts/scheme.schema.json`. | P0 | Data + Engine (Owner: TBD) |
 | **R9** | **Shared-Phone Privacy & Ephemeral Data** | • No personal data (income, age, caste, land) stored in permanent databases, remote servers, or persistent cookies.<br>• Prominent "Clear My Data / नया नागरिक" button on all screens.<br>• Automatic session wipe on inactivity timeout (5 minutes) or browser tab close. | P0 | Frontend + Docs (User & Owner: TBD) |
 | **R10** | **Graceful Offline / Low-Bandwidth Handling** | • Frontend bundle loads reliably under slow 3G network conditions.<br>• Scheme assets and rule evaluations happen client-side or with minimal payload round-trips. | P1 | Frontend (User) |
+| **R11** | **Entry Onboarding (Language & Device Mode)** | • Entry screen prompts for two fundamental choices before asking any personal questions:<br>&nbsp;&nbsp;1. Language: Hindi (हिंदी) or English.<br>&nbsp;&nbsp;2. Device Mode: "My own phone" (मेरा अपना फ़ोन) vs "Someone else's / Shared phone" (किसी और का / साझा फ़ोन).<br>• "Shared phone" mode activates strict defenses: shorter idle auto-wipe (2 mins), immediate purge on tab blur/hidden state, and disabled form history.<br>• Every screen displays the mandatory independent disclaimer: *"Independent project, not an official government website."* | P0 | Frontend (User) |
 
 ---
 
 ## 5. Screen Inventory
 
-1. **Screen 1: Welcome & Language/Voice Selector (`/`)**
+1. **Screen 1: Welcome & Onboarding (`/`)**
+   - Independent branding with mandatory disclaimer: *"Independent project, not an official government website / स्वतंत्र परियोजना, आधिकारिक सरकारी वेबसाइट नहीं।"*
    - Immediate audio greeting in Hindi: *"नमस्ते! जानिए आपके लिए सरकारी योजनाएं।"*
-   - Large touch targets to toggle Hindi or English.
-   - Mic permissions check and quick test.
-   - Reassurance banner: *"आपका डेटा इस फ़ोन पर सुरक्षित रहेगा और कभी सेव नहीं होगा।"*
+   - Language switch buttons: **हिंदी** / **English**.
+   - Device Ownership Selector: **"मेरा अपना फ़ोन (My own phone)"** vs **"किसी और का / साझा फ़ोन (Shared phone)"**.
+   - Reassurance banner: *"कोई खाता या पासवर्ड नहीं। आपका डेटा इस फ़ोन पर कभी सेव नहीं होगा।"*
 
 2. **Screen 2: Guided Question Flow (`/check`)**
    - Single-question-at-a-time focus for low-cognitive burden.
@@ -137,3 +141,4 @@ The problem statement proposes 5 specific edge scenarios. Our designated respons
 | **Government rule changes during hackathon** | Medium | Schemes maintain a `last_checked_date` field in JSON. Rules are decoupled from frontend code. |
 | **Dialect & accent variations in Hindi** | Medium | Offer simple numeric/tap options alongside voice input. Handle standard Hindi synonyms in speech parsing. |
 | **Team merge collisions** | High | Rigid folder separation enforced by `AGENTS.md` and schema contracts. |
+

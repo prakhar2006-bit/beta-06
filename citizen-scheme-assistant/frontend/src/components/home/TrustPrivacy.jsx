@@ -1,80 +1,34 @@
 import React from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
-import { ShieldCheck, Lock, ExternalLink, UserX } from 'lucide-react';
 
 export const TrustPrivacy = ({ className = '' }) => {
   const { t } = useLanguage();
-
   const trustPoints = [
-    {
-      icon: Lock,
-      titleKey: 'trustPoint1Title',
-      descKey: 'trustPoint1Desc',
-      color: 'bg-emerald-100/80 text-emerald-700 border-emerald-200/60',
-    },
-    {
-      icon: ShieldCheck,
-      titleKey: 'trustPoint2Title',
-      descKey: 'trustPoint2Desc',
-      color: 'bg-blue-100/80 text-blue-700 border-blue-200/60',
-    },
-    {
-      icon: ExternalLink,
-      titleKey: 'trustPoint3Title',
-      descKey: 'trustPoint3Desc',
-      color: 'bg-orange-100/80 text-orange-700 border-orange-200/60',
-    },
-    {
-      icon: UserX,
-      titleKey: 'trustPoint4Title',
-      descKey: 'trustPoint4Desc',
-      color: 'bg-purple-100/80 text-purple-700 border-purple-200/60',
-    },
+    { number: '01', titleKey: 'trustPoint1Title', descKey: 'trustPoint1Desc' },
+    { number: '02', titleKey: 'trustPoint2Title', descKey: 'trustPoint2Desc' },
+    { number: '03', titleKey: 'trustPoint3Title', descKey: 'trustPoint3Desc' },
+    { number: '04', titleKey: 'trustPoint4Title', descKey: 'trustPoint4Desc' },
   ];
 
   return (
-    <section id="about" className={`py-12 md:py-16 relative ${className}`}>
+    <section id="about" className={`py-24 md:py-32 relative ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
-          <span className="inline-block px-3.5 py-1 rounded-full glass-card-subtle text-[11px] font-bold text-emerald-800 uppercase tracking-wider mb-2">
-            Safety & Integrity
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        <div className="max-w-2xl mb-12 md:mb-16">
+          <p className="eyebrow mb-4">Safety & integrity</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mb-3">
             {t('trustHeading', 'Built on Trust, Privacy, and Official Sources')}
           </h2>
-          <p className="text-sm text-slate-600">
-            {t(
-              'trustSubheading',
-              'Scheme Sahayak is designed specifically for public benefit and shared-phone safety.'
-            )}
-          </p>
+          <p className="text-base text-stone-500">{t('trustSubheading', 'Scheme Sahayak is designed specifically for public benefit and shared-phone safety.')}</p>
         </div>
-
-        {/* 4 Feature Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {trustPoints.map((point) => {
-            const Icon = point.icon;
-            return (
-              <div
-                key={point.titleKey}
-                className="glass-panel rounded-[26px] p-6 shadow-glass flex flex-col"
-              >
-                <div>
-                  <div
-                    className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 border shadow-2xs ${point.color}`}
-                  >
-                    <Icon className="w-5 h-5" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5">{t(point.titleKey)}</h3>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">{t(point.descKey)}</p>
-                </div>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-stone-300">
+          {trustPoints.map((point) => (
+            <div key={point.titleKey} className="px-6 sm:px-7 lg:px-8 pt-8 pb-9 lg:pb-2 border-b lg:border-b-0 lg:border-r border-stone-300 last:border-0 first:pl-0 last:pr-0 sm:first:pl-0 sm:last:pr-0">
+              <span className="text-sm font-mono text-orange-700 mb-7 block">{point.number}</span>
+              <h3 className="text-base sm:text-[17px] font-bold text-slate-950 leading-snug mb-4 max-w-[17rem]">{t(point.titleKey)}</h3>
+              <p className="text-sm text-stone-600 leading-7 max-w-[18rem]">{t(point.descKey)}</p>
+            </div>
+          ))}
         </div>
-
       </div>
     </section>
   );

@@ -44,3 +44,19 @@ You are only authorized to generate or modify code in the folder assigned for yo
 - Do not combine refactorings with feature additions.
 - If a task involves updating documentation and code, keep them clearly partitioned.
 - Ensure all JSON schemas, mock data, and test cases validate before concluding your turn.
+
+---
+
+## Rule 7: No Accounts, Registration, or Login Flows
+- Never implement user registration, login screens, passwords, phone number OTPs, or persistent citizen accounts.
+- The product serves exactly one citizen per session and stores nothing across visits.
+- The entry screen asks only for Language (`hi` / `en`) and Device Mode ("My own phone" vs "Someone else's / Shared phone").
+
+---
+
+## Rule 8: Independent Civic Branding & Mandatory Disclaimer
+- Never use the National Emblem of India (Ashoka Lion Capital), state or national government seals, ministry crests, or visual assets of existing government portals (like myScheme or India.gov.in).
+- Use our independent name ("Citizen Scheme Assistant / नागरिक योजना सहायक"), bespoke logo, and neutral palette.
+- Every page and screen must prominently show the disclaimer: *"Independent project, not an official government website."* / *"स्वतंत्र परियोजना, आधिकारिक सरकारी वेबसाइट नहीं।"*
+
+

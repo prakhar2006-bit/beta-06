@@ -79,3 +79,4 @@ The engine responds with a list of evaluated scheme verdicts:
 1. Schemas in `contracts/` are shared code assets.
 2. Any modification requires an entry in `docs/DECISIONS.md` under an Architecture Decision Record (ADR).
 3. Any pull request touching `contracts/` must be reviewed and approved by all module owners (Frontend, Engine, Data).
+

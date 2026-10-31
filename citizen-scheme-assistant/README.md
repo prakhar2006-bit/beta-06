@@ -65,3 +65,4 @@ citizen-scheme-assistant/
 - **System Architecture**: See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
 - **Contributing Guidelines**: See [CONTRIBUTING.md](./CONTRIBUTING.md).
 - **Technical Decisions**: See [docs/DECISIONS.md](./docs/DECISIONS.md).
+

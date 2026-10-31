@@ -29,7 +29,7 @@ export const SearchBar = ({ onSearch, initialValue = '', className = '' }) => {
   return (
     <div className={`w-full max-w-4xl mx-auto ${className}`}>
       <form onSubmit={handleSubmit} className="relative">
-        <div className="glass-panel rounded-full p-2 pl-4 flex items-center shadow-glass border border-white/80 focus-within:border-orange-400 focus-within:ring-4 focus-within:ring-orange-100/50 transition-all">
+        <div className="bg-white p-1.5 pl-4 flex items-center border border-stone-300 focus-within:border-slate-950 focus-within:ring-2 focus-within:ring-slate-950/10 transition-all">
           <div className="pr-2 text-slate-400">
             <Search className="w-5 h-5" aria-hidden="true" />
           </div>
@@ -41,15 +41,15 @@ export const SearchBar = ({ onSearch, initialValue = '', className = '' }) => {
               'searchPlaceholder',
               'Search schemes by name, keyword or benefit (e.g., KISAN, Awas, Pension)...'
             )}
-            className="w-full py-2.5 pr-3 text-slate-900 placeholder-slate-400 bg-transparent text-xs sm:text-sm font-medium focus:outline-none"
+            className="w-full py-3 pr-3 text-slate-900 placeholder-stone-400 bg-transparent text-xs sm:text-sm font-medium focus:outline-none"
             aria-label="Search schemes"
           />
           <button
             type="submit"
-            className="glass-dark-pill shrink-0 px-5 py-2.5 rounded-full text-xs font-semibold text-white tracking-wide hover:bg-black transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+            className="bg-slate-950 shrink-0 px-5 py-3 text-xs font-semibold text-white tracking-wide hover:bg-orange-700 transition-colors flex items-center gap-1.5 active:scale-[.98]"
           >
             <span>{t('searchButton', 'Search Schemes')}</span>
-            <div className="w-4 h-4 rounded-full bg-white/20 flex items-center justify-center">
+            <div className="w-4 h-4 flex items-center justify-center">
               <ArrowRight className="w-2.5 h-2.5 text-white" />
             </div>
           </button>
@@ -57,14 +57,14 @@ export const SearchBar = ({ onSearch, initialValue = '', className = '' }) => {
       </form>
 
       {/* Popular quick tags */}
-      <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500">
-        <span className="font-semibold text-slate-600">{t('popularSearchesLabel', 'Popular:')}</span>
+      <div className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-stone-300">
+        <span className="font-semibold text-stone-300">{t('popularSearchesLabel', 'Popular:')}</span>
         {['PM-KISAN', 'Awas Yojana', 'Ujjwala', 'Vishwakarma', 'Ayushman', 'Ladli Behna'].map((tag) => (
           <button
             key={tag}
             type="button"
             onClick={() => handleQuickTag(tag)}
-            className="glass-card-subtle px-3 py-1 rounded-full text-slate-700 hover:text-slate-950 hover:bg-white transition-all shadow-2xs text-[11px] font-semibold"
+            className="text-stone-200 underline decoration-white/30 underline-offset-4 hover:text-orange-300 transition-colors text-[11px] font-semibold hover:-translate-y-0.5"
           >
             {tag}
           </button>

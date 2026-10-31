@@ -69,3 +69,4 @@ To ensure consistency across the UI, decision explanations, voice prompts, and d
 | **Gram Panchayat** | ग्राम पंचायत | ग्राम प्रधान या पंचायत सचिव का कार्यालय |
 | **Tehsil / Sub-Divisional Office** | तहसील / एसडीएम कार्यालय | ब्लॉक या तहसील मुख्यालय |
 | **Post Office Bank** | डाकघर बचत बैंक (IPPB) | निकटतम शाखा या डाकिया के माध्यम से |
+

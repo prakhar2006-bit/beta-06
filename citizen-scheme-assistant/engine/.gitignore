@@ -1,0 +1,8 @@
+# Supabase link metadata and local generated state.
+supabase/.temp/
+supabase/.branches/
+*.crt
+*.cer
+*.pem
+# Archive audit copies, quarantined scripts and local preparation manifests.
+.phase3-output/

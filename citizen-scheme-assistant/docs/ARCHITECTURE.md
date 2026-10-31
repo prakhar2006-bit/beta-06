@@ -100,3 +100,4 @@ flowchart TD
 
 7. **Step 7: Session Wipe**  
    Upon tapping "Clear Data / नया नागरिक" or on browser session termination, all answers and evaluations are purged from device memory.
+

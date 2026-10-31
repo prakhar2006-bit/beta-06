@@ -1049,5 +1049,186 @@ export const MOCK_SCHEMES = [
       },
     ],
   },
+   {
+    id: 'ksb-home-loan-interest-subsidy',
+    code: 'ksb-home-loan-interest-subsidy',
+    name: {
+      en: 'Financial Assistance as Interest Subsidy on Home Loan (Ex-Servicemen)',
+      hi: 'गृह ऋण पर ब्याज सब्सिडी के रूप में वित्तीय सहायता (पूर्व सैनिक)',
+    },
+    short_name: 'Ex-Servicemen Home Loan Interest Subsidy',
+    category: 'housing',
+    level: 'central',
+    state_code: 'ALL',
+    applicable_states: ['ALL'],
+    featured: false,
+    description: {
+      en: 'Relief from the Kendriya Sainik Board for war widows, war-bereaved families, war-disabled personnel and attributable peacetime casualties (all ranks): the Government pays back 50% of the interest on a home loan.',
+      hi: 'केंद्रीय सैनिक बोर्ड की ओर से युद्ध विधवाओं, युद्ध में शहीद सैनिकों के परिवारों, युद्ध में विकलांग हुए सैनिकों और शांतिकाल में सेवा के कारण हताहत हुए (सभी रैंक) सैनिकों को गृह ऋण के ब्याज का 50% वापस।',
+    },
+    benefits: {
+      en: '50% of the interest on your home loan is reimbursed. Only up to ₹1,00,000 of the loan is counted, even if your loan is larger. The subsidy runs for at most 5 years, or until the loan is repaid, whichever is earlier. The loan must be from a bank, a Government or public sector undertaking, LIC, GIC or HUDCO. Payment is made online after approval, when funds are available.',
+      hi: 'आपके गृह ऋण के ब्याज का 50% लौटाया जाता है। ऋण चाहे अधिक हो, केवल ₹1,00,000 तक के ऋण को गिना जाता है। सब्सिडी अधिकतम 5 वर्ष, या ऋण चुकने तक, जो भी पहले हो, मिलती है। ऋण बैंक, सरकारी या सार्वजनिक क्षेत्र के उपक्रम, एलआईसी, जीआईसी या हुडको से लिया होना चाहिए। मंज़ूरी के बाद, धन उपलब्ध होने पर भुगतान ऑनलाइन होता है।',
+    },
+    official_source: {
+      url: 'https://www.ksb.gov.in/',
+      last_checked_date: null, // TODO: set when verified
+      issuing_ministry: {
+        en: 'Kendriya Sainik Board, Department of Ex-Servicemen Welfare, Ministry of Defence',
+        hi: 'केंद्रीय सैनिक बोर्ड, पूर्व सैनिक कल्याण विभाग, रक्षा मंत्रालय',
+      },
+      gazette_or_order_ref: null,
+    },
+    criteria: [
+      {
+        id: 'crit-ksb-applicant-category',
+        field: 'servicemen_welfare_category',
+        operator: 'IN',
+        target_value: ['WAR_WIDOW', 'WAR_BEREAVED_FAMILY', 'WAR_DISABLED', 'ATTRIBUTABLE_PEACETIME_CASUALTY'],
+        criticality: 'MANDATORY',
+        explanation_if_met: {
+          en: 'You are a war widow, a member of a war-bereaved family, war-disabled personnel, or an attributable peacetime casualty (all ranks).',
+          hi: 'आप युद्ध विधवा, युद्ध में शहीद सैनिक के परिवार के सदस्य, युद्ध में विकलांग हुए सैनिक, या शांतिकाल में सेवा के कारण हताहत (सभी रैंक) हैं।',
+        },
+        explanation_if_violated: {
+          en: 'The scheme is only for war widows, war-bereaved families, war-disabled personnel and attributable peacetime casualties. Other ex-servicemen are not covered.',
+          hi: 'यह योजना केवल युद्ध विधवाओं, शहीद सैनिकों के परिवारों, युद्ध में विकलांग सैनिकों और शांतिकाल में सेवा के कारण हताहत सैनिकों के लिए है। अन्य पूर्व सैनिक शामिल नहीं हैं।',
+        },
+      },
+      {
+        // CONFIRM: Eligibility says a loan from "a bank", but the FAQ says a loan from a
+        // private bank does not count ("only approved banks, government/public sector
+        // undertakings, LIC, GIC and HUDCO"). The source does not say which banks are
+        // "approved". Check the KSB scheme page and add the correct list of lender types.
+        id: 'crit-ksb-approved-lender',
+        field: 'home_loan_lender_type',
+        operator: 'IN',
+        target_value: ['APPROVED_BANK', 'GOVT_PSU', 'LIC', 'GIC', 'HUDCO'],
+        criticality: 'MANDATORY',
+        explanation_if_met: {
+          en: 'Your home loan is from an approved bank, a Government or public sector undertaking, LIC, GIC or HUDCO.',
+          hi: 'आपका गृह ऋण किसी मान्य बैंक, सरकारी या सार्वजनिक क्षेत्र के उपक्रम, एलआईसी, जीआईसी या हुडको से है।',
+        },
+        explanation_if_violated: {
+          en: 'The home loan must be from an approved bank, a Government or public sector undertaking, LIC, GIC or HUDCO. A loan from a private lender may not count.',
+          hi: 'गृह ऋण किसी मान्य बैंक, सरकारी या सार्वजनिक क्षेत्र के उपक्रम, एलआईसी, जीआईसी या हुडको से होना चाहिए। निजी ऋणदाता से लिया ऋण मान्य नहीं हो सकता।',
+        },
+      },
+      {
+        // From the documents section: the banker must certify that repayment of the loan and
+        // interest was regular and the repayment schedule has not changed. It is not in the
+        // Eligibility list, but without it the claim cannot be made. CONFIRM.
+        id: 'crit-ksb-regular-repayment',
+        field: 'loan_repayment_regular',
+        operator: 'EQUALS',
+        target_value: true,
+        criticality: 'MANDATORY',
+        explanation_if_met: {
+          en: 'You have repaid the loan and interest regularly, and the repayment schedule has not been changed.',
+          hi: 'आपने ऋण और ब्याज नियमित रूप से चुकाया है और चुकौती की समय-सारणी में कोई बदलाव नहीं हुआ है।',
+        },
+        explanation_if_violated: {
+          en: 'The bank must certify that repayment was regular and the schedule did not change. Irregular repayment can block the claim.',
+          hi: 'बैंक को प्रमाणित करना होता है कि चुकौती नियमित रही और समय-सारणी नहीं बदली। अनियमित चुकौती से दावा रुक सकता है।',
+        },
+      },
+      // Not a criterion: the ₹1,00,000 limit is a cap on the loan amount counted, not a reason
+      // to refuse (the source says "regardless of the actual loan amount").
+    ],
+    required_documents: [
+      {
+        id: 'doc-ksb-ex-servicemen-id',
+        title: { en: 'Ex-Servicemen Identity Card (attested copy)', hi: 'पूर्व सैनिक पहचान पत्र (सत्यापित प्रति)' },
+        issuing_authority: { en: 'Armed Forces / Department of Ex-Servicemen Welfare', hi: 'सशस्त्र बल / पूर्व सैनिक कल्याण विभाग' },
+        optional: false,
+        guidance: { en: 'A duly attested copy.', hi: 'विधिवत सत्यापित प्रति।' },
+      },
+      {
+        // CONFIRM: for a war widow or war-bereaved family, the Discharge Book would be the
+        // soldier’s, and may not exist. Check with the District Sainik Board what they accept.
+        id: 'doc-ksb-discharge-book',
+        title: { en: 'Discharge Book (attested copy)', hi: 'डिस्चार्ज बुक (सत्यापित प्रति)' },
+        issuing_authority: { en: 'Armed Forces', hi: 'सशस्त्र बल' },
+        optional: false,
+        guidance: { en: 'A duly attested copy.', hi: 'विधिवत सत्यापित प्रति।' },
+      },
+      {
+        id: 'doc-ksb-no-change-cert',
+        title: { en: 'Certificate that the repayment schedule has not changed', hi: 'प्रमाण पत्र कि चुकौती की समय-सारणी में बदलाव नहीं हुआ' },
+        issuing_authority: { en: 'Your bank or lender (Government/PSU, LIC, GIC, HUDCO)', hi: 'आपका बैंक या ऋणदाता (सरकारी/पीएसयू, एलआईसी, जीआईसी, हुडको)' },
+        optional: false,
+        guidance: { en: 'Ask your lender for this certificate.', hi: 'यह प्रमाण पत्र अपने ऋणदाता से लें।' },
+      },
+      {
+        id: 'doc-ksb-interest-statement',
+        title: { en: 'Statement of interest actually paid for the claim period', hi: 'दावे की अवधि में वास्तव में चुकाए गए ब्याज का विवरण' },
+        issuing_authority: { en: 'Your bank or lender', hi: 'आपका बैंक या ऋणदाता' },
+        optional: false,
+        guidance: { en: 'Shows the interest you paid.', hi: 'आपके द्वारा चुकाया गया ब्याज दर्शाता है।' },
+      },
+      {
+        id: 'doc-ksb-regular-repayment-cert',
+        title: { en: 'Certificate that loan and interest were repaid regularly', hi: 'प्रमाण पत्र कि ऋण और ब्याज नियमित रूप से चुकाए गए' },
+        issuing_authority: { en: 'Your bank or lender', hi: 'आपका बैंक या ऋणदाता' },
+        optional: false,
+        guidance: { en: 'Ask your lender for this certificate.', hi: 'यह प्रमाण पत्र अपने ऋणदाता से लें।' },
+      },
+      {
+        // Listed only in the online upload step, not in "Documents Required". CONFIRM.
+        id: 'doc-ksb-photo',
+        title: { en: 'Photograph', hi: 'फ़ोटो' },
+        issuing_authority: { en: 'Self', hi: 'स्वयं' },
+        optional: false,
+        guidance: { en: 'To upload with the online application.', hi: 'ऑनलाइन आवेदन के साथ अपलोड करने के लिए।' },
+      },
+      {
+        id: 'doc-ksb-bank-passbook',
+        title: { en: 'Bank passbook', hi: 'बैंक पासबुक' },
+        issuing_authority: { en: 'Bank', hi: 'बैंक' },
+        optional: false,
+        guidance: { en: 'The subsidy is paid online into your bank account.', hi: 'सब्सिडी ऑनलाइन आपके बैंक खाते में आती है।' },
+      },
+      {
+        // CONFIRM: the upload step also mentions a caste certificate and a residential
+        // certificate. These look copied from another scheme (the same page even says
+        // "eligible students"). Not in the Documents Required list. Ask the District Sainik
+        // Board whether they are really needed.
+        id: 'doc-ksb-residential-cert',
+        title: { en: 'Residential certificate and caste certificate', hi: 'निवास प्रमाण पत्र और जाति प्रमाण पत्र' },
+        issuing_authority: { en: 'Competent authority', hi: 'सक्षम प्राधिकारी' },
+        optional: true,
+        guidance: {
+          en: 'The online form mentions these, but the document list does not. Check with your District Sainik Board before arranging them.',
+          hi: 'ऑनलाइन फ़ॉर्म में इनका उल्लेख है, पर दस्तावेज़ सूची में नहीं। इन्हें बनवाने से पहले अपने ज़िला सैनिक बोर्ड से पूछ लें।',
+        },
+      },
+    ],
+    application_steps: [
+      {
+        step_number: 1,
+        title: { en: 'Register on the Kendriya Sainik Board website', hi: 'केंद्रीय सैनिक बोर्ड की वेबसाइट पर पंजीकरण करें' },
+        description: {
+          en: 'On ksb.gov.in choose "Register". Fill in your name, Aadhaar number, email ID, mobile number and bank details, and set a password. You then get a User ID and password.',
+          hi: 'ksb.gov.in पर "Register" चुनें। अपना नाम, आधार नंबर, ईमेल, मोबाइल नंबर और बैंक विवरण भरें और पासवर्ड बनाएँ। इसके बाद आपको यूज़र आईडी और पासवर्ड मिलेगा।',
+        },
+      },
+      {
+        step_number: 2,
+        title: { en: 'Fill the online application', hi: 'ऑनलाइन आवेदन भरें' },
+        description: {
+          en: 'Log in, click "New Application", select this scheme, fill in the form and upload the documents.',
+          hi: 'लॉग इन करें, "New Application" पर क्लिक करें, यह योजना चुनें, फ़ॉर्म भरें और दस्तावेज़ अपलोड करें।',
+        },
+      },
+      {
+        step_number: 3,
+        title: { en: 'Save, print and submit to the District Sainik Board', hi: 'सेव करें, प्रिंट लें और ज़िला सैनिक बोर्ड में जमा करें' },
+        description: {
+          en: 'Click "Save & Forward", take a printout, and submit it with all the required documents to your District Sainik Board. The Kendriya Sainik Board then checks and approves it, and payment is made online when funds are available.',
+          hi: '"Save & Forward" पर क्लिक करें, प्रिंट निकालें और सभी ज़रूरी दस्तावेज़ों के साथ अपने ज़िला सैनिक बोर्ड में जमा करें। इसके बाद केंद्रीय सैनिक बोर्ड जाँच कर मंज़ूरी देता है और धन उपलब्ध होने पर भुगतान ऑनलाइन होता है।',
+        },
+      },
+    ],
+  },
 ];
 

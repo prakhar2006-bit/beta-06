@@ -75,3 +75,4 @@ flowchart TD
 3. **Step 3: Engine (`engine/`)**: Implements logic consuming `data/schemes/` and emits `eligibility-result.schema.json`.
 4. **Step 4: Frontend (`frontend/`)**: Builds screens using mock contract responses, then connects to the engine.
 5. **Step 5: End-to-End Integration**: Full pass testing bilingual voice input, checklist export, and shared-phone privacy reset.
+

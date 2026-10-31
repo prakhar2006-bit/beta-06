@@ -1,0 +1,2 @@
+# In-process ASGI requests; tests use the standard-library unittest runner.
+httpx>=0.28,<1

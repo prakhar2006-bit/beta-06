@@ -1,0 +1,2 @@
+# Isolated database connection support; no web-framework dependency required.
+psycopg[binary]>=3.2,<4

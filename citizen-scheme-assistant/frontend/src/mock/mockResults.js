@@ -1,3 +1,5 @@
+// TEMPORARY MOCK. Delete at engine integration. Frontend must not contain eligibility rules.
+
 /**
  * Mock Screening Results for UI Demonstration
  * Follows contracts/eligibility-result.schema.json

@@ -1,0 +1,1388 @@
+{
+  "format": "preliminary-screening-v1",
+  "checked_on": "2026-10-31",
+  "purpose": "Source-checked preliminary guidance, not publication or institutional policy approval",
+  "sources": {
+    "post-life": {
+      "reference_id": "post-life",
+      "original_url": "https://www.indiapost.gov.in/insurance-services/pmjjby",
+      "title": "India Post — PMJJBY",
+      "locator": "Scope of coverage; KYC; forms",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "post-accident": {
+      "reference_id": "post-accident",
+      "original_url": "https://www.indiapost.gov.in/insurance-services/pmsby",
+      "title": "India Post — PMSBY",
+      "locator": "Scope of coverage; KYC; forms",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "dfs-2026": {
+      "reference_id": "dfs-2026",
+      "original_url": "https://financialservices.gov.in/sites/default/files/2026-05/DFS-ANNUAL-REPORT-ENGLISH-2025-26.pdf",
+      "title": "DFS annual report 2025–26",
+      "locator": "Section 6.7.1–6.7.2, printed page 252: current premiums, benefits and lien",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "life-age": {
+      "reference_id": "life-age",
+      "original_url": "https://www.indiapost.gov.in/api/documents/file/1037n5x0mhoi3ii3d35sgn369dy04nii0s5ed0cnrf048xv0634s3l8933aghw",
+      "title": "India Post — historical PMJJBY rules",
+      "locator": "Page 2: age nearer birthday. Historical premium and health terms are not used.",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "accident-age": {
+      "reference_id": "accident-age",
+      "original_url": "https://www.indiapost.gov.in/api/documents/file/103buv42xety3ixi13ighs04p3a0e32g0s5j40k56z35t1c02u6y0baz634tmu",
+      "title": "India Post — historical PMSBY rules",
+      "locator": "Page 2: age convention and termination. Historical premium and start date are not used.",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "sym-pib": {
+      "reference_id": "sym-pib",
+      "original_url": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=153849&lang=2&reg=48",
+      "title": "PIB — PM-SYM, 4 March 2025",
+      "locator": "Eligibility; contribution; documents; CSC enrolment",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "sym-eshram": {
+      "reference_id": "sym-eshram",
+      "original_url": "https://www.eshram.gov.in/Schemes",
+      "title": "Ministry of Labour — e-Shram schemes",
+      "locator": "PM-SYM: citizenship; occupation; income wording below ₹15,000",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "apy-faq": {
+      "reference_id": "apy-faq",
+      "original_url": "https://www.pfrda.org.in/documents/33652/676426/APY%2BFAQs.pdf",
+      "title": "PFRDA — Atal Pension Yojana FAQ",
+      "locator": "Questions 3–5, 10–17 and 25: entry, tax exclusion, one account, documents and contributions",
+      "last_checked_date": "2026-10-31",
+      "effective_from": "2022-10-01",
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "ssy-pib": {
+      "reference_id": "ssy-pib",
+      "original_url": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=157019&lang=16&reg=5",
+      "title": "PIB — Sukanya Samriddhi, 21 January 2026",
+      "locator": "Who can open; account limits; documents; deposit and maturity",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    },
+    "ssy-residence": {
+      "reference_id": "ssy-residence",
+      "original_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2094807&lang=2&reg=48",
+      "title": "PIB — Sukanya Samriddhi, January 2025",
+      "locator": "Opening the account: resident Indian girl, guardian, under ten, one account",
+      "last_checked_date": "2026-10-31",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "publication_approval": false
+    }
+  },
+  "schemes": [
+    {
+      "scheme_id": "in-cen-000001",
+      "short_name": "PMJJBY",
+      "name": {
+        "en": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+        "hi": "प्रधानमंत्री जीवन ज्योति बीमा योजना"
+      },
+      "overview": {
+        "en": "Renewable life insurance for account holders, with a nominee benefit on death. This check covers new enrolment, not claims or renewal.",
+        "hi": "खाताधारकों के लिए नवीकरणीय जीवन बीमा, जिसमें मृत्यु पर नामित व्यक्ति को लाभ मिलता है। यह जाँच नए नामांकन के लिए है, दावे या नवीकरण के लिए नहीं।"
+      },
+      "benefit_highlight": {
+        "en": "₹2 lakh life cover · ₹436 annual premium",
+        "hi": "₹2 लाख जीवन बीमा · ₹436 वार्षिक प्रीमियम"
+      },
+      "audience": {
+        "en": "Adults opening new cover, generally age 18–50",
+        "hi": "नया बीमा लेने वाले वयस्क, सामान्यतः उम्र 18–50 वर्ष"
+      },
+      "scope": "new_enrolment_preliminary",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "What is your age in completed years on the day you plan to join?",
+            "hi": "जिस दिन आप जुड़ना चाहते हैं, उस दिन आपकी पूरे वर्षों में उम्र कितनी होगी?"
+          },
+          "label": {
+            "en": "Entry age: 18–50 years",
+            "hi": "प्रवेश की उम्र: 18–50 वर्ष"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 18
+            },
+            {
+              "operator": "lte",
+              "expected_value": 50
+            }
+          ],
+          "source_ids": [
+            "post-life",
+            "life-age"
+          ],
+          "manual_values": [
+            50
+          ],
+          "manual_reason": {
+            "en": "The provider must check the exact birthday convention at this age.",
+            "hi": "इस उम्र पर संस्था को जन्मदिन के अनुसार सही आयु सीमा जाँचनी होगी।"
+          }
+        },
+        {
+          "key": "existing_account",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you already have an active PMJJBY account or cover?",
+            "hi": "क्या आपका PMJJBY खाता या बीमा पहले से चालू है?"
+          },
+          "label": {
+            "en": "New enrolment rather than duplicate cover",
+            "hi": "दोबारा खाता खोलने के बजाय नया नामांकन"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "post-life"
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Contact your provider to check or renew your existing account; this check is for new enrolment.",
+            "hi": "अपने मौजूदा खाते की जाँच या नवीकरण के लिए संस्था से संपर्क करें; यह जाँच नए नामांकन के लिए है।"
+          }
+        },
+        {
+          "key": "savings_account",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you have an individual savings account at a participating bank or post office?",
+            "hi": "क्या आपके पास भाग लेने वाले बैंक या डाकघर में व्यक्तिगत बचत खाता है?"
+          },
+          "label": {
+            "en": "Participating savings account",
+            "hi": "भाग लेने वाली संस्था में बचत खाता"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "post-life",
+            "dfs-2026"
+          ]
+        },
+        {
+          "key": "contributions",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you willing to authorise the required premium or contributions by auto-debit?",
+            "hi": "क्या आप आवश्यक प्रीमियम या अंशदान के लिए अपने खाते से अपने-आप कटौती की अनुमति देना चाहते हैं?"
+          },
+          "label": {
+            "en": "Consent to contributions and auto-debit",
+            "hi": "अंशदान और खाते से कटौती की सहमति"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "dfs-2026"
+          ]
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "life",
+          "text": {
+            "en": "₹2 lakh payable on death from any cause, subject to insurance terms.",
+            "hi": "बीमा की शर्तों के अनुसार किसी भी कारण से मृत्यु पर ₹2 लाख देय।"
+          },
+          "source_ids": [
+            "dfs-2026"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "premium",
+          "text": {
+            "en": "Annual premium ₹436; ask the bank about any applicable mid-year premium. A 30-day lien applies to non-accidental death for new cover.",
+            "hi": "वार्षिक प्रीमियम ₹436; वर्ष के बीच जुड़ने पर लागू प्रीमियम बैंक से पूछें। नए बीमे में गैर-दुर्घटनात्मक मृत्यु पर 30 दिन की प्रतीक्षा अवधि लागू है।"
+          },
+          "source_ids": [
+            "dfs-2026"
+          ],
+          "requirement": "required"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "account",
+          "text": {
+            "en": "Savings account details for the participating bank/post office",
+            "hi": "भाग लेने वाले बैंक या डाकघर के बचत खाते का विवरण"
+          },
+          "source_ids": [
+            "post-life"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "kyc",
+          "text": {
+            "en": "Bank KYC / identity and age proof; confirm accepted documents with the branch",
+            "hi": "बैंक की पहचान और उम्र संबंधी केवाईसी; मान्य दस्तावेज़ शाखा से पूछें"
+          },
+          "source_ids": [
+            "post-life"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "consent",
+          "text": {
+            "en": "Completed enrolment and auto-debit consent form, with nominee details",
+            "hi": "नामित व्यक्ति के विवरण सहित नामांकन और खाते से कटौती की सहमति का भरा हुआ फ़ॉर्म"
+          },
+          "source_ids": [
+            "post-life"
+          ],
+          "requirement": "required"
+        }
+      ],
+      "application": {
+        "url": "https://www.indiapost.gov.in/insurance-services/pmjjby",
+        "link_kind": "information",
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Visit your participating bank or post office and request the current PMJJBY enrolment form.",
+            "hi": "भाग लेने वाले बैंक या डाकघर जाएँ और वर्तमान पीएमजेजेबीवाई नामांकन फ़ॉर्म माँगें।"
+          },
+          {
+            "en": "Provide account/KYC and nominee details, sign the consent and auto-debit instruction, and keep funds for the premium.",
+            "hi": "खाते, केवाईसी और नामित व्यक्ति के विवरण दें, सहमति और कटौती की अनुमति पर हस्ताक्षर करें तथा प्रीमियम के लिए राशि रखें।"
+          },
+          {
+            "en": "Get an acknowledgement and have the branch confirm the premium, cover start, lien and age convention before relying on coverage.",
+            "hi": "पावती लें और बीमा पर भरोसा करने से पहले प्रीमियम, शुरुआत, प्रतीक्षा अवधि तथा आयु की गणना शाखा से पुष्ट करें।"
+          }
+        ],
+        "source_ids": [
+          "post-life",
+          "dfs-2026"
+        ]
+      },
+      "manual_notes": [
+        {
+          "en": "Final enrolment, age evidence, lien and cover start must be confirmed by the bank/insurer. No health information is collected here.",
+          "hi": "अंतिम नामांकन, उम्र का प्रमाण, प्रतीक्षा अवधि और बीमा की शुरुआत बैंक या बीमाकर्ता से पुष्ट करें। यहाँ स्वास्थ्य संबंधी जानकारी नहीं ली जाती।"
+        }
+      ],
+      "conflicts": [
+        "Historical India Post rules show ₹330 and health declarations; the 2025–26 DFS report supplies current ₹436 premium and 30-day lien. Historical pricing/health terms are not executed."
+      ],
+      "human_publication_approved": false,
+      "translation_origin": "project_authored_not_official"
+    },
+    {
+      "scheme_id": "in-cen-000002",
+      "short_name": "PMSBY",
+      "name": {
+        "en": "Pradhan Mantri Suraksha Bima Yojana",
+        "hi": "प्रधानमंत्री सुरक्षा बीमा योजना"
+      },
+      "overview": {
+        "en": "Annual renewable protection for accidental death and specified permanent disabilities. It is accident insurance, not general medical insurance.",
+        "hi": "दुर्घटनात्मक मृत्यु और निर्धारित स्थायी दिव्यांगता के लिए सालाना नवीकरणीय सुरक्षा। यह दुर्घटना बीमा है, सामान्य स्वास्थ्य बीमा नहीं।"
+      },
+      "benefit_highlight": {
+        "en": "Up to ₹2 lakh accident cover · ₹20 a year",
+        "hi": "₹2 लाख तक दुर्घटना बीमा · ₹20 प्रति वर्ष"
+      },
+      "audience": {
+        "en": "Account holders seeking accident cover, generally age 18–70",
+        "hi": "दुर्घटना बीमा चाहने वाले खाताधारक, सामान्यतः उम्र 18–70 वर्ष"
+      },
+      "scope": "new_enrolment_preliminary",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "What is your age in completed years on the day you plan to join?",
+            "hi": "जिस दिन आप जुड़ना चाहते हैं, उस दिन आपकी पूरे वर्षों में उम्र कितनी होगी?"
+          },
+          "label": {
+            "en": "Entry age: 18–70 years",
+            "hi": "प्रवेश की उम्र: 18–70 वर्ष"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 18
+            },
+            {
+              "operator": "lte",
+              "expected_value": 70
+            }
+          ],
+          "source_ids": [
+            "post-accident",
+            "accident-age"
+          ],
+          "manual_values": [
+            69,
+            70
+          ],
+          "manual_reason": {
+            "en": "The provider must check the exact birthday convention at this age.",
+            "hi": "इस उम्र पर संस्था को जन्मदिन के अनुसार सही आयु सीमा जाँचनी होगी।"
+          }
+        },
+        {
+          "key": "existing_account",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you already have an active PMSBY account or cover?",
+            "hi": "क्या आपका PMSBY खाता या बीमा पहले से चालू है?"
+          },
+          "label": {
+            "en": "New enrolment rather than duplicate cover",
+            "hi": "दोबारा खाता खोलने के बजाय नया नामांकन"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "post-accident"
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Contact your provider to check or renew your existing account; this check is for new enrolment.",
+            "hi": "अपने मौजूदा खाते की जाँच या नवीकरण के लिए संस्था से संपर्क करें; यह जाँच नए नामांकन के लिए है।"
+          }
+        },
+        {
+          "key": "savings_account",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you have an individual savings account at a participating bank or post office?",
+            "hi": "क्या आपके पास भाग लेने वाले बैंक या डाकघर में व्यक्तिगत बचत खाता है?"
+          },
+          "label": {
+            "en": "Participating savings account",
+            "hi": "भाग लेने वाली संस्था में बचत खाता"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "post-accident",
+            "dfs-2026"
+          ]
+        },
+        {
+          "key": "contributions",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you willing to authorise the required premium or contributions by auto-debit?",
+            "hi": "क्या आप आवश्यक प्रीमियम या अंशदान के लिए अपने खाते से अपने-आप कटौती की अनुमति देना चाहते हैं?"
+          },
+          "label": {
+            "en": "Consent to contributions and auto-debit",
+            "hi": "अंशदान और खाते से कटौती की सहमति"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "dfs-2026"
+          ]
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "accident",
+          "text": {
+            "en": "₹2 lakh for accidental death or permanent total disability; ₹1 lakh for specified partial permanent disability.",
+            "hi": "दुर्घटनात्मक मृत्यु या पूर्ण स्थायी दिव्यांगता पर ₹2 लाख; निर्धारित आंशिक स्थायी दिव्यांगता पर ₹1 लाख।"
+          },
+          "source_ids": [
+            "dfs-2026"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "premium",
+          "text": {
+            "en": "Annual premium ₹20, collected through the linked account.",
+            "hi": "जुड़े हुए खाते से ₹20 वार्षिक प्रीमियम की कटौती।"
+          },
+          "source_ids": [
+            "dfs-2026"
+          ],
+          "requirement": "required"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "account",
+          "text": {
+            "en": "Savings account details for the participating bank/post office",
+            "hi": "भाग लेने वाले बैंक या डाकघर के बचत खाते का विवरण"
+          },
+          "source_ids": [
+            "post-accident"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "kyc",
+          "text": {
+            "en": "Bank KYC / identity and age proof; confirm accepted documents with the branch",
+            "hi": "बैंक की पहचान और उम्र संबंधी केवाईसी; मान्य दस्तावेज़ शाखा से पूछें"
+          },
+          "source_ids": [
+            "post-accident"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "consent",
+          "text": {
+            "en": "Completed enrolment and auto-debit consent form, with nominee details",
+            "hi": "नामित व्यक्ति के विवरण सहित नामांकन और खाते से कटौती की सहमति का भरा हुआ फ़ॉर्म"
+          },
+          "source_ids": [
+            "post-accident"
+          ],
+          "requirement": "required"
+        }
+      ],
+      "application": {
+        "url": "https://www.indiapost.gov.in/insurance-services/pmsby",
+        "link_kind": "information",
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Ask your participating bank or post office for PMSBY enrolment.",
+            "hi": "भाग लेने वाले बैंक या डाकघर में पीएमएसबीवाई नामांकन के लिए पूछें।"
+          },
+          {
+            "en": "Complete the current form with account, KYC and nominee details and authorise the premium debit.",
+            "hi": "वर्तमान फ़ॉर्म में खाते, केवाईसी और नामित व्यक्ति के विवरण भरें और प्रीमियम कटौती की अनुमति दें।"
+          },
+          {
+            "en": "Keep the acknowledgement and confirm the cover start, renewal and age-related termination with the provider.",
+            "hi": "पावती रखें और बीमा की शुरुआत, नवीकरण तथा उम्र संबंधी समाप्ति संस्था से पुष्ट करें।"
+          }
+        ],
+        "source_ids": [
+          "post-accident",
+          "dfs-2026"
+        ]
+      },
+      "manual_notes": [
+        {
+          "en": "Near the upper age boundary, the provider must reconcile entry-age wording with termination at age 70. This is not a claim assessment.",
+          "hi": "ऊपरी आयु सीमा के पास संस्था को प्रवेश की आयु और 70 वर्ष पर बीमा समाप्ति की शर्त जाँचनी होगी। यह बीमा दावे की जाँच नहीं है।"
+        }
+      ],
+      "conflicts": [
+        "Historical India Post rules show ₹12 and age-nearer-birthday termination at 70; DFS 2025–26 gives ₹20 and headline age 18–70. Ages 69–70 require provider verification."
+      ],
+      "human_publication_approved": false,
+      "translation_origin": "project_authored_not_official"
+    },
+    {
+      "scheme_id": "in-cen-000003",
+      "short_name": "PM-SYM",
+      "name": {
+        "en": "Pradhan Mantri Shram Yogi Maan-dhan",
+        "hi": "प्रधानमंत्री श्रम योगी मान-धन"
+      },
+      "overview": {
+        "en": "A contributory pension for eligible unorganised workers. The government matches the worker’s contribution; pension begins at 60.",
+        "hi": "पात्र असंगठित श्रमिकों के लिए अंशदायी पेंशन। सरकार श्रमिक के बराबर अंशदान देती है; पेंशन 60 वर्ष से शुरू होती है।"
+      },
+      "benefit_highlight": {
+        "en": "₹3,000 monthly pension from age 60",
+        "hi": "60 वर्ष से ₹3,000 मासिक पेंशन"
+      },
+      "audience": {
+        "en": "Unorganised workers aged 18–40 with low monthly income",
+        "hi": "18–40 वर्ष के कम मासिक आय वाले असंगठित श्रमिक"
+      },
+      "scope": "new_enrolment_preliminary",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "What is your age in completed years on the day you plan to join?",
+            "hi": "जिस दिन आप जुड़ना चाहते हैं, उस दिन आपकी पूरे वर्षों में उम्र कितनी होगी?"
+          },
+          "label": {
+            "en": "Entry age: 18–40 years",
+            "hi": "प्रवेश की उम्र: 18–40 वर्ष"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 18
+            },
+            {
+              "operator": "lte",
+              "expected_value": 40
+            }
+          ],
+          "source_ids": [
+            "sym-pib"
+          ],
+          "manual_values": [
+            40
+          ],
+          "manual_reason": {
+            "en": "The provider must check the exact birthday convention at this age.",
+            "hi": "इस उम्र पर संस्था को जन्मदिन के अनुसार सही आयु सीमा जाँचनी होगी।"
+          }
+        },
+        {
+          "key": "indian_citizen",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you an Indian citizen?",
+            "hi": "क्या आप भारतीय नागरिक हैं?"
+          },
+          "label": {
+            "en": "Indian citizenship",
+            "hi": "भारतीय नागरिकता"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "sym-eshram"
+          ]
+        },
+        {
+          "key": "unorganised_worker",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you work in the unorganised sector, such as domestic work, street vending, construction or agricultural labour?",
+            "hi": "क्या आप घरेलू काम, रेहड़ी, निर्माण या कृषि मजदूरी जैसे असंगठित क्षेत्र में काम करते हैं?"
+          },
+          "label": {
+            "en": "Unorganised-sector work",
+            "hi": "असंगठित क्षेत्र में काम"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "sym-pib"
+          ]
+        },
+        {
+          "key": "monthly_income",
+          "kind": "income",
+          "question": {
+            "en": "What is your own monthly income in rupees?",
+            "hi": "आपकी अपनी मासिक आय रुपये में कितनी है?"
+          },
+          "label": {
+            "en": "Monthly income within the entry limit",
+            "hi": "मासिक आय प्रवेश सीमा के भीतर"
+          },
+          "predicates": [
+            {
+              "operator": "lte",
+              "expected_value": 15000
+            }
+          ],
+          "source_ids": [
+            "sym-pib",
+            "sym-eshram"
+          ],
+          "manual_values": [
+            15000
+          ],
+          "manual_reason": {
+            "en": "Official pages differ between “below ₹15,000” and “₹15,000 or less”. Confirm the exact boundary with the CSC.",
+            "hi": "आधिकारिक पृष्ठों पर “₹15,000 से कम” और “₹15,000 या कम” दोनों हैं। इस सीमा पर सीएससी से पुष्टि करें।"
+          }
+        },
+        {
+          "key": "statutory_cover",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you covered by EPFO, ESIC or a government-funded NPS?",
+            "hi": "क्या आप ईपीएफओ, ईएसआईसी या सरकारी वित्तपोषित एनपीएस में शामिल हैं?"
+          },
+          "label": {
+            "en": "No excluded statutory social-security coverage",
+            "hi": "अपवर्जित वैधानिक सामाजिक सुरक्षा में शामिल न हों"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "sym-pib",
+            "sym-eshram"
+          ]
+        },
+        {
+          "key": "income_taxpayer",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you an income-tax payer?",
+            "hi": "क्या आप आयकरदाता हैं?"
+          },
+          "label": {
+            "en": "Not an income-tax payer",
+            "hi": "आयकरदाता न हों"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "sym-pib"
+          ]
+        },
+        {
+          "key": "other_pension",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you already receiving benefits from another government pension scheme?",
+            "hi": "क्या आपको किसी दूसरी सरकारी पेंशन योजना का लाभ मिल रहा है?"
+          },
+          "label": {
+            "en": "Other government pension needs review",
+            "hi": "दूसरी सरकारी पेंशन की जाँच"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "sym-pib"
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "The CSC must confirm how your existing pension interacts with PM-SYM.",
+            "hi": "सीएससी से पुष्टि करें कि मौजूदा पेंशन के साथ पीएम-एसवाईएम लागू होती है या नहीं।"
+          }
+        },
+        {
+          "key": "savings_account",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you have a savings-bank or Jan Dhan account with IFSC for contributions?",
+            "hi": "क्या अंशदान के लिए आपके पास आईएफएससी सहित बचत बैंक या जनधन खाता है?"
+          },
+          "label": {
+            "en": "Savings-bank or Jan Dhan account with IFSC",
+            "hi": "आईएफएससी सहित बचत बैंक या जनधन खाता"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "sym-pib"
+          ]
+        },
+        {
+          "key": "contributions",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you willing to authorise the required premium or contributions by auto-debit?",
+            "hi": "क्या आप आवश्यक प्रीमियम या अंशदान के लिए अपने खाते से अपने-आप कटौती की अनुमति देना चाहते हैं?"
+          },
+          "label": {
+            "en": "Consent to contributions and auto-debit",
+            "hi": "अंशदान और खाते से कटौती की सहमति"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "sym-pib"
+          ]
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "pension",
+          "text": {
+            "en": "Assured pension of ₹3,000 a month after 60, subject to scheme contributions and terms.",
+            "hi": "योजना के अंशदान और शर्तों के अनुसार 60 वर्ष के बाद ₹3,000 मासिक पेंशन।"
+          },
+          "source_ids": [
+            "sym-pib"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "contribution",
+          "text": {
+            "en": "Worker contributions depend on entry age (₹55–₹200 a month), matched by government. Confirm your exact amount at enrolment.",
+            "hi": "प्रवेश की उम्र के अनुसार श्रमिक का मासिक अंशदान ₹55–₹200 होता है और सरकार बराबर राशि देती है। नामांकन पर सही राशि पुष्ट करें।"
+          },
+          "source_ids": [
+            "sym-pib"
+          ],
+          "requirement": "required"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "aadhaar",
+          "text": {
+            "en": "Aadhaar for enrolment authentication",
+            "hi": "नामांकन के प्रमाणीकरण के लिए आधार"
+          },
+          "source_ids": [
+            "sym-pib"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "bank",
+          "text": {
+            "en": "Savings/Jan Dhan account details with IFSC",
+            "hi": "आईएफएससी सहित बचत या जनधन खाते का विवरण"
+          },
+          "source_ids": [
+            "sym-pib"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "mobile",
+          "text": {
+            "en": "Mobile number for enrolment updates",
+            "hi": "नामांकन संबंधी सूचना के लिए मोबाइल नंबर"
+          },
+          "source_ids": [
+            "sym-pib"
+          ],
+          "requirement": "required"
+        }
+      ],
+      "application": {
+        "url": "https://maandhan.in/",
+        "link_kind": "application",
+        "mode": "both",
+        "steps": [
+          {
+            "en": "Visit a Common Service Centre with Aadhaar and savings/Jan Dhan account details, or consult the official Maandhan portal.",
+            "hi": "आधार और बचत या जनधन खाते के विवरण के साथ सामान्य सेवा केंद्र जाएँ या आधिकारिक मानधन पोर्टल देखें।"
+          },
+          {
+            "en": "Have the CSC verify your occupation, exclusions and contribution amount; complete authentication and enrolment.",
+            "hi": "सीएससी से व्यवसाय, अपवर्जन और अंशदान की जाँच कराएँ; प्रमाणीकरण और नामांकन पूरा करें।"
+          },
+          {
+            "en": "Pay the first contribution as instructed, sign the auto-debit mandate and retain the pension card/acknowledgement.",
+            "hi": "निर्देश के अनुसार पहला अंशदान दें, कटौती की अनुमति पर हस्ताक्षर करें और पेंशन कार्ड या पावती रखें।"
+          }
+        ],
+        "source_ids": [
+          "sym-pib"
+        ]
+      },
+      "manual_notes": [
+        {
+          "en": "The CSC confirms occupation classification and interaction with other pensions. Income exactly ₹15,000 requires verification.",
+          "hi": "सीएससी व्यवसाय की श्रेणी और दूसरी पेंशन के साथ लागू होने की पुष्टि करता है। ठीक ₹15,000 आय पर पुष्टि आवश्यक है।"
+        }
+      ],
+      "conflicts": [
+        "PIB says monthly income ≤₹15,000; e-Shram says below ₹15,000. Exact boundary remains unresolved. Other-pension interaction is manual."
+      ],
+      "human_publication_approved": false,
+      "translation_origin": "project_authored_not_official"
+    },
+    {
+      "scheme_id": "in-cen-000007",
+      "short_name": "APY",
+      "name": {
+        "en": "Atal Pension Yojana",
+        "hi": "अटल पेंशन योजना"
+      },
+      "overview": {
+        "en": "A contribution-based pension with a chosen guaranteed monthly pension after age 60. This check is for a new APY account under the post-October 2022 entry rules.",
+        "hi": "अंशदान पर आधारित पेंशन, जिसमें 60 वर्ष के बाद चुनी गई गारंटीकृत मासिक पेंशन मिलती है। यह जाँच अक्टूबर 2022 के बाद के नियमों के अनुसार नए खाते के लिए है।"
+      },
+      "benefit_highlight": {
+        "en": "Choose ₹1,000–₹5,000 monthly pension at 60",
+        "hi": "60 वर्ष पर ₹1,000–₹5,000 मासिक पेंशन चुनें"
+      },
+      "audience": {
+        "en": "Indian citizens joining before the APY age cut-off",
+        "hi": "एपीवाई की आयु सीमा के भीतर जुड़ने वाले भारतीय नागरिक"
+      },
+      "scope": "new_enrolment_preliminary",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "What is your age in completed years on the day you plan to join?",
+            "hi": "जिस दिन आप जुड़ना चाहते हैं, उस दिन आपकी पूरे वर्षों में उम्र कितनी होगी?"
+          },
+          "label": {
+            "en": "Entry age: 18–40 years",
+            "hi": "प्रवेश की उम्र: 18–40 वर्ष"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 18
+            },
+            {
+              "operator": "lte",
+              "expected_value": 40
+            }
+          ],
+          "source_ids": [
+            "apy-faq"
+          ],
+          "manual_values": [
+            40
+          ],
+          "manual_reason": {
+            "en": "The provider must check the exact birthday convention at this age.",
+            "hi": "इस उम्र पर संस्था को जन्मदिन के अनुसार सही आयु सीमा जाँचनी होगी।"
+          }
+        },
+        {
+          "key": "indian_citizen",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you an Indian citizen?",
+            "hi": "क्या आप भारतीय नागरिक हैं?"
+          },
+          "label": {
+            "en": "Indian citizenship",
+            "hi": "भारतीय नागरिकता"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "apy-faq"
+          ]
+        },
+        {
+          "key": "ever_income_taxpayer",
+          "kind": "boolean",
+          "question": {
+            "en": "As of the planned application date, are you or have you ever been an income-tax payer under the Income-tax Act?",
+            "hi": "आवेदन के दिन तक क्या आप आयकर अधिनियम के तहत आयकरदाता हैं या कभी रहे हैं?"
+          },
+          "label": {
+            "en": "No current or past income-tax-payer exclusion for a new account",
+            "hi": "नए खाते के लिए वर्तमान या पूर्व आयकरदाता वाला अपवर्जन न हो"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "apy-faq"
+          ]
+        },
+        {
+          "key": "existing_account",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you already have an active APY account or cover?",
+            "hi": "क्या आपका APY खाता या बीमा पहले से चालू है?"
+          },
+          "label": {
+            "en": "New enrolment rather than duplicate cover",
+            "hi": "दोबारा खाता खोलने के बजाय नया नामांकन"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "apy-faq"
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Contact your provider to check or renew your existing account; this check is for new enrolment.",
+            "hi": "अपने मौजूदा खाते की जाँच या नवीकरण के लिए संस्था से संपर्क करें; यह जाँच नए नामांकन के लिए है।"
+          }
+        },
+        {
+          "key": "savings_account",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you have an individual savings account at a participating bank or post office?",
+            "hi": "क्या आपके पास भाग लेने वाले बैंक या डाकघर में व्यक्तिगत बचत खाता है?"
+          },
+          "label": {
+            "en": "Participating savings account",
+            "hi": "भाग लेने वाली संस्था में बचत खाता"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "apy-faq"
+          ]
+        },
+        {
+          "key": "contributions",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you willing to authorise the required premium or contributions by auto-debit?",
+            "hi": "क्या आप आवश्यक प्रीमियम या अंशदान के लिए अपने खाते से अपने-आप कटौती की अनुमति देना चाहते हैं?"
+          },
+          "label": {
+            "en": "Consent to contributions and auto-debit",
+            "hi": "अंशदान और खाते से कटौती की सहमति"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "apy-faq"
+          ]
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "pension",
+          "text": {
+            "en": "Choose a guaranteed pension of ₹1,000, ₹2,000, ₹3,000, ₹4,000 or ₹5,000 a month after 60, with contributions based on entry age and pension choice.",
+            "hi": "60 वर्ष के बाद ₹1,000, ₹2,000, ₹3,000, ₹4,000 या ₹5,000 मासिक पेंशन चुनें; अंशदान प्रवेश की उम्र और पेंशन के विकल्प पर निर्भर है।"
+          },
+          "source_ids": [
+            "apy-faq"
+          ],
+          "requirement": "required"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "account",
+          "text": {
+            "en": "Savings bank or post-office account details",
+            "hi": "बैंक या डाकघर के बचत खाते का विवरण"
+          },
+          "source_ids": [
+            "apy-faq"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "nominee",
+          "text": {
+            "en": "Nominee details for the APY application",
+            "hi": "एपीवाई आवेदन के लिए नामित व्यक्ति का विवरण"
+          },
+          "source_ids": [
+            "apy-faq"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "aadhaar",
+          "text": {
+            "en": "Aadhaar identification: provide it if available and ask the provider about the enrolment process if it is pending",
+            "hi": "आधार पहचान: उपलब्ध हो तो दें; आधार लंबित होने पर संस्था से नामांकन की प्रक्रिया पूछें"
+          },
+          "source_ids": [
+            "apy-faq"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "application": {
+        "url": "https://www.pfrda.org.in/documents/33652/676426/APY%2BFAQs.pdf",
+        "link_kind": "information",
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Approach the bank branch or post office holding your savings account and request APY registration.",
+            "hi": "अपने बचत खाते की बैंक शाखा या डाकघर में एपीवाई पंजीकरण के लिए जाएँ।"
+          },
+          {
+            "en": "Choose the pension amount and contribution frequency; supply nominee and identification details and authorise auto-debit.",
+            "hi": "पेंशन राशि और अंशदान की आवृत्ति चुनें; नामित व्यक्ति और पहचान के विवरण दें तथा कटौती की अनुमति दें।"
+          },
+          {
+            "en": "Have the provider confirm the exact age cut-off and tax-payer exclusion, contribution amount and account acknowledgement.",
+            "hi": "संस्था से सही आयु सीमा, आयकरदाता अपवर्जन, अंशदान राशि और खाते की पावती पुष्ट कराएँ।"
+          }
+        ],
+        "source_ids": [
+          "apy-faq"
+        ]
+      },
+      "manual_notes": [
+        {
+          "en": "APY FAQ Q17 permits joining only through the 40th birthday. A completed age of 40 therefore needs an exact date check, without collecting a birth date here.",
+          "hi": "एपीवाई प्रश्न 17 के अनुसार 40वें जन्मदिन तक ही जुड़ सकते हैं। इसलिए पूरे 40 वर्ष की उम्र पर सही तारीख की जाँच चाहिए; यहाँ जन्मतिथि नहीं ली जाती।"
+        }
+      ],
+      "conflicts": [],
+      "human_publication_approved": false,
+      "translation_origin": "project_authored_not_official"
+    },
+    {
+      "scheme_id": "in-cen-000008",
+      "short_name": "SSY",
+      "name": {
+        "en": "Sukanya Samriddhi Account Scheme",
+        "hi": "सुकन्या समृद्धि खाता योजना"
+      },
+      "overview": {
+        "en": "A long-term savings account opened by a parent or legal guardian for a girl child. Interest is notified periodically; this guide does not promise a current rate.",
+        "hi": "बालिका के लिए माता-पिता या कानूनी अभिभावक द्वारा खोला जाने वाला दीर्घकालीन बचत खाता। ब्याज समय-समय पर अधिसूचित होता है; यह मार्गदर्शिका वर्तमान दर का वादा नहीं करती।"
+      },
+      "benefit_highlight": {
+        "en": "Save for a daughter’s future · start with ₹250",
+        "hi": "बेटी के भविष्य के लिए बचत · ₹250 से शुरुआत"
+      },
+      "audience": {
+        "en": "Parents or legal guardians of girls under 10",
+        "hi": "10 वर्ष से कम उम्र की बालिकाओं के माता-पिता या कानूनी अभिभावक"
+      },
+      "scope": "new_enrolment_preliminary",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "How old will the child be, in completed years, on account opening day?",
+            "hi": "खाता खोलने के दिन बालिका की पूरे वर्षों में उम्र कितनी होगी?"
+          },
+          "label": {
+            "en": "Child is younger than 10 at opening",
+            "hi": "खाता खोलते समय बालिका की उम्र 10 वर्ष से कम हो"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 0
+            },
+            {
+              "operator": "lt",
+              "expected_value": 10
+            }
+          ],
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "manual_values": [],
+          "manual_reason": {
+            "en": "The provider must check the exact birthday convention at this age.",
+            "hi": "इस उम्र पर संस्था को जन्मदिन के अनुसार सही आयु सीमा जाँचनी होगी।"
+          }
+        },
+        {
+          "key": "girl_child",
+          "kind": "boolean",
+          "question": {
+            "en": "Is this account for a girl child?",
+            "hi": "क्या यह खाता बालिका के लिए है?"
+          },
+          "label": {
+            "en": "Account for a girl child",
+            "hi": "बालिका के लिए खाता"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "ssy-pib"
+          ]
+        },
+        {
+          "key": "guardian",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you the child’s parent or legal guardian?",
+            "hi": "क्या आप बालिका के माता-पिता या कानूनी अभिभावक हैं?"
+          },
+          "label": {
+            "en": "Parent or legal guardian opens the account",
+            "hi": "माता-पिता या कानूनी अभिभावक खाता खोलें"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "ssy-pib"
+          ]
+        },
+        {
+          "key": "resident_indian",
+          "kind": "boolean",
+          "question": {
+            "en": "Is the child a resident Indian citizen?",
+            "hi": "क्या बालिका भारत में निवासी भारतीय नागरिक है?"
+          },
+          "label": {
+            "en": "Resident Indian girl at opening",
+            "hi": "खाता खोलते समय निवासी भारतीय बालिका"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "ssy-residence"
+          ]
+        },
+        {
+          "key": "existing_account",
+          "kind": "boolean",
+          "question": {
+            "en": "Does this girl already have a Sukanya Samriddhi account?",
+            "hi": "क्या इस बालिका का सुकन्या समृद्धि खाता पहले से है?"
+          },
+          "label": {
+            "en": "New enrolment rather than duplicate cover",
+            "hi": "दोबारा खाता खोलने के बजाय नया नामांकन"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Contact your provider to check or renew your existing account; this check is for new enrolment.",
+            "hi": "अपने मौजूदा खाते की जाँच या नवीकरण के लिए संस्था से संपर्क करें; यह जाँच नए नामांकन के लिए है।"
+          }
+        },
+        {
+          "key": "family_limit",
+          "kind": "boolean",
+          "question": {
+            "en": "Does your family already have SSY accounts for two or more other girls?",
+            "hi": "क्या आपके परिवार में दो या अधिक दूसरी बालिकाओं के सुकन्या खाते पहले से हैं?"
+          },
+          "label": {
+            "en": "Family limit or multiple-birth exception",
+            "hi": "परिवार की सीमा या एक साथ कई बच्चों के जन्म का अपवाद"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Twins/triplets exceptions need the bank to check birth order, birth certificates and an affidavit.",
+            "hi": "जुड़वाँ या तीन बच्चों के अपवाद में बैंक को जन्म क्रम, जन्म प्रमाणपत्र और शपथपत्र जाँचना होगा।"
+          }
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "savings",
+          "text": {
+            "en": "Start with ₹250; annual deposits are subject to a ₹1.5 lakh limit. Deposits run for up to 15 years and normal maturity is 21 years from opening.",
+            "hi": "₹250 से शुरुआत करें; वार्षिक जमा की सीमा ₹1.5 लाख है। जमा अवधि अधिकतम 15 वर्ष और सामान्य परिपक्वता खाता खुलने से 21 वर्ष है।"
+          },
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "interest",
+          "text": {
+            "en": "Savings earn the interest rate notified by government from time to time; confirm the current quarter’s rate with the provider.",
+            "hi": "बचत पर सरकार द्वारा समय-समय पर अधिसूचित ब्याज मिलता है; वर्तमान तिमाही की दर संस्था से पूछें।"
+          },
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "requirement": "required"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "birth",
+          "text": {
+            "en": "Girl child’s birth certificate",
+            "hi": "बालिका का जन्म प्रमाणपत्र"
+          },
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "form",
+          "text": {
+            "en": "Sukanya account opening form from the bank/post office",
+            "hi": "बैंक या डाकघर से सुकन्या खाता खोलने का फ़ॉर्म"
+          },
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "identity",
+          "text": {
+            "en": "Aadhaar and PAN or Form 60 identification documents as applicable; ask the branch whose documents it needs",
+            "hi": "लागू आधार और पैन या फ़ॉर्म 60 के पहचान दस्तावेज़; शाखा से पूछें कि किसके दस्तावेज़ चाहिए"
+          },
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "requirement": "required"
+        },
+        {
+          "item_key": "exception",
+          "text": {
+            "en": "For a multiple-birth exception: relevant birth certificates and guardian’s affidavit",
+            "hi": "एक साथ कई बच्चों के जन्म के अपवाद के लिए संबंधित जन्म प्रमाणपत्र और अभिभावक का शपथपत्र"
+          },
+          "source_ids": [
+            "ssy-pib"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "application": {
+        "url": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=157019&lang=16&reg=5",
+        "link_kind": "information",
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Visit an India Post office or authorised bank branch and request the Sukanya account opening form.",
+            "hi": "भारतीय डाकघर या अधिकृत बैंक शाखा जाएँ और सुकन्या खाता खोलने का फ़ॉर्म माँगें।"
+          },
+          {
+            "en": "Take the birth certificate and applicable guardian identification; have the branch check residency and any family-limit exception.",
+            "hi": "जन्म प्रमाणपत्र और लागू अभिभावक पहचान दस्तावेज़ लें; शाखा से निवास और परिवार की सीमा के अपवाद की जाँच कराएँ।"
+          },
+          {
+            "en": "Make the initial deposit after verification, obtain the passbook and confirm the current deposit and interest terms.",
+            "hi": "जाँच के बाद शुरुआती जमा करें, पासबुक लें और जमा तथा ब्याज की वर्तमान शर्तें पुष्ट करें।"
+          }
+        ],
+        "source_ids": [
+          "ssy-pib"
+        ]
+      },
+      "manual_notes": [
+        {
+          "en": "The provider verifies guardian documents and residency. Multiple-birth exceptions are never automatically rejected or accepted here.",
+          "hi": "संस्था अभिभावक के दस्तावेज़ और निवास की जाँच करती है। एक साथ कई बच्चों के जन्म वाले अपवाद यहाँ अपने-आप स्वीकार या अस्वीकार नहीं किए जाते।"
+        }
+      ],
+      "conflicts": [],
+      "human_publication_approved": false,
+      "translation_origin": "project_authored_not_official"
+    }
+  ]
+}

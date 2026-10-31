@@ -7,6 +7,7 @@ from app.api.routes.schemes import router
 from app.api.routes.eligibility import router as eligibility_router
 from app.api.routes.questionnaire import router as questionnaire_router
 from app.api.routes.results import router as results_router
+from app.api.routes.demo import router as demo_router
 from app.core.config import cors_origins, load_environment
 from app.core.errors import register_errors
 
@@ -27,6 +28,7 @@ app.include_router(router)
 app.include_router(eligibility_router)
 app.include_router(questionnaire_router)
 app.include_router(results_router)
+app.include_router(demo_router)
 
 
 @app.get("/health")

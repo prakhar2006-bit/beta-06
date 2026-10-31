@@ -1,0 +1,2 @@
+# Keep the reviewed function body byte-stable for its security digest on Windows.
+reviewed-rls-auto-enable.sql text eol=lf

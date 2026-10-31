@@ -7,13 +7,19 @@ from dotenv import load_dotenv
 
 ENGINE_DIR = Path(__file__).resolve().parents[2]
 DEFAULT_ORIGINS = (
+    "http://localhost:3001,http://127.0.0.1:3001,"
     "http://localhost:3000,http://127.0.0.1:3000,"
-    "http://localhost:5173,http://127.0.0.1:5173"
+    "http://localhost:3001,http://127.0.0.1:3001,"
+    "http://localhost:3002,http://127.0.0.1:3002,"
+    "http://localhost:5173,http://127.0.0.1:5173,"
+    "http://localhost:5174,http://127.0.0.1:5174"
 )
 
 
 def load_environment() -> None:
     load_dotenv(ENGINE_DIR / ".env", override=False, interpolate=False)
+    os.environ.setdefault("SCHEME_APP_ENV", "development")
+    os.environ.setdefault("SCHEME_DEMO_ENABLED", "1")
 
 
 def cors_origins() -> list[str]:

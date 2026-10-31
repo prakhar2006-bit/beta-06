@@ -1,97 +1,105 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import { schemeApi } from '../services/schemeApi';
+import { errorKey } from '../i18n/integration.js';
+import { schemeApi } from '../services/schemeApi.js';
 import { SchemeCard } from '../components/schemes/SchemeCard';
-import { FilterSidebar } from '../components/schemes/FilterSidebar';
-import { LoadingState } from '../components/common/LoadingState';
-import { EmptyState } from '../components/common/EmptyState';
-import { Search, Filter, X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
+
+export const PublishedCatalog = ({ data, loading, error }) => {
+  const { t } = useLanguage();
+  if (error) {
+    return (
+      <div
+        role="alert"
+        className="p-6 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-sm font-medium"
+      >
+        {error}
+      </div>
+    );
+  }
+  if (loading) {
+    return (
+      <p role="status" className="text-center py-12 text-slate-600 font-medium">
+        {t('loading', 'Loading schemes...')}
+      </p>
+    );
+  }
+  if (!data?.items?.length) {
+    return (
+      <p
+        role="status"
+        className="glass-panel rounded-[28px] p-8 text-center text-slate-600 font-medium border border-white/80 shadow-glass"
+      >
+        {t('emptyPublished', 'No published schemes')}
+      </p>
+    );
+  }
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {data.items.map((scheme) => (
+        <SchemeCard key={scheme.id || scheme.code} scheme={scheme} />
+      ))}
+    </div>
+  );
+};
 
 export const SchemesPage = () => {
-  const { t } = useLanguage();
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  // Filters state initialized from URL search params
-  const [filters, setFilters] = useState({
-    search: searchParams.get('search') || '',
-    category: searchParams.get('category') || 'all',
-    level: searchParams.get('level') || 'all',
-    state: searchParams.get('state') || 'ALL',
-  });
-
-  const [schemes, setSchemes] = useState([]);
+  const { t, language } = useLanguage();
+  const [params, setParams] = useSearchParams();
+  const [search, setSearch] = useState(params.get('search') || '');
+  const [level, setLevel] = useState(params.get('level') || 'all');
+  const [offset, setOffset] = useState(0);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  // Sync state with URL params
-  useEffect(() => {
-    const newFilters = {
-      search: searchParams.get('search') || '',
-      category: searchParams.get('category') || 'all',
-      level: searchParams.get('level') || 'all',
-      state: searchParams.get('state') || 'ALL',
-    };
-    setFilters(newFilters);
-  }, [searchParams]);
-
-  // Fetch schemes whenever filters change
   useEffect(() => {
     let active = true;
     setLoading(true);
-
+    setError('');
     schemeApi
-      .getSchemes(filters)
-      .then((data) => {
+      .getSchemes({ search, level, language, offset })
+      .then((r) => {
+        if (active) setData(r);
+      })
+      .catch((e) => {
         if (active) {
-          setSchemes(data.schemes || []);
-          setLoading(false);
+          setError(t(errorKey(e)));
+          setData(null);
         }
       })
-      .catch(() => {
+      .finally(() => {
         if (active) setLoading(false);
       });
-
     return () => {
       active = false;
     };
-  }, [filters]);
+  }, [search, level, language, offset]);
 
-  const updateFilter = (key, value) => {
-    const updated = { ...filters, [key]: value };
-    setFilters(updated);
-
-    const params = new URLSearchParams();
-    if (updated.search) params.set('search', updated.search);
-    if (updated.category !== 'all') params.set('category', updated.category);
-    if (updated.level !== 'all') params.set('level', updated.level);
-    if (updated.state !== 'ALL') params.set('state', updated.state);
-    setSearchParams(params);
+  const handleSearchChange = (val) => {
+    setSearch(val);
+    setOffset(0);
+    const newParams = new URLSearchParams(params);
+    if (val) newParams.set('search', val);
+    else newParams.delete('search');
+    setParams(newParams);
   };
 
-  const handleResetFilters = () => {
-    const resetState = {
-      search: '',
-      category: 'all',
-      level: 'all',
-      state: 'ALL',
-    };
-    setFilters(resetState);
-    setSearchParams({});
+  const handleLevelChange = (val) => {
+    setLevel(val);
+    setOffset(0);
+    const newParams = new URLSearchParams(params);
+    if (val && val !== 'all') newParams.set('level', val);
+    else newParams.delete('level');
+    setParams(newParams);
   };
-
-  const hasActiveFilters =
-    filters.search ||
-    filters.category !== 'all' ||
-    filters.level !== 'all' ||
-    filters.state !== 'ALL';
 
   return (
     <div className="flex-1 py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         {/* Page Header */}
-        <div className="mb-8">
+        <div>
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full glass-card-subtle text-[11px] font-bold text-orange-700 uppercase tracking-wider mb-2">
             Catalog & Discovery
           </div>
@@ -100,27 +108,28 @@ export const SchemesPage = () => {
           </h1>
           <p className="text-sm text-slate-600">
             {t(
-              'exploreSubtitle',
+              'catalogueIntro',
               'Search and filter through Central and State Government welfare programs'
             )}
           </p>
         </div>
 
-        {/* Search & Mobile Filter Bar */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="relative flex-1">
+        {/* Search & Filter Bar */}
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="relative flex-1 min-w-[240px]">
             <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
-              value={filters.search}
-              onChange={(e) => updateFilter('search', e.target.value)}
+              className="w-full pl-11 pr-10 py-3.5 glass-input rounded-full text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
+              aria-label={t('searchSchemesInput', 'Search by scheme name or keyword...')}
               placeholder={t('searchSchemesInput', 'Search by scheme name or keyword...')}
-              className="w-full pl-11 pr-10 py-3 glass-input rounded-full text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
+              value={search}
+              onChange={(e) => handleSearchChange(e.target.value)}
             />
-            {filters.search && (
+            {search && (
               <button
                 type="button"
-                onClick={() => updateFilter('search', '')}
+                onClick={() => handleSearchChange('')}
                 className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
               >
                 <X className="w-4 h-4" />
@@ -128,130 +137,49 @@ export const SchemesPage = () => {
             )}
           </div>
 
+          <div className="shrink-0">
+            <select
+              className="glass-input rounded-full py-3.5 px-5 text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer"
+              aria-label={t('filterTitle', 'Level Filter')}
+              value={level}
+              onChange={(e) => handleLevelChange(e.target.value)}
+            >
+              <option value="all">{t('allSchemes', 'All schemes')}</option>
+              {['central', 'state', 'ut', 'local'].map((l) => (
+                <option value={l} key={l}>
+                  {t(l === 'central' ? 'centralGov' : l === 'state' ? 'stateGov' : l, l)}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Published Catalog Grid */}
+        <PublishedCatalog data={data} loading={loading} error={error} />
+
+        {/* Pagination */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/60">
           <button
             type="button"
-            onClick={() => setMobileFilterOpen(true)}
-            className="lg:hidden flex items-center gap-2 px-5 py-3 glass-panel rounded-full text-xs font-bold text-slate-800 shadow-glass"
+            disabled={!offset || loading}
+            onClick={() => setOffset(Math.max(0, offset - 20))}
+            className="px-5 py-2.5 rounded-full text-xs font-bold glass-panel text-slate-800 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white transition-all shadow-glass"
           >
-            <Filter className="w-4 h-4 text-orange-500" />
-            <span>{t('filterTitle', 'Filters')}</span>
+            ← {t('btnBack', 'Previous')}
+          </button>
+          <span className="text-xs text-slate-500 font-semibold">
+            {data?.total ? `${offset + 1} - ${Math.min(offset + 20, data.total)} of ${data.total}` : ''}
+          </span>
+          <button
+            type="button"
+            disabled={!data?.has_more || loading}
+            onClick={() => setOffset(offset + 20)}
+            className="px-5 py-2.5 rounded-full text-xs font-bold glass-dark-pill disabled:opacity-40 disabled:cursor-not-allowed hover:bg-black transition-all shadow-md"
+          >
+            {t('btnNext', 'Next')} →
           </button>
         </div>
-
-        {/* Active Filter Chips */}
-        {hasActiveFilters && (
-          <div className="flex flex-wrap items-center gap-2 mb-6 text-xs">
-            <span className="text-slate-500 font-semibold">Active Filters:</span>
-            {filters.category !== 'all' && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-card-subtle text-orange-950 font-bold border border-orange-200">
-                <span>Category: {filters.category}</span>
-                <button
-                  type="button"
-                  onClick={() => updateFilter('category', 'all')}
-                  className="hover:text-black"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </span>
-            )}
-            {filters.level !== 'all' && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-card-subtle text-blue-950 font-bold border border-blue-200 capitalize">
-                <span>Level: {filters.level}</span>
-                <button
-                  type="button"
-                  onClick={() => updateFilter('level', 'all')}
-                  className="hover:text-black"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </span>
-            )}
-            {filters.state !== 'ALL' && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-card-subtle text-emerald-950 font-bold border border-emerald-200">
-                <span>State: {filters.state}</span>
-                <button
-                  type="button"
-                  onClick={() => updateFilter('state', 'ALL')}
-                  className="hover:text-black"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </span>
-            )}
-            <button
-              type="button"
-              onClick={handleResetFilters}
-              className="text-orange-700 hover:underline font-bold ml-1 text-xs"
-            >
-              {t('filterClearAll', 'Clear All')}
-            </button>
-          </div>
-        )}
-
-        {/* Content Layout: Sidebar + Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* Desktop Filter Sidebar */}
-          <aside className="hidden lg:block glass-panel p-6 rounded-[28px] shadow-glass h-fit sticky top-24 border border-white/80">
-            <FilterSidebar
-              filters={filters}
-              onChange={updateFilter}
-              onReset={handleResetFilters}
-            />
-          </aside>
-
-          {/* Scheme Cards Stream */}
-          <main className="lg:col-span-3">
-            {/* Header / Scheme Count */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-bold text-slate-500">
-                {t('showingResults', 'Showing')} {schemes.length} {t('schemesCount', 'schemes')}
-              </span>
-            </div>
-
-            {loading ? (
-              <LoadingState />
-            ) : schemes.length === 0 ? (
-              <EmptyState
-                title={t('noSchemesFound', 'No schemes match your criteria')}
-                description={t(
-                  'noSchemesFoundDesc',
-                  "Try adjusting your search terms, changing the category, or selecting 'All States'."
-                )}
-                actionText={t('resetFilters', 'Reset All Filters')}
-                onAction={handleResetFilters}
-              />
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {schemes.map((scheme) => (
-                  <SchemeCard key={scheme.id || scheme.code} scheme={scheme} />
-                ))}
-              </div>
-            )}
-          </main>
-
-        </div>
-
       </div>
-
-      {/* Mobile Drawer Filter Dialog */}
-      {mobileFilterOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-slate-900/30 backdrop-blur-md lg:hidden flex justify-end"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="w-full max-w-xs glass-panel h-full p-6 overflow-y-auto shadow-2xl border-l border-white/80">
-            <FilterSidebar
-              filters={filters}
-              onChange={updateFilter}
-              onReset={handleResetFilters}
-              isMobile={true}
-              onCloseMobile={() => setMobileFilterOpen(false)}
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Request, Response
 
+from app.api.routes import demo
 from app.eligibility import questionnaire
 from app.eligibility.provider import RuleProvider, get_rule_provider
 from app.schemas.questionnaire import AnswerRequest, NextRequest, QuestionnaireResponse, StartRequest
@@ -21,15 +22,22 @@ def context(response):
 
 
 @router.post('/start', response_model=QuestionnaireResponse)
-def start(request: StartRequest, response: Response, provider: Provider):
+def start(request: StartRequest, response: Response, provider: Provider, http_request: Request):
+    """Reviewed questionnaire; local demo mode returns the /demo preliminary DTO."""
+    if demo.is_local_demo(http_request):
+        return demo.local_response(demo.start_preliminary(request,response),response)
     return questionnaire.start(request, provider, as_of=context(response))
 
 
 @router.post('/next', response_model=QuestionnaireResponse)
-def next_question(request: NextRequest, response: Response, provider: Provider):
+def next_question(request: NextRequest, response: Response, provider: Provider, http_request: Request):
+    if demo.is_local_demo(http_request):
+        return demo.local_response(demo.next_preliminary(request,response),response)
     return questionnaire.next_question(request.state, provider, as_of=context(response))
 
 
 @router.post('/answer', response_model=QuestionnaireResponse)
-def answer(request: AnswerRequest, response: Response, provider: Provider):
+def answer(request: AnswerRequest, response: Response, provider: Provider, http_request: Request):
+    if demo.is_local_demo(http_request):
+        return demo.local_response(demo.answer_preliminary(request,response),response)
     return questionnaire.answer(request, provider, as_of=context(response))

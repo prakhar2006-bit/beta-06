@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
-import { INDIAN_STATES, SCHEME_CATEGORIES } from '../../data/mockSchemes';
+import { INDIAN_STATES, SCHEME_CATEGORIES } from '../../constants/schemeConstants';
 import { Filter, X, RotateCcw } from 'lucide-react';
 
 export const FilterSidebar = ({

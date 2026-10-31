@@ -1,372 +1,437 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import { sessionApi } from '../services/sessionApi';
-import { QuestionInput } from '../components/questionnaire/QuestionInput';
+import { errorKey } from '../i18n/integration.js';
+import { schemeApi } from '../services/schemeApi.js';
+import { screeningFlow as flow } from '../services/screeningFlow.js';
+import { speechValue } from '../services/adapters.js';
 import { VoiceAssistant } from '../components/questionnaire/VoiceAssistant';
-import { ProgressBar } from '../components/common/ProgressBar';
 import { LanguageSwitcher } from '../components/common/LanguageSwitcher';
 import { LoadingState } from '../components/common/LoadingState';
-import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw, HelpCircle } from 'lucide-react';
+import { useAuth } from '../auth/AuthContext';
+import { profileToAnswers } from '../profile/profileToAnswers';
 
 export const ScreeningPage = () => {
-  const { t, getLocalized, language } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
-  const questionContainerRef = useRef(null);
+  const [params] = useSearchParams();
+  const { user, profileDetails } = useAuth();
 
-  const [sessionId, setSessionId] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [totalQuestions, setTotalQuestions] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [currentAnswer, setCurrentAnswer] = useState(null);
+  const SCHEME_ALIASES = {
+    pmjjby: 'in-cen-000001',
+    pmsby: 'in-cen-000002',
+    'pm-sym': 'in-cen-000003',
+    apy: 'in-cen-000007',
+    ssy: 'in-cen-000008',
+    'sukanya-samriddhi': 'in-cen-000008',
+  };
+
+  const rawRequested = params.get('scheme_id') || '';
+  const initialSchemeId = SCHEME_ALIASES[rawRequested.toLowerCase()] || rawRequested;
+  const [schemes, setSchemes] = useState([]);
+  const [selected, setSelected] = useState(initialSchemeId);
+  const [q, setQ] = useState(
+    () => (!initialSchemeId || flow.current?.state?.scheme_id === initialSchemeId ? flow.current : null)
+  );
+  const [value, setValue] = useState('');
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [evaluating, setEvaluating] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [reload, setReload] = useState(0);
+  const lock = useRef(false);
+  const generation = useRef(0);
+  const prefilled = useRef(new Set());
 
-  // 1. Scroll to very top of window and document on step change
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, [currentIndex]);
+  const profileAnswers = useMemo(
+    () => (user ? profileToAnswers(profileDetails?.answers || {}) : {}),
+    [user, profileDetails]
+  );
 
-  // Cancel any active speech synthesis on unmount
-  useEffect(() => {
-    return () => {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-    };
-  }, []);
-
-  // Initialize or resume session
   useEffect(() => {
     let active = true;
-
-    async function init() {
-      try {
-        let sid = sessionApi.getSessionId();
-        if (!sid) {
-          const res = await sessionApi.createSession(language);
-          sid = res.session_id;
+    setLoading(true);
+    setError('');
+    schemeApi
+      .getSchemes({ language, limit: 100 })
+      .then(async (data) => {
+        const items = data.items || [];
+        const requested =
+          SCHEME_ALIASES[(params.get('scheme_id') || '').toLowerCase()] || params.get('scheme_id');
+        if (requested && !items.some((s) => s.id === requested)) {
+          try {
+            const detail = await schemeApi.getSchemeByCode(requested, language);
+            if (detail) items.push(detail);
+          } catch {
+            // Keep existing catalogue items if individual scheme lookup fails
+          }
         }
         if (active) {
-          setSessionId(sid);
-          const savedAnswers = JSON.parse(sessionStorage.getItem('yojanamitra_answers') || '{}');
-          setAnswers(savedAnswers);
-          loadQuestion(sid, 0, savedAnswers);
+          setSchemes(items);
+          if (requested && items.some((s) => s.id === requested)) {
+            setSelected(requested);
+          }
         }
-      } catch (err) {
-        console.error('Session init error:', err);
+      })
+      .catch((e) => {
+        if (active) setError(t(errorKey(e)));
+      })
+      .finally(() => {
         if (active) setLoading(false);
-      }
-    }
-
-    init();
-
+      });
     return () => {
       active = false;
     };
+  }, [language, reload]);
+
+  useEffect(() => {
+    flow.api.clearSession?.();
+    return () => {
+      generation.current++;
+      window.speechSynthesis?.cancel();
+    };
   }, []);
 
-  const loadQuestion = async (sid, index, existingAnswers = answers) => {
-    setLoading(true);
-    setErrorMessage('');
-    try {
-      const data = await sessionApi.getNextQuestion(sid, index);
-      if (data && data.question) {
-        setCurrentQuestion(data.question);
-        setCurrentIndex(data.current_index || index);
-        setTotalQuestions(data.total_questions || 10);
+  // Scroll to top on question transition
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [q?.current_question?.question_id]);
 
-        // Prepopulate current answer if citizen previously answered
-        const qId = data.question.id;
-        if (existingAnswers[qId] !== undefined) {
-          setCurrentAnswer(existingAnswers[qId]);
-        } else {
-          setCurrentAnswer(data.question.type === 'MULTI_SELECT' ? [] : null);
-        }
-      }
-    } catch (err) {
-      setErrorMessage(err.message || 'Failed to load question');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAnswerChange = (val) => {
-    setCurrentAnswer(val);
-    setErrorMessage('');
-  };
-
-  const handleNext = async (e) => {
-    if (e) {
-      e.preventDefault();
-      e.currentTarget?.blur();
-    }
-
-    // Debounce / race-condition guard
-    if (loading || evaluating) return;
-
-    if (!currentQuestion) return;
-
-    // Cancel any active voice read-aloud immediately on navigation
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
-
-    // Validation for required fields
-    if (
-      currentQuestion.required &&
-      (currentAnswer === null ||
-        currentAnswer === undefined ||
-        currentAnswer === '' ||
-        (Array.isArray(currentAnswer) && currentAnswer.length === 0))
-    ) {
-      setErrorMessage(t('requiredField', 'This question is required to evaluate eligibility.'));
+  useEffect(() => {
+    const key = q?.current_question?.question_id;
+    if (!key || !user || profileAnswers[key] === undefined || prefilled.current.has(key) || busy)
       return;
-    }
+    prefilled.current.add(key);
+    run(() => flow.update(key, 'answer', profileAnswers[key]));
+  }, [q?.current_question?.question_id, user, profileAnswers, busy]);
 
-    // Save answer
-    const updatedAnswers = {
-      ...answers,
-      [currentQuestion.id]: currentAnswer,
-    };
-    setAnswers(updatedAnswers);
-
+  async function run(action, navigateAfter = false) {
+    if (lock.current) return;
+    lock.current = true;
+    setBusy(true);
+    setError('');
+    const ticket = generation.current;
     try {
-      await sessionApi.submitAnswer(sessionId, currentQuestion.id, currentAnswer);
-    } catch (err) {
-      console.warn('Answer submit note:', err.message);
-    }
-
-    const nextIdx = currentIndex + 1;
-    if (nextIdx < totalQuestions) {
-      loadQuestion(sessionId, nextIdx, updatedAnswers);
-    } else {
-      triggerEvaluation();
-    }
-  };
-
-  const handleBack = (e) => {
-    if (e) {
-      e.preventDefault();
-      e.currentTarget?.blur();
-    }
-
-    // Debounce / race-condition guard
-    if (loading || evaluating) return;
-
-    // Cancel any active voice read-aloud immediately on navigation
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
-
-    // Preserve any edits made on current step before moving back
-    const updatedAnswers = {
-      ...answers,
-      ...(currentQuestion && currentAnswer !== null && currentAnswer !== undefined
-        ? { [currentQuestion.id]: currentAnswer }
-        : {}),
-    };
-    setAnswers(updatedAnswers);
-
-    if (currentIndex > 0) {
-      loadQuestion(sessionId, currentIndex - 1, updatedAnswers);
-    }
-  };
-
-  const triggerEvaluation = async () => {
-    setEvaluating(true);
-    try {
-      await sessionApi.evaluateSession(sessionId);
-      navigate('/results');
-    } catch (err) {
-      console.error('Evaluation error:', err);
-      navigate('/results');
-    } finally {
-      setEvaluating(false);
-    }
-  };
-
-  const handleClear = () => {
-    if (window.confirm(t('clearSessionConfirm'))) {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
+      const result = await action();
+      if (ticket !== generation.current) return;
+      if (navigateAfter) navigate('/results');
+      else {
+        setQ(result);
+        setValue('');
       }
-      sessionApi.clearSession();
-      setAnswers({});
-      setCurrentAnswer(null);
-      setCurrentIndex(0);
-      sessionApi.createSession(language).then((res) => {
-        setSessionId(res.session_id);
-        loadQuestion(res.session_id, 0, {});
-      });
+    } catch (e) {
+      if (ticket === generation.current) setError(t(errorKey(e)));
+    } finally {
+      lock.current = false;
+      setBusy(false);
     }
-  };
-
-  const questionTitle = currentQuestion ? getLocalized(currentQuestion.title) : '';
-  const helpText = currentQuestion ? getLocalized(currentQuestion.help_text) : '';
-
-  if (evaluating) {
-    return (
-      <div className="flex-1 flex items-center justify-center py-20 px-4">
-        <div className="glass-panel p-8 sm:p-12 rounded-[36px] shadow-glass-lg max-w-md w-full text-center border border-white/80">
-          <div className="w-16 h-16 rounded-full glass-orb-saffron text-white flex items-center justify-center mx-auto mb-6 animate-spin shadow-lg">
-            <CheckCircle2 className="w-8 h-8" />
-          </div>
-          <h2 className="text-xl font-black text-slate-900 mb-2">
-            Evaluating Government Schemes...
-          </h2>
-          <p className="text-xs text-slate-500 leading-relaxed font-normal">
-            Matching your profile with Central & State welfare guidelines. Generating explanations and document checklists.
-          </p>
-        </div>
-      </div>
-    );
   }
 
-  return (
-    // 2 & 3. Outer Page Wrapper with ref, scroll-mt-6, and compact py-6 md:py-8 padding
-    <div
-      ref={questionContainerRef}
-      className="flex-1 py-6 md:py-8 relative scroll-mt-6"
-    >
-      {/* Background soft glowing sun orbs */}
-      <div className="absolute top-1/4 right-1/4 w-72 h-72 rounded-full bg-orange-300/30 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-72 h-72 rounded-full bg-emerald-200/20 blur-3xl pointer-events-none" />
+  useEffect(() => {
+    if (q && !busy && !error && flow.current && flow.current.state.language !== language)
+      run(() => flow.language(language));
+  }, [language, busy, q?.state?.language, error]);
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10">
-        
-        {/* Top Control Bar ("Clear Data / New Citizen" and language switcher) */}
-        <div className="flex items-center justify-between mb-4 sm:mb-5">
+  const question = q?.current_question;
+  const validSelection = schemes.some(
+    (s) => s.id === selected && (!s.is_demo || s.screening_available === true)
+  );
+
+  const clear = () => {
+    generation.current++;
+    prefilled.current.clear();
+    flow.clear();
+    setQ(null);
+    setValue('');
+    setError('');
+    window.speechSynthesis?.cancel();
+  };
+
+  const changePrefill = (key) => {
+    prefilled.current.delete(key);
+    run(() => flow.update(key, 'clear'));
+  };
+
+  const submit = (action, input = value) =>
+    run(() => flow.update(question.question_id, action, input));
+
+  return (
+    <div className="flex-1 py-6 md:py-8 relative">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <div className="flex justify-between mb-5">
           <button
             type="button"
-            onClick={handleClear}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full glass-card-subtle text-xs font-semibold text-slate-600 hover:text-rose-600 transition"
-            title={t('btnClearSession')}
+            className="glass-card-subtle rounded-full px-4 py-2 text-xs font-semibold hover:bg-white transition-all shadow-xs"
+            onClick={clear}
+            disabled={busy}
           >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>{t('btnClearSession', 'Clear Data / Reset')}</span>
+            {t('clearData')}
           </button>
-
           <LanguageSwitcher />
         </div>
 
-        {/* Questionnaire Progress & Question Card */}
-        <div className="glass-panel rounded-[36px] shadow-glass-lg p-6 sm:p-8 sm:py-10 border border-white/80 relative overflow-hidden">
-          
-          {/* Progress Bar ("Step X of 10") */}
-          <div className="mb-6 sm:mb-8">
-            <ProgressBar current={currentIndex} total={totalQuestions || 10} />
-          </div>
+        <div
+          className="glass-panel rounded-[36px] shadow-glass-lg p-6 sm:p-8 border border-white/80"
+          aria-busy={busy}
+        >
+          <p className="text-sm text-slate-500 mb-5">{t('screeningSingle')}</p>
 
-          {loading ? (
-            <LoadingState message="Loading next question..." />
-          ) : currentQuestion ? (
-            <div className="space-y-6 sm:space-y-8">
-              
-              {/* Question Header & Voice Assistant */}
-              <div>
-                <div className="flex items-center justify-between gap-3 mb-2.5">
-                  <span className="text-[11px] font-bold text-orange-700 uppercase tracking-wider glass-card-subtle px-3 py-0.5 rounded-full">
-                    {t('stepProgress', 'Question')} {currentIndex + 1} {t('ofText', 'of')}{' '}
-                    {totalQuestions}
+          {error && <p role="alert" className="text-rose-700 mb-4 text-sm font-semibold">{error}</p>}
+
+          {!q ? (
+            loading ? (
+              <LoadingState />
+            ) : (
+              <div className="space-y-4">
+                <label className="block font-bold text-slate-900" htmlFor="scheme-select">
+                  {t('selectScheme')}
+                </label>
+                <select
+                  id="scheme-select"
+                  className="glass-input rounded-2xl w-full p-4 text-sm font-medium focus:outline-none cursor-pointer"
+                  value={selected}
+                  onChange={(e) => setSelected(e.target.value)}
+                  disabled={busy}
+                >
+                  <option value="">{t('selectScheme')}</option>
+                  {schemes
+                    .filter((s) => !s.is_demo || s.screening_available === true)
+                    .map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.name || s.id}
+                        {s.translation_fallback
+                          ? ` (${t(s.language === 'en' ? 'fallbackEnglish' : 'languageFallback')})`
+                          : ''}
+                      </option>
+                    ))}
+                </select>
+
+                {!schemes.length && !error && <p role="status">{t('emptyPublished')}</p>}
+
+                {error && (
+                  <button
+                    type="button"
+                    className="text-xs font-bold text-orange-600 hover:underline mr-4"
+                    onClick={() => setReload((n) => n + 1)}
+                  >
+                    {t('retry')}
+                  </button>
+                )}
+
+                <button
+                  className="glass-dark-pill w-full sm:w-auto inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide hover:bg-black transition-all shadow-lg active:scale-95 disabled:opacity-40"
+                  disabled={!validSelection || busy}
+                  onClick={() => run(() => flow.start(selected, language))}
+                >
+                  {t('startScheme')}
+                </button>
+              </div>
+            )
+          ) : (
+            <>
+              <div role="status" className="text-xs text-slate-600 flex flex-wrap gap-3 mb-6">
+                {['answered', 'unknown', 'skipped', 'remaining'].map((k) => (
+                  <span key={k}>
+                    {t(k === 'remaining' ? 'remainingCount' : `${k}Count`)}: {q.progress[k]}
                   </span>
+                ))}
+              </div>
 
-                  {/* Bilingual Voice Read Aloud and Speech Recognition */}
+              {q.completed &&
+                (q.missing_information_labels || []).map((label, i) => (
+                  <p className="mb-3 text-sm" key={i}>
+                    {label}
+                  </p>
+                ))}
+
+              {question ? (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    submit('answer');
+                  }}
+                  className="space-y-5"
+                >
                   <VoiceAssistant
-                    textToRead={`${questionTitle}. ${helpText}`}
-                    onSpeechResult={(val) => {
-                      if (currentQuestion.type === 'NUMBER') {
-                        const num = parseInt(val.replace(/\D/g, ''), 10);
-                        if (!isNaN(num)) setCurrentAnswer(num);
-                      } else {
-                        setCurrentAnswer(val);
+                    contentLanguage={question.content_language}
+                    textToRead={question.text}
+                    onSpeechResult={(text) => {
+                      try {
+                        setValue(speechValue(question, text));
+                        setError('');
+                      } catch {
+                        setError(t('invalidAnswer'));
                       }
                     }}
                   />
-                </div>
+                  <p className="text-xs text-slate-500">
+                    {t('voiceConfirm')} {t('voiceFallback')}
+                  </p>
+                  <h2
+                    id="current-question"
+                    data-question-id={question.question_id}
+                    lang={question.content_language}
+                    className="text-xl sm:text-2xl font-black text-slate-900"
+                  >
+                    {question.text}
+                  </h2>
+                  {profileAnswers[question.question_id] !== undefined && (
+                    <p className="text-xs text-emerald-700">
+                      {t('fromProfile', 'From your saved details')}{' '}
+                      <button
+                        type="button"
+                        className="ml-2 underline"
+                        onClick={() => changePrefill(question.question_id)}
+                      >
+                        {t('changeAnswer', 'Change')}
+                      </button>
+                    </p>
+                  )}
+                  {(question.translation_fallback ||
+                    question.content_language !== language) && (
+                    <p className="text-amber-700 text-xs">{t('fallbackEnglish')}</p>
+                  )}
+                  <p className="text-xs text-slate-500">
+                    {[
+                      question.unit,
+                      question.period,
+                      question.scope,
+                      question.reference_basis,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ')}
+                  </p>
 
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 leading-snug">
-                  {questionTitle}
-                </h2>
+                  {question.answer_type === 'boolean' ? (
+                    <div
+                      role="radiogroup"
+                      aria-labelledby="current-question"
+                      className="grid grid-cols-2 gap-4"
+                    >
+                      {[true, false].map((v) => (
+                        <button
+                          type="button"
+                          key={String(v)}
+                          role="radio"
+                          aria-checked={value === v}
+                          className={`glass-card-subtle rounded-[24px] p-6 text-sm font-bold transition-all ${
+                            value === v
+                              ? 'ring-2 ring-orange-500 bg-white/95 text-slate-900 shadow-md'
+                              : 'text-slate-700 hover:bg-white/80'
+                          }`}
+                          disabled={busy}
+                          onClick={() => setValue(v)}
+                        >
+                          {t(v ? 'yes' : 'no')}
+                        </button>
+                      ))}
+                    </div>
+                  ) : question.answer_type === 'category' ? (
+                    <div>
+                      <p className="text-xs text-slate-500 mb-2">{t('categoryCodes')}</p>
+                      <select
+                        aria-labelledby="current-question"
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                        className="glass-input rounded-2xl w-full p-4 text-sm font-semibold focus:outline-none cursor-pointer"
+                        disabled={busy}
+                      >
+                        <option value="">{t('selectOne', 'Select one')}</option>
+                        {question.allowed_values.map((v) => (
+                          <option value={v} key={v}>
+                            {v}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ) : (
+                    <input
+                      aria-labelledby="current-question"
+                      type="text"
+                      inputMode={
+                        question.answer_type === 'integer' ? 'numeric' : 'decimal'
+                      }
+                      autoComplete="off"
+                      value={value}
+                      disabled={busy}
+                      onChange={(e) => setValue(e.target.value)}
+                      className="glass-input rounded-full w-full p-4 text-center text-xl font-bold focus:outline-none"
+                    />
+                  )}
 
-                {helpText && (
-                  <div className="mt-2 flex items-start gap-2 text-xs text-slate-500 font-normal">
-                    <HelpCircle className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                    <p>{helpText}</p>
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      type="submit"
+                      disabled={busy || value === ''}
+                      className="glass-dark-pill rounded-full px-6 py-3 text-sm font-semibold tracking-wide disabled:opacity-40"
+                    >
+                      {t('btnNext', 'Continue')}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => submit('skip')}
+                      className="glass-card-subtle rounded-full px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-white"
+                    >
+                      {t('skipQuestion')}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => submit('answer', null)}
+                      className="glass-card-subtle rounded-full px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-white"
+                    >
+                      {t('unknownAnswer')}
+                    </button>
                   </div>
-                )}
-              </div>
-
-              {/* Dynamic Input Control */}
-              <div className="py-1">
-                <QuestionInput
-                  question={currentQuestion}
-                  value={currentAnswer}
-                  onChange={handleAnswerChange}
-                />
-              </div>
-
-              {/* Error validation message */}
-              {errorMessage && (
-                <p className="text-xs font-bold text-rose-600 text-center animate-shake">
-                  {errorMessage}
-                </p>
+                </form>
+              ) : (
+                <div className="space-y-4">
+                  <p className="text-base font-semibold text-slate-800">
+                    {q.completion_reason === 'VERIFICATION_REQUIRED'
+                      ? t('verificationComplete')
+                      : t('resultNotice')}
+                  </p>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {q.evaluation?.explanation}
+                  </p>
+                  <button
+                    disabled={busy}
+                    className="glass-dark-pill rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide hover:bg-black transition-all shadow-md"
+                    onClick={() => run(() => flow.finish(), true)}
+                  >
+                    {t('finishScreening')}
+                  </button>
+                </div>
               )}
 
-              {/* Navigation Controls */}
-              <div className="pt-5 border-t border-white/60 flex items-center justify-between gap-4">
+              <div className="mt-6 pt-5 border-t border-white/60 flex flex-wrap gap-3">
                 <button
-                  type="button"
-                  onClick={(e) => {
-                    handleBack(e);
-                  }}
-                  disabled={currentIndex === 0 || loading || evaluating}
-                  className={`inline-flex items-center gap-2 px-5 py-3 rounded-full text-xs font-semibold transition focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:outline-none ${
-                    currentIndex === 0 || loading || evaluating
-                      ? 'text-slate-300 cursor-not-allowed bg-transparent'
-                      : 'glass-card-subtle text-slate-700 hover:bg-white'
-                  }`}
+                  disabled={busy || !flow.history.length}
+                  onClick={() => run(() => flow.back())}
+                  className="glass-card-subtle rounded-full px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-white disabled:opacity-40"
                 >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>{t('btnBack', 'Back')}</span>
+                  {t('previousAnswer')}
                 </button>
-
-                {/* Dark Pill CTA with capsule arrow */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    handleNext(e);
-                  }}
-                  disabled={loading || evaluating}
-                  className="glass-dark-pill inline-flex items-center gap-3 px-6 py-3.5 rounded-full text-xs font-semibold tracking-wide hover:bg-black transition-all shadow-md active:scale-95 focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span>
-                    {currentIndex === totalQuestions - 1
-                      ? t('btnSubmit', 'Evaluate Eligibility')
-                      : t('btnNext', 'Continue')}
-                  </span>
-                  <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-                    <ArrowRight className="w-3 h-3 text-white" />
-                  </div>
-                </button>
+                {Object.keys(q.state.answers)
+                  .concat(q.state.skipped)
+                  .map((key) => (
+                    <button
+                      key={key}
+                      disabled={busy}
+                      className="glass-card-subtle rounded-full px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-white"
+                      onClick={() => run(() => flow.update(key, 'clear'))}
+                    >
+                      {t('clearAnswer')}: {q.field_labels?.[key] || t('previousAnswer')}
+                    </button>
+                  ))}
               </div>
-
-            </div>
-          ) : (
-            <p className="text-center text-sm text-slate-500">No questions available.</p>
+            </>
           )}
 
+          {busy && <p role="status" className="mt-4 text-xs text-slate-500 font-medium">{t('loadingQuestion')}</p>}
         </div>
 
-        {/* Ephemeral Privacy Note */}
-        <div className="mt-5 text-center text-xs text-slate-400 font-medium">
-          <span>🔒 Ephemeral Session: Your answers are not stored permanently on any server.</span>
-        </div>
-
+        <p className="text-center text-xs text-slate-500 mt-5">{t('privacyMemory')}</p>
       </div>
     </div>
   );

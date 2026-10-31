@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { translations } from './translations';
+import { integration } from './integration.js';
 
 const LanguageContext = createContext(null);
 
@@ -21,6 +22,7 @@ export const LanguageProvider = ({ children }) => {
   };
 
   const t = (key, fallback = '') => {
+    if (integration[language]?.[key]) return integration[language][key];
     if (translations[language] && translations[language][key]) {
       return translations[language][key];
     }

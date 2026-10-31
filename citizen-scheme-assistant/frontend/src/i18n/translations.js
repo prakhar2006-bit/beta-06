@@ -16,19 +16,23 @@ export const translations = {
     navCheckEligibility: "Check Eligibility",
     navClearData: "Clear My Data",
     
+    // Banner Disclaimer
+    bannerDisclaimer: "Independent project, not an official government website.",
+
     // Language Switcher
     langEn: "English",
     langHi: "हिंदी",
     
     // Hero Section
-    heroBadge: "Official Welfare Discovery Initiative",
+    heroBadge: "Independent scheme guide",
     heroHeading: "Government Schemes Made Simple for Everyone.",
     heroSubheading: "Discover government benefits, understand your eligibility, and find the right schemes for you — all in one place.",
     heroCtaStart: "Start Eligibility Check",
     heroCtaExplore: "Explore Schemes",
-    heroStat1: "100+ Welfare Schemes",
-    heroStat2: "28 States & 8 UTs Covered",
-    heroStat3: "100% Free & Ephemeral Privacy",
+    heroStatSchemes: "{count} Welfare Schemes",
+    heroStat1: "Welfare Schemes",
+    heroStat2: "Central & State Schemes",
+    heroStat3: "Nothing is saved after you close it",
     heroCitizenVoice: "Available in Hindi and English",
 
     // Search Section
@@ -147,9 +151,13 @@ export const translations = {
     // Results Page
     resultsTitle: "Screening Evaluation Results",
     resultsSubtitle: "Based on your preliminary responses, here is the eligibility breakdown for screened government schemes.",
-    statusPotentiallyEligible: "Potentially Eligible",
+    statusPotentiallyEligible: "You may qualify",
     statusIneligible: "Not Eligible Under Screened Rules",
     statusNeedsVerification: "Needs Verification",
+    statusNoCurrentRules: "No Current Rules",
+    statusUnknown: "Unknown status, please check the official source",
+    noCurrentRulesCardText: "We do not have current rules for this scheme. Please check the official source.",
+    staleRulesWarning: "These rules were last checked on {date} and may be out of date.",
     statusAll: "All Results",
     resultsDisclaimer: "Important Notice: This is a preliminary screening, not an official government decision. Final eligibility and approval are determined by the relevant government authority upon document verification and formal application.",
     decisiveRuleHeading: "Why this outcome:",
@@ -162,9 +170,10 @@ export const translations = {
     noResultsFound: "No screening results found. Please complete the questionnaire first.",
     startScreeningNow: "Start Questionnaire",
     summaryTitle: "Summary",
-    eligibleCount: "Potentially Eligible",
+    eligibleCount: "You may qualify",
     uncertainCount: "Needs Verification",
     ineligibleCount: "Not Eligible",
+    noCurrentRulesCount: "No Current Rules",
 
     // Scheme Details Page
     backToSchemes: "Back to Schemes",
@@ -198,6 +207,24 @@ export const translations = {
     closeModal: "Close Preview",
     sampleWatermarkBadge: "SAMPLE – NOT VALID",
 
+    // Authentication & Profile additions
+    authUnavailable: "Login is not available right now. You can continue as a guest.",
+    loginTitle: "Log in", signupTitle: "Create an account", emailLabel: "Email", passwordLabel: "Password", fullNameLabel: "Full name",
+    preferredLanguageLabel: "Preferred language", stateLabel: "State or Union Territory", selectStatePlaceholder: "Select your state",
+    rememberMe: "This is my own phone, keep me signed in", loginButton: "Login", signupButton: "Sign up", profileMenu: "Profile", logoutButton: "Logout",
+    showPassword: "Show password", passwordHint: "Use at least 8 characters.", passwordMinError: "Password must be at least 8 characters.",
+    noAccount: "Don't have an account?", hasAccount: "Already have an account?", signupLink: "Sign up", loginLink: "Login", working: "Please wait...",
+    checkEmail: "Check your email to confirm your account.", profileTitle: "Profile", saveProfile: "Save", profileSaved: "Profile saved.",
+    profilePrivacy: "We only save your name, language and state. We never save your income, caste, Aadhaar or your answers.",
+    deleteProfile: "Delete my profile data", deleteProfileConfirm: "Delete your profile data and log out?", deleteProfileHint: "This cannot be undone.",
+    authInvalidCredentials: "The email or password is incorrect.", authAlreadyRegistered: "This email is already registered.",
+    authWeakPassword: "Choose a stronger password with at least 8 characters.", authRateLimit: "Too many attempts. Please try again later.",
+    authNetworkError: "We could not connect. Please check your internet connection.", authGenericError: "Something went wrong. Please try again.", profileRetentionPrivacy: "Deleted when you next sign in after 90 days, or anytime you press Delete.",
+    profileDetailsEyebrow: "Optional profile", profileDetailsTitle: "Tell us about yourself", backToProfile: "Back to profile", profileDetailsLink: "Add optional profile details", profileStepAbout: "About you", profileStepLocation: "Location", profileStepWork: "Work and education", profileStepFamily: "Family and support", profileCompletenessNote: "Completeness does not affect eligibility. Skipping is always okay.", profileConsent: "I agree to save these optional details to improve my experience.", profileConsentRequired: "Please give consent before saving these details.", profileDetailsSaved: "Your details were saved.", profileDetailsError: "Could not save your details. Please try again.", profilePrevious: "Previous", profileSaveContinue: "Save and continue", profileSkip: "Prefer not to say", profileSkipQuestion: "Skip this question",
+    profileGender: "Gender", profileDob: "Date of birth", profileMarital: "Marital status", profileDisability: "Do you have a disability?", profileSpecialCategories: "Special category", profileDomicile: "Domicile state", profileDifferentState: "Do you live in a different state?", profileRuralUrban: "Area type", profileSchemePreference: "Scheme preference", profileOccupation: "Occupation", profileEducation: "Highest education", profileStudying: "Are you currently studying?", profileCurrentClass: "Current class or course", profileInstitution: "Institution type", profileSocialCategory: "Social category", profileObcList: "OBC list", profileIncome: "Annual family income", profileRationCard: "Ration card", profileTaxpayer: "Income tax payer", profileLand: "Agricultural land", profileHouseType: "House type", profileLpg: "LPG connection", profileVehicle: "Motor vehicle", profileFieldWhy: "This helps us show more relevant information.",
+    profileOption_female: "Female", profileOption_male: "Male", profileOption_other: "Other", profileOption_prefer_not_to_say: "Prefer not to say", profileOption_yes: "Yes", profileOption_no: "No", profileOption_dont_know: "I don't know", profileOption_unmarried: "Unmarried", profileOption_married: "Married", profileOption_widowed: "Widowed", profileOption_divorced_separated: "Divorced or separated", profileOption_ex_servicemen: "Ex-serviceman", profileOption_freedom_fighter_family: "Freedom fighter family", profileOption_registered_worker: "Registered worker", profileOption_none: "None", profileOption_rural: "Rural", profileOption_urban: "Urban", profileOption_central: "Central government", profileOption_state: "State government", profileOption_both: "Both", profileOption_government: "Government", profileOption_government_aided: "Government aided", profileOption_private: "Private", profileOption_general_ews: "General / EWS", profileOption_obc: "OBC", profileOption_sc: "SC", profileOption_st: "ST", profileOption_central_list: "Central list", profileOption_state_list: "State list", profileOption_apl: "APL", profileOption_bpl: "BPL", profileOption_antyodaya: "Antyodaya", profileOption_priority_nfsa: "Priority NFSA", profileOption_up_to_2_5: "Up to 2.5 acres", profileOption_2_5_to_5: "2.5 to 5 acres", profileOption_above_5: "Above 5 acres", profileOption_kutcha: "Kutcha", profileOption_semi_pucca: "Semi-pucca", profileOption_pucca: "Pucca", profileOption_no_house: "No house",
+    incomeBelow1Lakh: "Below ₹1 lakh", income1To2_5Lakh: "₹1–2.5 lakh", income2_5To3_5Lakh: "₹2.5–3.5 lakh", income3_5To6Lakh: "₹3.5–6 lakh", income6To8Lakh: "₹6–8 lakh", incomeAbove8Lakh: "Above ₹8 lakh", incomeDontKnow: "I don't know", documentsTitle: "My documents", documentPrivacyNote: "Documents are private and removed after 90 days of inactivity.", documentUploadLimit: "JPG, PNG or PDF · up to 3 MB", uploadDocument: "Upload document", uploading: "Uploading...", documentUploadError: "Could not upload this document.", documentPreview: "View", deleteDocument: "Delete", confirmDocument: "Confirm", confirmedValue: "Enter the value you confirmed", documentConfirmed: "Confirmed", tickOnly: "tick only", documentAlreadyHave: "Already added", documentStillNeeded: "Still needed", fromProfile: "From your saved details", fromDocument: "From a confirmed document", changeAnswer: "Change", docCaste: "Caste certificate", docIncome: "Income certificate", docDomicile: "Domicile certificate", docRationCard: "Ration card", docLandRecord: "Land record", docMarksheet: "Marksheet", docDisability: "Disability certificate", docWorkerRegistration: "Worker registration", docExServicemen: "Ex-servicemen ID", docSchoolProof: "School admission proof", docAadhaarTick: "Aadhaar available", docBankPassbookTick: "Bank passbook available",
+
     // Common
     optional: "Optional",
     noSchemesMatchFilter: "No schemes match the selected filter.",
@@ -223,19 +250,23 @@ export const translations = {
     navCheckEligibility: "पात्रता जांचें",
     navClearData: "डेटा मिटाएं",
     
+    // Banner Disclaimer
+    bannerDisclaimer: "स्वतंत्र परियोजना, आधिकारिक सरकारी वेबसाइट नहीं।",
+
     // Language Switcher
     langEn: "English",
     langHi: "हिंदी",
 
     // Hero Section
-    heroBadge: "सार्वजनिक कल्याण सूचना पहल",
+    heroBadge: "स्वतंत्र योजना मार्गदर्शिका",
     heroHeading: "सभी के लिए सरकारी योजनाएं हुईं आसान।",
     heroSubheading: "सरकारी योजनाओं के लाभ जानें, अपनी पात्रता समझें, और सही योजनाओं की जानकारी प्राप्त करें — सब कुछ एक ही जगह पर।",
     heroCtaStart: "पात्रता जांच शुरू करें",
     heroCtaExplore: "योजनाएं देखें",
-    heroStat1: "100+ जनकल्याणकारी योजनाएं",
-    heroStat2: "28 राज्य और 8 केंद्र शासित प्रदेश",
-    heroStat3: "100% निःशुल्क एवं सुरक्षित डेटा",
+    heroStatSchemes: "{count} जनकल्याणकारी योजनाएं",
+    heroStat1: "जनकल्याणकारी योजनाएं",
+    heroStat2: "केंद्र व राज्य सरकार की योजनाएं",
+    heroStat3: "ब्राउज़र बंद करने पर कुछ भी सुरक्षित नहीं रहता",
     heroCitizenVoice: "हिंदी और अंग्रेजी में उपलब्ध",
 
     // Search Section
@@ -311,7 +342,7 @@ export const translations = {
 
     // Explore Schemes Page
     exploreTitle: "सरकारी योजनाएं खोजें",
-    exploreSubtitle: "केंद्र और सभी 28 राज्यों व 8 केंद्र शासित प्रदेशों की योजनाओं को देखें और फ़िल्टर करें",
+    exploreSubtitle: "केंद्र और राज्य सरकारों के कल्याणकारी कार्यक्रमों को देखें और फ़िल्टर करें",
     filterTitle: "फ़िल्टर",
     filterGovernmentLevel: "सरकार का स्तर",
     filterAllLevels: "सभी स्तर",
@@ -354,9 +385,13 @@ export const translations = {
     // Results Page
     resultsTitle: "पात्रता मूल्यांकन परिणाम",
     resultsSubtitle: "आपके द्वारा दी गई प्राथमिक जानकारी के आधार पर सरकारी योजनाओं का पात्रता विश्लेषण:",
-    statusPotentiallyEligible: "संभावित रूप से पात्र",
+    statusPotentiallyEligible: "आप पात्र हो सकते हैं",
     statusIneligible: "जांचे गए नियमों के तहत अपात्र",
     statusNeedsVerification: "संशय / अधिक जानकारी आवश्यक",
+    statusNoCurrentRules: "वर्तमान में नियम उपलब्ध नहीं",
+    statusUnknown: "अज्ञात स्थिति, कृपया आधिकारिक स्रोत देखें",
+    noCurrentRulesCardText: "हमारे पास इस योजना के लिए वर्तमान नियम उपलब्ध नहीं हैं। कृपया आधिकारिक स्रोत देखें।",
+    staleRulesWarning: "इन नियमों की अंतिम जांच {date} को की गई थी और ये पुराने हो सकते हैं।",
     statusAll: "सभी परिणाम",
     resultsDisclaimer: "महत्वपूर्ण सूचना: यह एक प्रारंभिक जांच है, आधिकारिक सरकारी निर्णय नहीं। अंतिम पात्रता और स्वीकृति संबंधित सरकारी प्राधिकरण द्वारा दस्तावेज़ सत्यापन के बाद ही निर्धारित की जाती है।",
     decisiveRuleHeading: "इस परिणाम का मुख्य कारण:",
@@ -369,9 +404,10 @@ export const translations = {
     noResultsFound: "कोई परिणाम नहीं मिला। कृपया पहले पात्रता प्रश्नावली पूरी करें।",
     startScreeningNow: "प्रश्नावली शुरू करें",
     summaryTitle: "परिणाम सारांश",
-    eligibleCount: "संभावित पात्र",
+    eligibleCount: "आप पात्र हो सकते हैं",
     uncertainCount: "सत्यापन आवश्यक",
     ineligibleCount: "वर्तमान में अपात्र",
+    noCurrentRulesCount: "नियम उपलब्ध नहीं",
 
     // Scheme Details Page
     backToSchemes: "योजनाओं की सूची पर वापस जाएं",
@@ -404,6 +440,22 @@ export const translations = {
     formatVariationHeading: "राज्य प्रारूप भिन्नता संबंधी जानकारी",
     closeModal: "पूर्वावलोकन बंद करें",
     sampleWatermarkBadge: "केवल नमूना - अमान्य",
+
+    // Authentication & Profile additions
+    authUnavailable: "लॉगिन अभी उपलब्ध नहीं है। आप अतिथि के रूप में ऐप चला सकते हैं।",
+    loginTitle: "लॉगिन करें", signupTitle: "खाता बनाएं", emailLabel: "ईमेल", passwordLabel: "पासवर्ड", fullNameLabel: "पूरा नाम",
+    preferredLanguageLabel: "पसंदीदा भाषा", stateLabel: "राज्य या केंद्र शासित प्रदेश", selectStatePlaceholder: "अपना राज्य चुनें",
+    rememberMe: "यह मेरा अपना फ़ोन है, मुझे लॉगिन रखें", loginButton: "लॉगिन", signupButton: "खाता बनाएं", profileMenu: "प्रोफ़ाइल", logoutButton: "लॉगआउट",
+    showPassword: "पासवर्ड दिखाएं", passwordHint: "कम से कम 8 अक्षर रखें।", passwordMinError: "पासवर्ड कम से कम 8 अक्षरों का होना चाहिए।",
+    noAccount: "खाता नहीं है?", hasAccount: "पहले से खाता है?", signupLink: "खाता बनाएं", loginLink: "लॉगिन", working: "कृपया प्रतीक्षा करें...",
+    checkEmail: "खाता सत्यापित करने के लिए अपना ईमेल देखें।", profileTitle: "प्रोफ़ाइल", saveProfile: "सहेजें", profileSaved: "प्रोफ़ाइल सहेजी गई।",
+    profilePrivacy: "हम केवल आपका नाम, भाषा और राज्य सहेजते हैं। आपकी आय, जाति, आधार या आपके उत्तर कभी सहेजे नहीं जाते।",
+    deleteProfile: "मेरी प्रोफ़ाइल जानकारी मिटाएं", deleteProfileConfirm: "क्या आप प्रोफ़ाइल जानकारी मिटाकर लॉगआउट करना चाहते हैं?", deleteProfileHint: "यह वापस नहीं किया जा सकता।",
+    authInvalidCredentials: "ईमेल या पासवर्ड गलत है।", authAlreadyRegistered: "इस ईमेल से पहले खाता बना हुआ है।",
+    authWeakPassword: "कम से कम 8 अक्षरों का मजबूत पासवर्ड चुनें।", authRateLimit: "बहुत अधिक प्रयास हुए हैं। बाद में फिर प्रयास करें।",
+    authNetworkError: "कनेक्शन नहीं हो सका। अपना इंटरनेट जांचें।", authGenericError: "कुछ गड़बड़ी हुई। कृपया फिर प्रयास करें।", profileRetentionPrivacy: "90 दिन बाद अगली बार लॉगिन करने पर या Delete दबाते ही जानकारी मिटा दी जाएगी।",
+    profileDetailsEyebrow: "वैकल्पिक प्रोफ़ाइल", profileDetailsTitle: "अपने बारे में बताएं", backToProfile: "प्रोफ़ाइल पर वापस जाएं", profileDetailsLink: "वैकल्पिक जानकारी जोड़ें", profileStepAbout: "आपके बारे में", profileStepLocation: "स्थान", profileStepWork: "काम और शिक्षा", profileStepFamily: "परिवार और सहायता", profileCompletenessNote: "इस जानकारी से पात्रता प्रभावित नहीं होती। प्रश्न छोड़ना ठीक है।", profileConsent: "मैं इस वैकल्पिक जानकारी को सहेजने की सहमति देता/देती हूँ।", profileConsentRequired: "जानकारी सहेजने से पहले सहमति दें।", profileDetailsSaved: "आपकी जानकारी सहेज दी गई।", profileDetailsError: "जानकारी सहेजी नहीं जा सकी। फिर प्रयास करें।", profilePrevious: "पिछला", profileSaveContinue: "सहेजें और आगे बढ़ें", profileSkip: "बताना नहीं चाहते", profileSkipQuestion: "यह प्रश्न छोड़ें", profileGender: "लिंग", profileDob: "जन्म तिथि", profileMarital: "वैवाहिक स्थिति", profileDisability: "क्या आपको दिव्यांगता है?", profileSpecialCategories: "विशेष श्रेणी", profileDomicile: "स्थायी निवास राज्य", profileDifferentState: "क्या आप किसी दूसरे राज्य में रहते हैं?", profileRuralUrban: "क्षेत्र का प्रकार", profileSchemePreference: "योजना की पसंद", profileOccupation: "काम", profileEducation: "सबसे अधिक शिक्षा", profileStudying: "क्या आप अभी पढ़ रहे हैं?", profileCurrentClass: "वर्तमान कक्षा या पाठ्यक्रम", profileInstitution: "संस्थान का प्रकार", profileSocialCategory: "सामाजिक श्रेणी", profileObcList: "OBC सूची", profileIncome: "परिवार की वार्षिक आय", profileRationCard: "राशन कार्ड", profileTaxpayer: "आयकरदाता", profileLand: "कृषि भूमि", profileHouseType: "घर का प्रकार", profileLpg: "LPG कनेक्शन", profileVehicle: "मोटर वाहन", profileFieldWhy: "इससे आपको अधिक उपयोगी जानकारी दिखाने में मदद मिलती है।",
+    profileOption_female: "महिला", profileOption_male: "पुरुष", profileOption_other: "अन्य", profileOption_prefer_not_to_say: "बताना नहीं चाहते", profileOption_yes: "हाँ", profileOption_no: "नहीं", profileOption_dont_know: "पता नहीं", profileOption_unmarried: "अविवाहित", profileOption_married: "विवाहित", profileOption_widowed: "विधवा/विधुर", profileOption_divorced_separated: "तलाकशुदा या अलग", profileOption_ex_servicemen: "पूर्व सैनिक", profileOption_freedom_fighter_family: "स्वतंत्रता सेनानी परिवार", profileOption_registered_worker: "पंजीकृत श्रमिक", profileOption_none: "कोई नहीं", profileOption_rural: "ग्रामीण", profileOption_urban: "शहरी", profileOption_central: "केंद्र सरकार", profileOption_state: "राज्य सरकार", profileOption_both: "दोनों", profileOption_government: "सरकारी", profileOption_government_aided: "सरकारी सहायता प्राप्त", profileOption_private: "निजी", profileOption_general_ews: "सामान्य / EWS", profileOption_obc: "OBC", profileOption_sc: "SC", profileOption_st: "ST", profileOption_central_list: "केंद्रीय सूची", profileOption_state_list: "राज्य सूची", profileOption_apl: "APL", profileOption_bpl: "BPL", profileOption_antyodaya: "अंत्योदय", profileOption_priority_nfsa: "प्राथमिकता NFSA", profileOption_up_to_2_5: "2.5 एकड़ तक", profileOption_2_5_to_5: "2.5 से 5 एकड़", profileOption_above_5: "5 एकड़ से अधिक", profileOption_kutcha: "कच्चा", profileOption_semi_pucca: "अर्ध-पक्का", profileOption_pucca: "पक्का", profileOption_no_house: "घर नहीं", incomeBelow1Lakh: "₹1 लाख से कम", income1To2_5Lakh: "₹1–2.5 लाख", income2_5To3_5Lakh: "₹2.5–3.5 लाख", income3_5To6Lakh: "₹3.5–6 लाख", income6To8Lakh: "₹6–8 लाख", incomeAbove8Lakh: "₹8 लाख से अधिक", incomeDontKnow: "पता नहीं", documentsTitle: "मेरे दस्तावेज़", documentPrivacyNote: "दस्तावेज़ निजी हैं और 90 दिन की निष्क्रियता के बाद हटा दिए जाते हैं।", documentUploadLimit: "JPG, PNG या PDF · अधिकतम 3 MB", uploadDocument: "दस्तावेज़ अपलोड करें", uploading: "अपलोड हो रहा है...", documentUploadError: "दस्तावेज़ अपलोड नहीं हो सका।", documentPreview: "देखें", deleteDocument: "हटाएं", confirmDocument: "पुष्टि करें", confirmedValue: "पुष्टि किया गया विवरण लिखें", documentConfirmed: "पुष्टि हो गई", tickOnly: "केवल टिक", documentAlreadyHave: "पहले से जोड़ा गया", documentStillNeeded: "अभी चाहिए", fromProfile: "आपकी सहेजी जानकारी से", fromDocument: "पुष्टि किए गए दस्तावेज़ से", changeAnswer: "बदलें", docCaste: "जाति प्रमाणपत्र", docIncome: "आय प्रमाणपत्र", docDomicile: "निवास प्रमाणपत्र", docRationCard: "राशन कार्ड", docLandRecord: "भूमि रिकॉर्ड", docMarksheet: "अंकपत्र", docDisability: "दिव्यांगता प्रमाणपत्र", docWorkerRegistration: "श्रमिक पंजीकरण", docExServicemen: "पूर्व सैनिक पहचान पत्र", docSchoolProof: "स्कूल प्रवेश प्रमाण", docAadhaarTick: "आधार उपलब्ध है", docBankPassbookTick: "बैंक पासबुक उपलब्ध है",
 
     // Common
     optional: "वैकल्पिक",

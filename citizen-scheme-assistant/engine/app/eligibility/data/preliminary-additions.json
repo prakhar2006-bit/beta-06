@@ -1,0 +1,1727 @@
+{
+  "format": "preliminary-screening-extension-v1",
+  "checked_on": "2026-10-31",
+  "purpose": "Incomplete source-supported advisory checks; never publication approval",
+  "sources": {
+    "extra-pmuy": {
+      "reference_id": "extra-pmuy",
+      "original_url": "https://www.pmuy.gov.in/index.aspx",
+      "title": "PMUY — eligibility, documents and benefits",
+      "locator": "Eligibility Criteria; Documents Required; Benefits to customers; Where to Apply",
+      "last_checked_date": "2026-10-31",
+      "published_on": null,
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-ignoaps": {
+      "reference_id": "extra-ignoaps",
+      "original_url": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=155928&id=155928&lang=2&reg=48",
+      "title": "National Social Assistance Programme",
+      "locator": "IGNOAPS; Selection; State/UT implementation",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2025-11-07",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-pmkisan": {
+      "reference_id": "extra-pmkisan",
+      "original_url": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=156092&lang=2&reg=3",
+      "title": "21st Instalment of PM-KISAN",
+      "locator": "Eligibility Criteria to Enroll; Implementation Strategy; e-KYC",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2025-11-19",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-pmayg": {
+      "reference_id": "extra-pmayg",
+      "original_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2080091&lang=2&reg=48",
+      "title": "Automatic exclusion criteria for Pradhan Mantri Awas Yojana-Gramin Scheme beneficiaries",
+      "locator": "Revised exclusions, Step 1 and Step 2",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2024-12-03",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-pmjay": {
+      "reference_id": "extra-pmjay",
+      "original_url": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=160081&lang=3&reg=3",
+      "title": "Progressing Towards Universal Health Coverage: Ayushman Bharat – Pradhan Mantri Jan Arogya Yojana",
+      "locator": "Empowering Vulnerable Beneficiaries; rural/urban routes; 70+ expansion",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2026-09-22",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-vishwakarma": {
+      "reference_id": "extra-vishwakarma",
+      "original_url": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=155216&id=155216&lang=2&reg=3",
+      "title": "PM Vishwakarma Scheme: Honouring Heritage, Powering Progress",
+      "locator": "Eligibility Explained; CSC registration; Benefits",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2025-09-16",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-svanidhi": {
+      "reference_id": "extra-svanidhi",
+      "original_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2267102&lang=2&reg=48",
+      "title": "PM SVANidhi: Advancing Financial Inclusion for Street Vendors – FAQs",
+      "locator": "FAQ 4, 6, 7 and 9",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2026-05-30",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-mudra": {
+      "reference_id": "extra-mudra",
+      "original_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2240159&lang=1&reg=3",
+      "title": "PM Mudra Yojana Provides Collateral-Free Loans up to ₹20 Lakh to Entrepreneurs and Enterprises",
+      "locator": "Loan categories; Tarun Plus repayment condition; lending institutions",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2026-03-14",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-suryaghar": {
+      "reference_id": "extra-suryaghar",
+      "original_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2010757&lang=2&reg=48",
+      "title": "PM Surya Ghar Muft Bijlee Yojana: How You Can Apply for and Get Subsidy",
+      "locator": "Eligibility; national portal; application steps 1–6",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2024-03-01",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    },
+    "extra-kcc": {
+      "reference_id": "extra-kcc",
+      "original_url": "https://www.pib.gov.in/PressNoteDetails.aspx?ModuleId=3&NoteId=157771&lang=1&reg=3",
+      "title": "Kisan Credit Card: Fueling Growth in Agriculture",
+      "locator": "Eligible beneficiaries; onboarding; credit and MISS distinction",
+      "last_checked_date": "2026-10-31",
+      "published_on": "2026-03-11",
+      "effective_from": null,
+      "verification_method": "official_text_review",
+      "verification_status": "official_text_supported",
+      "publication_approval": false
+    }
+  },
+  "schemes": [
+    {
+      "scheme_id": "in-cen-000004",
+      "short_name": "Pradhan Mantri Ujjwala Yojana (PMUY)",
+      "name": {
+        "en": "Pradhan Mantri Ujjwala Yojana (PMUY)",
+        "hi": "प्रधानमंत्री उज्ज्वला योजना"
+      },
+      "overview": {
+        "en": "Deposit-free LPG connections for adult women in poor households, subject to OMC verification.",
+        "hi": "गरीब परिवारों की वयस्क महिलाओं के लिए जमानत राशि रहित एलपीजी कनेक्शन; तेल कंपनी का सत्यापन आवश्यक है।"
+      },
+      "benefit_highlight": {
+        "en": "Deposit-free LPG connection, first refill and stove under the current PMUY terms.",
+        "hi": "वर्तमान उज्ज्वला शर्तों के अनुसार जमानत राशि रहित कनेक्शन, पहला रिफिल और चूल्हा।"
+      },
+      "audience": {
+        "en": "Adult women without another household LPG connection.",
+        "hi": "वयस्क महिलाएँ जिनके परिवार में दूसरा एलपीजी कनेक्शन नहीं है।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "What is your age in completed years at application?",
+            "hi": "आवेदन के समय आपकी पूरे वर्षों में आयु कितनी है?"
+          },
+          "label": {
+            "en": "What is your age in completed years at application",
+            "hi": "आवेदन के समय आपकी पूरे वर्षों में आयु कितनी है"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 18
+            }
+          ],
+          "source_ids": [
+            "extra-pmuy"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "woman_applicant",
+          "kind": "boolean",
+          "question": {
+            "en": "Is the applicant a woman?",
+            "hi": "क्या आवेदक महिला है?"
+          },
+          "label": {
+            "en": "Is the applicant a woman",
+            "hi": "क्या आवेदक महिला है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "extra-pmuy"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "household_has_lpg",
+          "kind": "boolean",
+          "question": {
+            "en": "Does any member of the same household already have an LPG connection?",
+            "hi": "क्या इसी परिवार के किसी सदस्य के पास पहले से एलपीजी कनेक्शन है?"
+          },
+          "label": {
+            "en": "Does any member of the same household already have an LPG connection",
+            "hi": "क्या इसी परिवार के किसी सदस्य के पास पहले से एलपीजी कनेक्शन है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "extra-pmuy"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "poor_household",
+          "kind": "boolean",
+          "question": {
+            "en": "Does the applicant belong to a poor household under the PMUY deprivation declaration?",
+            "hi": "क्या आवेदक उज्ज्वला अभाव घोषणा के अनुसार गरीब परिवार से है?"
+          },
+          "label": {
+            "en": "Does the applicant belong to a poor household under the PMUY deprivation declaration",
+            "hi": "क्या आवेदक उज्ज्वला अभाव घोषणा के अनुसार गरीब परिवार से है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Ask the distributor to check the prescribed deprivation declaration.",
+            "hi": "निर्धारित अभाव घोषणा की जाँच वितरक से कराएँ।"
+          },
+          "source_ids": [
+            "extra-pmuy"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Deposit-free LPG connection, first refill and stove under the current PMUY terms.",
+            "hi": "वर्तमान उज्ज्वला शर्तों के अनुसार जमानत राशि रहित कनेक्शन, पहला रिफिल और चूल्हा।"
+          },
+          "source_ids": [
+            "extra-pmuy"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "kyc",
+          "text": {
+            "en": "Current KYC form and deprivation declaration",
+            "hi": "वर्तमान केवाईसी प्रपत्र और अभाव घोषणा"
+          },
+          "requirement": "required",
+          "source_ids": [
+            "extra-pmuy"
+          ]
+        },
+        {
+          "item_key": "identity",
+          "text": {
+            "en": "Applicant and adult household members’ Aadhaar copies as required by the current form",
+            "hi": "वर्तमान प्रपत्र के अनुसार आवेदक और परिवार के वयस्क सदस्यों की आधार प्रतियाँ"
+          },
+          "requirement": "required",
+          "source_ids": [
+            "extra-pmuy"
+          ]
+        },
+        {
+          "item_key": "family",
+          "text": {
+            "en": "Ration card / accepted family-composition proof; migrant self-declaration where applicable",
+            "hi": "राशन कार्ड या स्वीकार्य परिवार विवरण प्रमाण; लागू होने पर प्रवासी स्व-घोषणा"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-pmuy"
+          ]
+        },
+        {
+          "item_key": "address",
+          "text": {
+            "en": "Separate current-address proof if needed; confirm migrant alternatives",
+            "hi": "ज़रूरत होने पर अलग वर्तमान पता प्रमाण; प्रवासी विकल्प की पुष्टि करें"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-pmuy"
+          ]
+        },
+        {
+          "item_key": "bank",
+          "text": {
+            "en": "Applicant’s bank passbook copy or cancelled cheque",
+            "hi": "आवेदक की बैंक पासबुक की प्रति या रद्द चेक"
+          },
+          "requirement": "required",
+          "source_ids": [
+            "extra-pmuy"
+          ]
+        }
+      ],
+      "application": {
+        "mode": "both",
+        "steps": [
+          {
+            "en": "Use the official PMUY portal or visit the LPG distributor for the current application and verification process.",
+            "hi": "वर्तमान आवेदन और सत्यापन के लिए आधिकारिक उज्ज्वला पोर्टल देखें या एलपीजी वितरक से मिलें।"
+          }
+        ],
+        "url": "https://www.pmuy.gov.in/index.aspx",
+        "link_kind": "information",
+        "source_ids": [
+          "extra-pmuy"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "The distributor must verify household composition, deprivation declaration, duplicate connections and the current phase before enrolment.",
+          "hi": "नामांकन से पहले वितरक को परिवार की संरचना, अभाव घोषणा, दोहरे कनेक्शन और वर्तमान चरण की जाँच करनी होगी।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "The distributor must verify household composition, deprivation declaration, duplicate connections and the current phase before enrolment.",
+          "hi": "नामांकन से पहले वितरक को परिवार की संरचना, अभाव घोषणा, दोहरे कनेक्शन और वर्तमान चरण की जाँच करनी होगी।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000005",
+      "short_name": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS)",
+      "name": {
+        "en": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS)",
+        "hi": "इंदिरा गांधी राष्ट्रीय वृद्धावस्था पेंशन योजना"
+      },
+      "overview": {
+        "en": "Central old-age pension assistance with State/UT implementation and possible local supplements.",
+        "hi": "राज्य या केंद्र शासित प्रदेश के कार्यान्वयन और संभावित स्थानीय अंशदान वाली केंद्रीय वृद्धावस्था पेंशन सहायता।"
+      },
+      "benefit_highlight": {
+        "en": "Central share: ₹200 monthly at ages 60–79 and ₹500 from age 80; State/UT additions vary.",
+        "hi": "केंद्रीय अंश: 60–79 वर्ष पर ₹200 मासिक और 80 वर्ष से ₹500; राज्य या केंद्र शासित प्रदेश का अतिरिक्त अंश अलग हो सकता है।"
+      },
+      "audience": {
+        "en": "Older people in officially assessed BPL households; local selection applies.",
+        "hi": "आधिकारिक बीपीएल परिवारों के वृद्ध व्यक्ति; स्थानीय चयन लागू है।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "What is your age in completed years?",
+            "hi": "आपकी पूरे वर्षों में आयु कितनी है?"
+          },
+          "label": {
+            "en": "What is your age in completed years",
+            "hi": "आपकी पूरे वर्षों में आयु कितनी है"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 60
+            }
+          ],
+          "source_ids": [
+            "extra-ignoaps"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "bpl_household",
+          "kind": "boolean",
+          "question": {
+            "en": "Is your household recorded as BPL under the applicable government assessment?",
+            "hi": "क्या लागू सरकारी आकलन में आपका परिवार बीपीएल दर्ज है?"
+          },
+          "label": {
+            "en": "Is your household recorded as BPL under the applicable government assessment",
+            "hi": "क्या लागू सरकारी आकलन में आपका परिवार बीपीएल दर्ज है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Ask the local authority to check the BPL record, omissions and any applicable continuation provisions.",
+            "hi": "स्थानीय प्राधिकरण से बीपीएल अभिलेख, छूटे नाम और लागू निरंतरता प्रावधानों की जाँच कराएँ।"
+          },
+          "source_ids": [
+            "extra-ignoaps"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Central share: ₹200 monthly at ages 60–79 and ₹500 from age 80; State/UT additions vary.",
+            "hi": "केंद्रीय अंश: 60–79 वर्ष पर ₹200 मासिक और 80 वर्ष से ₹500; राज्य या केंद्र शासित प्रदेश का अतिरिक्त अंश अलग हो सकता है।"
+          },
+          "source_ids": [
+            "extra-ignoaps"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [],
+      "application": {
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Contact the local Gram Panchayat/municipality or designated State/UT social-assistance department for selection and the current document checklist.",
+            "hi": "चयन और वर्तमान दस्तावेज़ सूची के लिए ग्राम पंचायत, नगरपालिका या नामित राज्य सामाजिक सहायता विभाग से संपर्क करें।"
+          }
+        ],
+        "url": null,
+        "link_kind": "information",
+        "source_ids": [
+          "extra-ignoaps"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "State/UT selection, local age/BPL evidence, continuation exceptions and any top-up must be verified; this is not a pension sanction.",
+          "hi": "राज्य चयन, स्थानीय आयु और बीपीएल प्रमाण, निरंतरता अपवाद तथा अतिरिक्त अंश की पुष्टि आवश्यक है; यह पेंशन स्वीकृति नहीं है।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "State/UT selection, local age/BPL evidence, continuation exceptions and any top-up must be verified; this is not a pension sanction.",
+          "hi": "राज्य चयन, स्थानीय आयु और बीपीएल प्रमाण, निरंतरता अपवाद तथा अतिरिक्त अंश की पुष्टि आवश्यक है; यह पेंशन स्वीकृति नहीं है।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000006",
+      "short_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+      "name": {
+        "en": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+        "hi": "प्रधानमंत्री किसान सम्मान निधि (पीएम-किसान)"
+      },
+      "overview": {
+        "en": "Central income support for eligible landholding farmer families, subject to exclusions and official land-record verification.",
+        "hi": "पात्र भूमिधारक किसान परिवारों के लिए केंद्रीय आय सहायता। अपवर्जन और सरकारी भूमि अभिलेखों का सत्यापन लागू है।"
+      },
+      "benefit_highlight": {
+        "en": "INR 6000 annually through three instalments for approved beneficiaries.",
+        "hi": "स्वीकृत लाभार्थियों को तीन किस्तों में प्रति वर्ष 6000 रुपये।"
+      },
+      "audience": {
+        "en": "Cultivable land must be held in the family name; exclusion declarations, land records and e-KYC require official validation.",
+        "hi": "परिवार के नाम कृषि योग्य भूमि होनी चाहिए। अपवर्जन घोषणा, भूमि अभिलेख और ई-केवाईसी का सरकारी सत्यापन आवश्यक है।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "family_has_cultivable_land",
+          "kind": "boolean",
+          "question": {
+            "en": "Does your family hold cultivable land in its name?",
+            "hi": "क्या आपके परिवार के नाम कृषि योग्य भूमि है?"
+          },
+          "label": {
+            "en": "Does your family hold cultivable land in its name",
+            "hi": "क्या आपके परिवार के नाम कृषि योग्य भूमि है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "The State/UT must check land records and any special eligibility provisions.",
+            "hi": "राज्य को भूमि अभिलेख और विशेष पात्रता प्रावधान जाँचने होंगे।"
+          },
+          "source_ids": [
+            "extra-pmkisan"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "income_taxpayer_last_year",
+          "kind": "boolean",
+          "question": {
+            "en": "Has a member of the applicant family paid income tax for the relevant assessment year?",
+            "hi": "क्या आवेदक परिवार के किसी सदस्य ने संबंधित आकलन वर्ष में आयकर दिया है?"
+          },
+          "label": {
+            "en": "Has a member of the applicant family paid income tax for the relevant assessment year",
+            "hi": "क्या आवेदक परिवार के किसी सदस्य ने संबंधित आकलन वर्ष में आयकर दिया है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Confirm the precise family and tax exclusion with the PM-KISAN authority.",
+            "hi": "पीएम-किसान प्राधिकरण से परिवार और कर अपवर्जन की सही परिभाषा की पुष्टि करें।"
+          },
+          "source_ids": [
+            "extra-pmkisan"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "family_government_employment",
+          "kind": "boolean",
+          "question": {
+            "en": "Does the applicant family include a government or PSU employee?",
+            "hi": "क्या आवेदक परिवार में कोई सरकारी या सार्वजनिक उपक्रम कर्मचारी है?"
+          },
+          "label": {
+            "en": "Does the applicant family include a government or PSU employee",
+            "hi": "क्या आवेदक परिवार में कोई सरकारी या सार्वजनिक उपक्रम कर्मचारी है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Employment exclusions have category-specific exceptions; obtain official verification.",
+            "hi": "रोज़गार अपवर्जन में श्रेणी के अनुसार अपवाद हैं; आधिकारिक सत्यापन कराएँ।"
+          },
+          "source_ids": [
+            "extra-pmkisan"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "INR 6000 annually through three instalments for approved beneficiaries.",
+            "hi": "स्वीकृत लाभार्थियों को तीन किस्तों में प्रति वर्ष 6000 रुपये।"
+          },
+          "source_ids": [
+            "extra-pmkisan"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "document-1",
+          "text": {
+            "en": "Land ownership records",
+            "hi": "भूमि स्वामित्व अभिलेख"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-pmkisan"
+          ]
+        },
+        {
+          "item_key": "document-2",
+          "text": {
+            "en": "Aadhaar and bank details for official verification",
+            "hi": "सरकारी सत्यापन के लिए आधार और बैंक विवरण"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-pmkisan"
+          ]
+        }
+      ],
+      "application": {
+        "mode": "both",
+        "steps": [
+          {
+            "en": "Use the PM-KISAN portal or seek CSC assistance; the State/UT verifies land records and exclusions.",
+            "hi": "पीएम-किसान पोर्टल या सीएससी की सहायता लें। राज्य/केंद्र शासित प्रदेश भूमि अभिलेख और अपवर्जन जाँचता है।"
+          }
+        ],
+        "url": "https://pmkisan.gov.in/",
+        "link_kind": "information",
+        "source_ids": [
+          "extra-pmkisan"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "Complete family exclusions, land reference dates, State/UT records and e-KYC must be checked before benefits can be confirmed.",
+          "hi": "लाभ की पुष्टि से पहले परिवार के पूरे अपवर्जन, भूमि की संदर्भ तिथियाँ, राज्य अभिलेख और ई-केवाईसी की जाँच आवश्यक है।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "Complete family exclusions, land reference dates, State/UT records and e-KYC must be checked before benefits can be confirmed.",
+          "hi": "लाभ की पुष्टि से पहले परिवार के पूरे अपवर्जन, भूमि की संदर्भ तिथियाँ, राज्य अभिलेख और ई-केवाईसी की जाँच आवश्यक है।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000009",
+      "short_name": "Pradhan Mantri Awaas Yojana – Gramin (PMAY-G)",
+      "name": {
+        "en": "Pradhan Mantri Awaas Yojana – Gramin (PMAY-G)",
+        "hi": "प्रधानमंत्री आवास योजना – ग्रामीण"
+      },
+      "overview": {
+        "en": "Rural housing support allocated through official beneficiary identification and verification, not automatic self-declared entitlement.",
+        "hi": "सरकारी लाभार्थी पहचान और सत्यापन के माध्यम से ग्रामीण आवास सहायता; केवल स्वघोषणा से अधिकार नहीं मिलता।"
+      },
+      "benefit_highlight": {
+        "en": "Assistance for construction of eligible rural houses; current category/state amounts and convergence entitlements require verification.",
+        "hi": "पात्र ग्रामीण आवास निर्माण में सहायता; वर्तमान श्रेणी/राज्य राशि और अभिसरण लाभ का सत्यापन शेष है।"
+      },
+      "audience": {
+        "en": "Rural housing deprivation and revised asset, employment, income, tax and land exclusions apply; official selection is required.",
+        "hi": "ग्रामीण आवास वंचना तथा संशोधित संपत्ति, रोजगार, आय, कर और भूमि अपवर्जन लागू हैं; सरकारी चयन आवश्यक है।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "has_pucca_roof_or_wall",
+          "kind": "boolean",
+          "question": {
+            "en": "Does the household live in a house with a pucca roof or any pucca wall?",
+            "hi": "क्या परिवार ऐसे घर में रहता है जिसकी छत या कोई दीवार पक्की है?"
+          },
+          "label": {
+            "en": "Does the household live in a house with a pucca roof or any pucca wall",
+            "hi": "क्या परिवार ऐसे घर में रहता है जिसकी छत या कोई दीवार पक्की है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "extra-pmayg"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "more_than_two_rooms",
+          "kind": "boolean",
+          "question": {
+            "en": "Does the household live in a house with more than two rooms?",
+            "hi": "क्या परिवार दो से अधिक कमरों वाले घर में रहता है?"
+          },
+          "label": {
+            "en": "Does the household live in a house with more than two rooms",
+            "hi": "क्या परिवार दो से अधिक कमरों वाले घर में रहता है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "extra-pmayg"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "government_employee_in_family",
+          "kind": "boolean",
+          "question": {
+            "en": "Is any household member a government employee?",
+            "hi": "क्या परिवार का कोई सदस्य सरकारी कर्मचारी है?"
+          },
+          "label": {
+            "en": "Is any household member a government employee",
+            "hi": "क्या परिवार का कोई सदस्य सरकारी कर्मचारी है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "extra-pmayg"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "member_income_above_15000",
+          "kind": "boolean",
+          "question": {
+            "en": "Does any household member earn more than ₹15,000 per month?",
+            "hi": "क्या परिवार का कोई सदस्य ₹15,000 प्रति माह से अधिक कमाता है?"
+          },
+          "label": {
+            "en": "Does any household member earn more than ₹15,000 per month",
+            "hi": "क्या परिवार का कोई सदस्य ₹15,000 प्रति माह से अधिक कमाता है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "extra-pmayg"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "owns_motorised_three_four_wheeler",
+          "kind": "boolean",
+          "question": {
+            "en": "Does the household own a motorised three- or four-wheeler?",
+            "hi": "क्या परिवार के पास मोटर चालित तीन या चार पहिया वाहन है?"
+          },
+          "label": {
+            "en": "Does the household own a motorised three- or four-wheeler",
+            "hi": "क्या परिवार के पास मोटर चालित तीन या चार पहिया वाहन है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "extra-pmayg"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Assistance for construction of eligible rural houses; current category/state amounts and convergence entitlements require verification.",
+            "hi": "पात्र ग्रामीण आवास निर्माण में सहायता; वर्तमान श्रेणी/राज्य राशि और अभिसरण लाभ का सत्यापन शेष है।"
+          },
+          "source_ids": [
+            "extra-pmayg"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [],
+      "application": {
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Ask the local rural-housing implementing authority to verify the current PMAY-G selection rules and your household record. A survey or this screening is not a housing sanction.",
+            "hi": "स्थानीय ग्रामीण आवास प्राधिकरण से वर्तमान पीएम आवास-ग्रामीण चयन नियम और परिवार के अभिलेख की जाँच कराएँ। सर्वेक्षण या यह जाँच आवास स्वीकृति नहीं है।"
+          }
+        ],
+        "url": null,
+        "link_kind": "information",
+        "source_ids": [
+          "extra-pmayg"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "This checks only part of the revised exclusions. Remaining asset, tax and land checks, housing deprivation and official beneficiary selection remain necessary.",
+          "hi": "यह संशोधित अपवर्जनों के एक हिस्से की जाँच है। बाकी संपत्ति, कर और भूमि शर्तें, आवास की स्थिति तथा आधिकारिक लाभार्थी चयन अभी जाँचना आवश्यक है।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "This checks only part of the revised exclusions. Remaining asset, tax and land checks, housing deprivation and official beneficiary selection remain necessary.",
+          "hi": "यह संशोधित अपवर्जनों के एक हिस्से की जाँच है। बाकी संपत्ति, कर और भूमि शर्तें, आवास की स्थिति तथा आधिकारिक लाभार्थी चयन अभी जाँचना आवश्यक है।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000010",
+      "short_name": "Ayushman Bharat – Pradhan Mantri Jan Arogya Yojana (AB PM-JAY)",
+      "name": {
+        "en": "Ayushman Bharat – Pradhan Mantri Jan Arogya Yojana (AB PM-JAY)",
+        "hi": "आयुष्मान भारत – प्रधानमंत्री जन आरोग्य योजना"
+      },
+      "overview": {
+        "en": "Cashless secondary and tertiary hospitalisation coverage for officially identified beneficiary families, with an additional senior-citizen route.",
+        "hi": "सरकारी रूप से चिन्हित लाभार्थी परिवारों के लिए द्वितीयक और तृतीयक अस्पताल उपचार का नकदरहित कवर; वरिष्ठ नागरिकों का अलग मार्ग भी है।"
+      },
+      "benefit_highlight": {
+        "en": "Hospitalisation cover up to INR 5 lakh per family annually, subject to packages and route-specific conditions; not an unrestricted cash grant.",
+        "hi": "पैकेज और मार्ग की शर्तों के अधीन परिवार को प्रति वर्ष पाँच लाख रुपये तक अस्पताल कवर; यह बिना शर्त नकद अनुदान नहीं है।"
+      },
+      "audience": {
+        "en": "Several routes apply: SECC deprivation/occupation lists, legacy groups, and the 70+ expansion. Being below 70 does not itself exclude a person.",
+        "hi": "कई पात्रता मार्ग हैं: एसईसीसी वंचना/व्यवसाय सूचियाँ, पूर्व समूह और 70 वर्ष से अधिक आयु का विस्तार। 70 से कम आयु अपने आप अपात्र नहीं बनाती।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "What is your age in completed years? This identifies the 70+ route only.",
+            "hi": "आपकी पूरे वर्षों में आयु कितनी है? इससे केवल 70 वर्ष या अधिक वाला मार्ग पहचाना जाता है।"
+          },
+          "label": {
+            "en": "What is your age in completed years? This identifies the 70+ route only.",
+            "hi": "आपकी पूरे वर्षों में आयु कितनी है? इससे केवल 70 वर्ष या अधिक वाला मार्ग पहचाना जाता है।"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 70
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "People below 70 may qualify through SECC, occupational, State or other covered routes. Obtain an official beneficiary lookup; age below 70 is not a rejection.",
+            "hi": "70 वर्ष से कम आयु में भी एसईसीसी, व्यवसाय, राज्य या अन्य श्रेणी से पात्रता हो सकती है। आधिकारिक लाभार्थी जाँच कराएँ; 70 से कम आयु अस्वीकृति नहीं है।"
+          },
+          "source_ids": [
+            "extra-pmjay"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Hospitalisation cover up to INR 5 lakh per family annually, subject to packages and route-specific conditions; not an unrestricted cash grant.",
+            "hi": "पैकेज और मार्ग की शर्तों के अधीन परिवार को प्रति वर्ष पाँच लाख रुपये तक अस्पताल कवर; यह बिना शर्त नकद अनुदान नहीं है।"
+          },
+          "source_ids": [
+            "extra-pmjay"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [],
+      "application": {
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Use the official PM-JAY beneficiary verification process through the implementing agency or an empanelled hospital. Do not assume that age below 70 excludes the family route.",
+            "hi": "कार्यान्वयन संस्था या सूचीबद्ध अस्पताल से आधिकारिक पीएम-जय लाभार्थी सत्यापन कराएँ। 70 से कम आयु को परिवार वाले मार्ग से अपवर्जन न मानें।"
+          }
+        ],
+        "url": null,
+        "link_kind": "information",
+        "source_ids": [
+          "extra-pmjay"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "The relevant beneficiary route, State implementation, enrolment documents and any other government-health-cover choice must be confirmed by the official agency.",
+          "hi": "संबंधित लाभार्थी मार्ग, राज्य में कार्यान्वयन, नामांकन दस्तावेज़ और अन्य सरकारी स्वास्थ्य बीमा के विकल्प की पुष्टि आधिकारिक संस्था से कराएँ।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "The relevant beneficiary route, State implementation, enrolment documents and any other government-health-cover choice must be confirmed by the official agency.",
+          "hi": "संबंधित लाभार्थी मार्ग, राज्य में कार्यान्वयन, नामांकन दस्तावेज़ और अन्य सरकारी स्वास्थ्य बीमा के विकल्प की पुष्टि आधिकारिक संस्था से कराएँ।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000011",
+      "short_name": "PM Vishwakarma",
+      "name": {
+        "en": "PM Vishwakarma",
+        "hi": "पीएम विश्वकर्मा"
+      },
+      "overview": {
+        "en": "Recognition, training, tools, credit and market support for qualifying traditional artisans and craftspeople.",
+        "hi": "पात्र पारंपरिक कारीगरों और शिल्पकारों के लिए पहचान, प्रशिक्षण, औजार, ऋण और बाजार सहायता।"
+      },
+      "benefit_highlight": {
+        "en": "Certificate, skill training, toolkit incentive and conditional collateral-free enterprise loans; staged loans are not automatic grants.",
+        "hi": "प्रमाणपत्र, कौशल प्रशिक्षण, औजार प्रोत्साहन और शर्तबद्ध बिना जमानत उद्यम ऋण; चरणबद्ध ऋण स्वतः मिलने वाला अनुदान नहीं है।"
+      },
+      "audience": {
+        "en": "Minimum registration age 18, notified traditional trade and self-employment conditions apply, with family and government-service/credit exclusions.",
+        "hi": "नामांकन की न्यूनतम आयु 18 वर्ष, अधिसूचित पारंपरिक व्यवसाय और स्वरोजगार शर्तें लागू हैं; परिवार, सरकारी सेवा और पूर्व ऋण के अपवर्जन भी हैं।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "age",
+          "kind": "age",
+          "question": {
+            "en": "What is your completed age on registration?",
+            "hi": "पंजीकरण के दिन आपकी पूरे वर्षों में आयु कितनी है?"
+          },
+          "label": {
+            "en": "What is your completed age on registration",
+            "hi": "पंजीकरण के दिन आपकी पूरे वर्षों में आयु कितनी है"
+          },
+          "predicates": [
+            {
+              "operator": "gte",
+              "expected_value": 18
+            }
+          ],
+          "source_ids": [
+            "extra-vishwakarma"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "hands_tools_traditional_trade",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you work with hands and tools in a family-based traditional trade?",
+            "hi": "क्या आप हाथ और औज़ार से परिवार आधारित पारंपरिक काम करते हैं?"
+          },
+          "label": {
+            "en": "Do you work with hands and tools in a family-based traditional trade",
+            "hi": "क्या आप हाथ और औज़ार से परिवार आधारित पारंपरिक काम करते हैं"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Have the CSC confirm whether your trade is covered; do not infer eligibility from an incomplete trade list.",
+            "hi": "सीएससी से आपके काम की मान्य श्रेणी की पुष्टि कराएँ; अधूरी सूची से पात्रता तय न करें।"
+          },
+          "source_ids": [
+            "extra-vishwakarma"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "self_employed_unorganised",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you work on a self-employed basis in the unorganised sector?",
+            "hi": "क्या आप असंगठित क्षेत्र में स्वरोज़गार के आधार पर काम करते हैं?"
+          },
+          "label": {
+            "en": "Do you work on a self-employed basis in the unorganised sector",
+            "hi": "क्या आप असंगठित क्षेत्र में स्वरोज़गार के आधार पर काम करते हैं"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "The implementing authority must confirm the work classification.",
+            "hi": "कार्यान्वयन प्राधिकरण को काम की श्रेणी की पुष्टि करनी होगी।"
+          },
+          "source_ids": [
+            "extra-vishwakarma"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "government_service_family",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you, your spouse or an unmarried child employed in government service?",
+            "hi": "क्या आप, आपके पति या पत्नी, या अविवाहित संतान सरकारी सेवा में हैं?"
+          },
+          "label": {
+            "en": "Are you, your spouse or an unmarried child employed in government service",
+            "hi": "क्या आप, आपके पति या पत्नी, या अविवाहित संतान सरकारी सेवा में हैं"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "source_ids": [
+            "extra-vishwakarma"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "similar_credit_last_five_years",
+          "kind": "boolean",
+          "question": {
+            "en": "Have you taken a similar government business/self-employment loan in the past five years?",
+            "hi": "क्या आपने पिछले पाँच वर्षों में समान सरकारी व्यवसाय या स्वरोज़गार ऋण लिया है?"
+          },
+          "label": {
+            "en": "Have you taken a similar government business/self-employment loan in the past five years",
+            "hi": "क्या आपने पिछले पाँच वर्षों में समान सरकारी व्यवसाय या स्वरोज़गार ऋण लिया है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Repaid-loan exceptions and the applicable scheme must be checked; an earlier loan is not rejected automatically.",
+            "hi": "चुकाए गए ऋण के अपवाद और संबंधित योजना की जाँच आवश्यक है; पुराने ऋण पर स्वतः अस्वीकृति नहीं होगी।"
+          },
+          "source_ids": [
+            "extra-vishwakarma"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "family_already_registered",
+          "kind": "boolean",
+          "question": {
+            "en": "Is a spouse or unmarried child already registered for PM Vishwakarma?",
+            "hi": "क्या पति, पत्नी या अविवाहित संतान का पीएम विश्वकर्मा में पंजीकरण पहले से है?"
+          },
+          "label": {
+            "en": "Is a spouse or unmarried child already registered for PM Vishwakarma",
+            "hi": "क्या पति, पत्नी या अविवाहित संतान का पीएम विश्वकर्मा में पंजीकरण पहले से है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "The one-member-per-family restriction and existing registration require official checking.",
+            "hi": "परिवार में एक सदस्य की सीमा और पुराने पंजीकरण की आधिकारिक जाँच आवश्यक है।"
+          },
+          "source_ids": [
+            "extra-vishwakarma"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Certificate, skill training, toolkit incentive and conditional collateral-free enterprise loans; staged loans are not automatic grants.",
+            "hi": "प्रमाणपत्र, कौशल प्रशिक्षण, औजार प्रोत्साहन और शर्तबद्ध बिना जमानत उद्यम ऋण; चरणबद्ध ऋण स्वतः मिलने वाला अनुदान नहीं है।"
+          },
+          "source_ids": [
+            "extra-vishwakarma"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "document-1",
+          "text": {
+            "en": "Aadhaar authentication for CSC registration",
+            "hi": "सीएससी नामांकन के लिए आधार प्रमाणीकरण"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-vishwakarma"
+          ]
+        }
+      ],
+      "application": {
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Register with assistance from a Common Service Centre using Aadhaar biometric authentication; official verification stages apply.",
+            "hi": "कॉमन सर्विस सेंटर की सहायता से आधार बायोमेट्रिक प्रमाणीकरण द्वारा नामांकन करें; सरकारी सत्यापन चरण लागू हैं।"
+          }
+        ],
+        "url": null,
+        "link_kind": "information",
+        "source_ids": [
+          "extra-vishwakarma"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "The full covered-trade list, family record, loan exceptions and current CSC verification must be confirmed before enrolment.",
+          "hi": "नामांकन से पहले पूरी मान्य कार्य सूची, परिवार का अभिलेख, ऋण अपवाद और वर्तमान सीएससी सत्यापन की पुष्टि आवश्यक है।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "The full covered-trade list, family record, loan exceptions and current CSC verification must be confirmed before enrolment.",
+          "hi": "नामांकन से पहले पूरी मान्य कार्य सूची, परिवार का अभिलेख, ऋण अपवाद और वर्तमान सीएससी सत्यापन की पुष्टि आवश्यक है।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000012",
+      "short_name": "Prime Minister Street Vendor’s AtmaNirbhar Nidhi (PM SVANidhi)",
+      "name": {
+        "en": "Prime Minister Street Vendor’s AtmaNirbhar Nidhi (PM SVANidhi)",
+        "hi": "प्रधानमंत्री स्ट्रीट वेंडर्स आत्मनिर्भर निधि (पीएम स्वनिधि)"
+      },
+      "overview": {
+        "en": "Working-capital credit and linked support for eligible street vendors under the restructured scheme.",
+        "hi": "पुनर्गठित योजना में पात्र पथ विक्रेताओं के लिए कार्यशील पूंजी ऋण और संबंधित सहायता।"
+      },
+      "benefit_highlight": {
+        "en": "Progressive collateral-free loan tranches of INR 15000, 25000 and 50000; interest subsidy and digital incentives have conditions.",
+        "hi": "बिना जमानत ऋण के क्रमिक चरण 15000, 25000 और 50000 रुपये; ब्याज सहायता तथा डिजिटल प्रोत्साहन शर्तों के अधीन हैं।"
+      },
+      "audience": {
+        "en": "Street-vendor identification and official verification apply; progressive loan tranches require repayment conditions.",
+        "hi": "पथ विक्रेता पहचान और सरकारी सत्यापन लागू हैं; अगले ऋण चरण के लिए पुनर्भुगतान की शर्तें हैं।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "is_street_vendor",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you sell goods or provide services as a street vendor or hawker?",
+            "hi": "क्या आप पथ विक्रेता या फेरीवाले के रूप में सामान या सेवाएँ देते हैं?"
+          },
+          "label": {
+            "en": "Do you sell goods or provide services as a street vendor or hawker",
+            "hi": "क्या आप पथ विक्रेता या फेरीवाले के रूप में सामान या सेवाएँ देते हैं"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "extra-svanidhi"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "has_cov_or_lor",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you have a valid Certificate of Vending or Letter of Recommendation?",
+            "hi": "क्या आपके पास वैध विक्रय प्रमाणपत्र या अनुशंसा पत्र है?"
+          },
+          "label": {
+            "en": "Do you have a valid Certificate of Vending or Letter of Recommendation",
+            "hi": "क्या आपके पास वैध विक्रय प्रमाणपत्र या अनुशंसा पत्र है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Ask the Urban Local Body about identification and LoR alternatives; a missing document is not an automatic rejection.",
+            "hi": "पहचान और अनुशंसा पत्र के विकल्प के लिए नगर निकाय से पूछें; दस्तावेज़ न होना स्वतः अस्वीकृति नहीं है।"
+          },
+          "source_ids": [
+            "extra-svanidhi"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Progressive collateral-free loan tranches of INR 15000, 25000 and 50000; interest subsidy and digital incentives have conditions.",
+            "hi": "बिना जमानत ऋण के क्रमिक चरण 15000, 25000 और 50000 रुपये; ब्याज सहायता तथा डिजिटल प्रोत्साहन शर्तों के अधीन हैं।"
+          },
+          "source_ids": [
+            "extra-svanidhi"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "vendor",
+          "text": {
+            "en": "Certificate of Vending OR Letter of Recommendation; ask the ULB about accepted alternatives",
+            "hi": "विक्रय प्रमाणपत्र या अनुशंसा पत्र; स्वीकार्य विकल्प के लिए नगर निकाय से पूछें"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-svanidhi"
+          ]
+        }
+      ],
+      "application": {
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "A vendor holding a valid LoR or CoV may apply through the scheme portal/app or with ULB assistance. Exact current portal URL not verified here.",
+            "hi": "वैध सिफारिश पत्र या वेंडिंग प्रमाणपत्र वाला विक्रेता योजना पोर्टल/ऐप या नगर निकाय की सहायता से आवेदन कर सकता है। वर्तमान पोर्टल यूआरएल का सत्यापन यहाँ नहीं हुआ है।"
+          }
+        ],
+        "url": null,
+        "link_kind": "information",
+        "source_ids": [
+          "extra-svanidhi"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "The Urban Local Body and lender must verify vendor identification, current local coverage, loan tranche and any prior repayment.",
+          "hi": "नगर निकाय और ऋणदाता को विक्रेता पहचान, स्थानीय कवरेज, ऋण चरण और पुराने भुगतान की जाँच करनी होगी।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "The Urban Local Body and lender must verify vendor identification, current local coverage, loan tranche and any prior repayment.",
+          "hi": "नगर निकाय और ऋणदाता को विक्रेता पहचान, स्थानीय कवरेज, ऋण चरण और पुराने भुगतान की जाँच करनी होगी।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000013",
+      "short_name": "Pradhan Mantri MUDRA Yojana (PMMY)",
+      "name": {
+        "en": "Pradhan Mantri MUDRA Yojana (PMMY)",
+        "hi": "प्रधानमंत्री मुद्रा योजना"
+      },
+      "overview": {
+        "en": "Institutional business credit through member lenders for qualifying income-generating micro-enterprises.",
+        "hi": "पात्र आय-सृजन वाले सूक्ष्म उद्यमों के लिए सदस्य ऋणदाताओं के माध्यम से संस्थागत व्यवसाय ऋण।"
+      },
+      "benefit_highlight": {
+        "en": "Collateral-free credit across Shishu, Kishor, Tarun and conditional Tarun Plus categories, up to INR 20 lakh; no guaranteed sanction.",
+        "hi": "शिशु, किशोर, तरुण और शर्तबद्ध तरुण प्लस में 20 लाख रुपये तक बिना जमानत ऋण; मंजूरी की गारंटी नहीं है।"
+      },
+      "audience": {
+        "en": "A qualifying business plan and lender eligibility are required; Tarun Plus is for eligible borrowers who successfully repaid a prior Tarun loan.",
+        "hi": "पात्र व्यवसाय योजना और ऋणदाता की पात्रता जाँच आवश्यक है; तरुण प्लस के लिए पूर्व तरुण ऋण का सफल पुनर्भुगतान आवश्यक है।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "income_generating_business_plan",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you have a plan for an income-generating small manufacturing, trading, service or agriculture-allied enterprise?",
+            "hi": "क्या आपके पास छोटे विनिर्माण, व्यापार, सेवा या कृषि-संबद्ध आय देने वाले उद्यम की योजना है?"
+          },
+          "label": {
+            "en": "Do you have a plan for an income-generating small manufacturing, trading, service or agriculture-allied enterprise",
+            "hi": "क्या आपके पास छोटे विनिर्माण, व्यापार, सेवा या कृषि-संबद्ध आय देने वाले उद्यम की योजना है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Discuss an eligible business plan with the lender.",
+            "hi": "पात्र व्यवसाय योजना के बारे में ऋणदाता से चर्चा करें।"
+          },
+          "source_ids": [
+            "extra-mudra"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "requested_loan_amount",
+          "kind": "number",
+          "question": {
+            "en": "What loan principal are you seeking in rupees?",
+            "hi": "आप कितने रुपये का मूल ऋण चाहते हैं?"
+          },
+          "label": {
+            "en": "What loan principal are you seeking in rupees",
+            "hi": "आप कितने रुपये का मूल ऋण चाहते हैं"
+          },
+          "predicates": [
+            {
+              "operator": "lte",
+              "expected_value": 2000000
+            },
+            {
+              "operator": "gt",
+              "expected_value": 0
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Ask a lender about the applicable PMMY category or another credit product; this screen does not sanction loans.",
+            "hi": "लागू मुद्रा श्रेणी या अन्य ऋण के लिए ऋणदाता से पूछें; यह जाँच ऋण स्वीकृति नहीं है।"
+          },
+          "unit": "INR",
+          "source_ids": [
+            "extra-mudra"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Collateral-free credit across Shishu, Kishor, Tarun and conditional Tarun Plus categories, up to INR 20 lakh; no guaranteed sanction.",
+            "hi": "शिशु, किशोर, तरुण और शर्तबद्ध तरुण प्लस में 20 लाख रुपये तक बिना जमानत ऋण; मंजूरी की गारंटी नहीं है।"
+          },
+          "source_ids": [
+            "extra-mudra"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [],
+      "application": {
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Take the business plan to a participating bank, NBFC or MFI and request its current PMMY category, appraisal and document checklist.",
+            "hi": "भाग लेने वाले बैंक, एनबीएफसी या एमएफआई से व्यवसाय योजना के आधार पर वर्तमान मुद्रा श्रेणी, मूल्यांकन और दस्तावेज़ सूची पूछें।"
+          }
+        ],
+        "url": null,
+        "link_kind": "information",
+        "source_ids": [
+          "extra-mudra"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "The lender must assess the business and repayment ability. Tarun Plus above ₹10 lakh requires successful repayment of an earlier Tarun loan; no loan is approved here.",
+          "hi": "ऋणदाता को व्यवसाय और भुगतान क्षमता जाँचना होगा। ₹10 लाख से अधिक तरुण प्लस के लिए पुराना तरुण ऋण सफलतापूर्वक चुकाना आवश्यक है; यहाँ ऋण स्वीकृत नहीं होता।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "The lender must assess the business and repayment ability. Tarun Plus above ₹10 lakh requires successful repayment of an earlier Tarun loan; no loan is approved here.",
+          "hi": "ऋणदाता को व्यवसाय और भुगतान क्षमता जाँचना होगा। ₹10 लाख से अधिक तरुण प्लस के लिए पुराना तरुण ऋण सफलतापूर्वक चुकाना आवश्यक है; यहाँ ऋण स्वीकृत नहीं होता।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000014",
+      "short_name": "PM Surya Ghar: Muft Bijli Yojana",
+      "name": {
+        "en": "PM Surya Ghar: Muft Bijli Yojana",
+        "hi": "पीएम सूर्य घर: मुफ्त बिजली योजना"
+      },
+      "overview": {
+        "en": "Residential rooftop-solar support subject to technical feasibility, installation, DISCOM inspection and current subsidy rules.",
+        "hi": "तकनीकी व्यवहार्यता, स्थापना, डिस्कॉम निरीक्षण और वर्तमान सहायता नियमों के अधीन आवासीय रूफटॉप सौर सहायता।"
+      },
+      "benefit_highlight": {
+        "en": "Capital subsidy and rooftop generation savings under applicable technical/category rules; neither free units nor savings are guaranteed for every household.",
+        "hi": "लागू तकनीकी/श्रेणी नियमों के अनुसार पूंजी सहायता और सौर उत्पादन से बचत; हर परिवार को मुफ्त यूनिट या बचत की गारंटी नहीं है।"
+      },
+      "audience": {
+        "en": "The cited guidance requires citizenship, a suitable owned roof, valid electricity connection and no previous solar subsidy; current detailed rules need reconciliation.",
+        "hi": "उद्धृत मार्गदर्शन में नागरिकता, उपयुक्त स्वामित्व वाली छत, वैध बिजली कनेक्शन और पूर्व सौर सहायता न लेने की शर्त है; वर्तमान विस्तृत नियमों का मिलान शेष है।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "indian_citizen",
+          "kind": "boolean",
+          "question": {
+            "en": "Are you an Indian citizen?",
+            "hi": "क्या आप भारतीय नागरिक हैं?"
+          },
+          "label": {
+            "en": "Are you an Indian citizen",
+            "hi": "क्या आप भारतीय नागरिक हैं"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "source_ids": [
+            "extra-suryaghar"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "owned_suitable_roof",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you own a house with a roof suitable for rooftop solar?",
+            "hi": "क्या आपके अपने घर की छत रूफटॉप सौर संयंत्र के लिए उपयुक्त है?"
+          },
+          "label": {
+            "en": "Do you own a house with a roof suitable for rooftop solar",
+            "hi": "क्या आपके अपने घर की छत रूफटॉप सौर संयंत्र के लिए उपयुक्त है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Ownership, association routes and technical feasibility need current DISCOM verification.",
+            "hi": "स्वामित्व, सोसाइटी वाले मार्ग और तकनीकी व्यवहार्यता की वर्तमान डिस्कॉम जाँच आवश्यक है।"
+          },
+          "source_ids": [
+            "extra-suryaghar"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "has_valid_electricity_connection",
+          "kind": "boolean",
+          "question": {
+            "en": "Does the household have a valid electricity connection?",
+            "hi": "क्या परिवार के पास वैध बिजली कनेक्शन है?"
+          },
+          "label": {
+            "en": "Does the household have a valid electricity connection",
+            "hi": "क्या परिवार के पास वैध बिजली कनेक्शन है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Ask the DISCOM to verify the consumer connection and applicable route.",
+            "hi": "डिस्कॉम से उपभोक्ता कनेक्शन और लागू मार्ग की पुष्टि कराएँ।"
+          },
+          "source_ids": [
+            "extra-suryaghar"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        },
+        {
+          "key": "prior_solar_subsidy",
+          "kind": "boolean",
+          "question": {
+            "en": "Has the household already received a subsidy for solar panels?",
+            "hi": "क्या परिवार को पहले सौर पैनलों के लिए सहायता मिली है?"
+          },
+          "label": {
+            "en": "Has the household already received a subsidy for solar panels",
+            "hi": "क्या परिवार को पहले सौर पैनलों के लिए सहायता मिली है"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": false
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Ask the DISCOM about existing-subsidy, upgrade and current programme rules.",
+            "hi": "पुरानी सहायता, क्षमता बढ़ाने और वर्तमान नियमों के बारे में डिस्कॉम से पूछें।"
+          },
+          "source_ids": [
+            "extra-suryaghar"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Capital subsidy and rooftop generation savings under applicable technical/category rules; neither free units nor savings are guaranteed for every household.",
+            "hi": "लागू तकनीकी/श्रेणी नियमों के अनुसार पूंजी सहायता और सौर उत्पादन से बचत; हर परिवार को मुफ्त यूनिट या बचत की गारंटी नहीं है।"
+          },
+          "source_ids": [
+            "extra-suryaghar"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "document-1",
+          "text": {
+            "en": "Electricity consumer details",
+            "hi": "बिजली उपभोक्ता विवरण"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-suryaghar"
+          ]
+        },
+        {
+          "item_key": "document-2",
+          "text": {
+            "en": "Bank details and cancelled cheque at the subsidy stage",
+            "hi": "सहायता चरण में बैंक विवरण और रद्द चेक"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-suryaghar"
+          ]
+        }
+      ],
+      "application": {
+        "mode": "online",
+        "steps": [
+          {
+            "en": "Register on the national portal with State/DISCOM and consumer details; obtain feasibility approval, use a registered vendor, complete net-meter/inspection, then submit subsidy bank details.",
+            "hi": "राष्ट्रीय पोर्टल पर राज्य/डिस्कॉम और उपभोक्ता विवरण से पंजीकरण करें; व्यवहार्यता मंजूरी लें, पंजीकृत विक्रेता चुनें, नेट मीटर/निरीक्षण पूरा करें और सहायता के लिए बैंक विवरण दें।"
+          }
+        ],
+        "url": "https://www.pmsuryaghar.gov.in/",
+        "link_kind": "information",
+        "source_ids": [
+          "extra-suryaghar"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "The cited overview is from 2024. Current MNRE rules, DISCOM feasibility, prior subsidies, installation and commissioning must be confirmed; savings and payment dates are not guaranteed.",
+          "hi": "उद्धृत परिचय 2024 का है। वर्तमान मंत्रालय नियम, डिस्कॉम व्यवहार्यता, पुरानी सहायता, स्थापना और कमीशनिंग की पुष्टि करें; बचत या भुगतान तिथि की गारंटी नहीं है।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "The cited overview is from 2024. Current MNRE rules, DISCOM feasibility, prior subsidies, installation and commissioning must be confirmed; savings and payment dates are not guaranteed.",
+          "hi": "उद्धृत परिचय 2024 का है। वर्तमान मंत्रालय नियम, डिस्कॉम व्यवहार्यता, पुरानी सहायता, स्थापना और कमीशनिंग की पुष्टि करें; बचत या भुगतान तिथि की गारंटी नहीं है।"
+        }
+      ]
+    },
+    {
+      "scheme_id": "in-cen-000015",
+      "short_name": "Kisan Credit Card (KCC)",
+      "name": {
+        "en": "Kisan Credit Card (KCC)",
+        "hi": "किसान क्रेडिट कार्ड"
+      },
+      "overview": {
+        "en": "Bank-assessed agricultural and allied credit for eligible cultivators and other permitted farmer categories.",
+        "hi": "पात्र कृषकों और अन्य अनुमत किसान श्रेणियों के लिए बैंक मूल्यांकन आधारित कृषि तथा संबद्ध ऋण।"
+      },
+      "benefit_highlight": {
+        "en": "Flexible agricultural working-capital/investment credit with separately conditional interest-subvention and collateral rules; sanctioned limits depend on assessment.",
+        "hi": "कृषि कार्यशील पूंजी/निवेश हेतु लचीला ऋण; ब्याज सहायता और जमानत नियम अलग शर्तों के अधीन हैं; मंजूर सीमा मूल्यांकन पर निर्भर है।"
+      },
+      "audience": {
+        "en": "Owner cultivators, tenant farmers, oral lessees, sharecroppers and qualifying SHG/JLG routes are described; land ownership is not a universal requirement.",
+        "hi": "स्वामी कृषक, किरायेदार किसान, मौखिक पट्टेदार, बटाईदार और पात्र स्वयं सहायता/संयुक्त देयता समूह के मार्ग हैं; भूमि स्वामित्व सबके लिए अनिवार्य नहीं है।"
+      },
+      "scope": "new_enrolment_preliminary",
+      "checked_on": "2026-10-31",
+      "human_publication_approved": false,
+      "preliminary_complete": false,
+      "documents_complete": false,
+      "translation_origin": "project_authored_bilingual_requires_review",
+      "fields": [
+        {
+          "key": "cultivator_or_allied_activity",
+          "kind": "boolean",
+          "question": {
+            "en": "Do you cultivate crops as an owner, tenant, sharecropper or farmer-group member, or work in dairy, fisheries, poultry or beekeeping?",
+            "hi": "क्या आप मालिक, किरायेदार, बटाईदार या किसान समूह सदस्य के रूप में खेती करते हैं, या डेयरी, मत्स्य, मुर्गीपालन या मधुमक्खीपालन में काम करते हैं?"
+          },
+          "label": {
+            "en": "Do you cultivate crops as an owner, tenant, sharecropper or farmer-group member, or work in dairy, fisheries, poultry or beekeeping",
+            "hi": "क्या आप मालिक, किरायेदार, बटाईदार या किसान समूह सदस्य के रूप में खेती करते हैं, या डेयरी, मत्स्य, मुर्गीपालन या मधुमक्खीपालन में काम करते हैं"
+          },
+          "predicates": [
+            {
+              "operator": "eq",
+              "expected_value": true
+            }
+          ],
+          "failure_outcome": "verify",
+          "manual_reason": {
+            "en": "Other permitted activities and group routes need lender verification. Land ownership is not required for every KCC route.",
+            "hi": "अन्य अनुमत गतिविधियों और समूह वाले मार्ग की ऋणदाता से जाँच कराएँ। हर केसीसी मार्ग में भूमि का मालिक होना आवश्यक नहीं है।"
+          },
+          "source_ids": [
+            "extra-kcc"
+          ],
+          "effective_from": null,
+          "evidence_status": "official_text_supported"
+        }
+      ],
+      "benefits": [
+        {
+          "item_key": "overview",
+          "text": {
+            "en": "Flexible agricultural working-capital/investment credit with separately conditional interest-subvention and collateral rules; sanctioned limits depend on assessment.",
+            "hi": "कृषि कार्यशील पूंजी/निवेश हेतु लचीला ऋण; ब्याज सहायता और जमानत नियम अलग शर्तों के अधीन हैं; मंजूर सीमा मूल्यांकन पर निर्भर है।"
+          },
+          "source_ids": [
+            "extra-kcc"
+          ],
+          "requirement": "conditional"
+        }
+      ],
+      "documents": [
+        {
+          "item_key": "cultivator-application",
+          "text": {
+            "en": "For the cited crop-cultivator route: KCC form and land/crop information. Ask the bank for tenant, group and allied-activity alternatives.",
+            "hi": "उद्धृत फसल कृषक मार्ग में केसीसी प्रपत्र और भूमि या फसल विवरण; किरायेदार, समूह और संबद्ध गतिविधि के विकल्प बैंक से पूछें।"
+          },
+          "requirement": "conditional",
+          "source_ids": [
+            "extra-kcc"
+          ]
+        }
+      ],
+      "application": {
+        "mode": "offline",
+        "steps": [
+          {
+            "en": "Obtain the current KCC form from the bank; CSCs can assist transmission. Tenant/group and allied-activity routes require their applicable bank checklist.",
+            "hi": "बैंक से वर्तमान केसीसी प्रपत्र लें; सीएससी आवेदन भेजने में सहायता कर सकता है। किरायेदार/समूह और संबद्ध गतिविधियों की अलग बैंक सूची लागू है।"
+          }
+        ],
+        "url": null,
+        "link_kind": "information",
+        "source_ids": [
+          "extra-kcc"
+        ]
+      },
+      "verification_requirements": [
+        {
+          "en": "The bank must verify the applicable cultivator, tenant, group or allied-activity route, credit assessment and route-specific documents; no universal land-ownership or age test is imposed here.",
+          "hi": "बैंक को कृषक, किरायेदार, समूह या संबद्ध गतिविधि का मार्ग, ऋण मूल्यांकन और संबंधित दस्तावेज़ जाँचने होंगे; यहाँ सब पर भूमि स्वामित्व या आयु की एक शर्त नहीं लगाई गई है।"
+        }
+      ],
+      "manual_notes": [
+        {
+          "en": "The bank must verify the applicable cultivator, tenant, group or allied-activity route, credit assessment and route-specific documents; no universal land-ownership or age test is imposed here.",
+          "hi": "बैंक को कृषक, किरायेदार, समूह या संबद्ध गतिविधि का मार्ग, ऋण मूल्यांकन और संबंधित दस्तावेज़ जाँचने होंगे; यहाँ सब पर भूमि स्वामित्व या आयु की एक शर्त नहीं लगाई गई है।"
+        }
+      ]
+    }
+  ]
+}

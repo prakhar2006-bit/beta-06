@@ -1,3 +1,5 @@
+// TEMPORARY MOCK. Delete at engine integration. Frontend must not contain eligibility rules.
+
 /**
  * Mock Questionnaire for YojanaMitra Screening
  * Conforms to input types: TEXT, NUMBER, DATE, BOOLEAN, SINGLE_SELECT, MULTI_SELECT

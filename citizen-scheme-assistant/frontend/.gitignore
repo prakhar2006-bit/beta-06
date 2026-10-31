@@ -12,3 +12,7 @@ build/
 .vite/
 backend-openapi.json
 
+
+# Allow frontend lib directory
+!src/lib/
+!src/lib/**

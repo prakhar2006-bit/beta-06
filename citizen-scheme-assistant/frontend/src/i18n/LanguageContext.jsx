@@ -36,6 +36,7 @@ export const LanguageProvider = ({ children }) => {
   const getLocalized = (obj, fallback = '') => {
     if (!obj) return fallback;
     if (typeof obj === 'string') return obj;
+    if (typeof obj.text === 'string') return obj.text;
     return obj[language] || obj.en || obj.hi || fallback;
   };
 

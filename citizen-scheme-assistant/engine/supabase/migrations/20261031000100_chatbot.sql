@@ -24,3 +24,10 @@ CREATE INDEX IF NOT EXISTS idx_chat_conversations_session ON scheme_catalog.chat
 CREATE INDEX IF NOT EXISTS idx_chat_conversations_user ON scheme_catalog.chat_conversations(user_id);
 CREATE INDEX IF NOT EXISTS idx_chat_messages_conversation ON scheme_catalog.chat_messages(conversation_id, created_at ASC);
 
+-- These tables are part of the private application store, not the public
+-- catalogue. Keep the same fail-closed RLS posture as the catalogue tables;
+-- backend access must be added through an explicitly reviewed server role.
+ALTER TABLE scheme_catalog.chat_conversations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE scheme_catalog.chat_messages ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON scheme_catalog.chat_conversations, scheme_catalog.chat_messages FROM PUBLIC;
+

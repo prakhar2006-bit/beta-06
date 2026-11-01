@@ -265,9 +265,15 @@ def check_role(db):
                       "FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace "
                       "WHERE n.nspname='scheme_catalog' AND c.relkind='r'")
     expected = set(ORDER) | {'ingestion_runs'}
-    if {t['relname'] for t in tables} != expected or any(
+    by_name = {t['relname']: t for t in tables}
+    expected_tables = [by_name.get(name) for name in expected]
+    private_tables = [t for t in tables if t['relname'] not in expected]
+    if any(t is None for t in expected_tables) or any(
             t['owner'] or not t['relrowsecurity'] or not t['can_read'] or not t['can_insert']
-            or t['can_mutate'] or t['column_references'] or t['can_grant'] for t in tables):
+            or t['can_mutate'] or t['column_references'] or t['can_grant'] for t in expected_tables
+            if t is not None) or any(
+            t['owner'] or not t['relrowsecurity'] or t['can_read'] or t['can_insert']
+            or t['can_mutate'] or t['column_references'] or t['can_grant'] for t in private_tables):
         raise PreflightError('Writer needs reviewed SELECT/INSERT grants and RLS policies; no ownership or mutation grants')
     updates = db.query("SELECT c.relname,a.attname FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace "
                        "JOIN pg_attribute a ON a.attrelid=c.oid WHERE n.nspname='scheme_catalog' AND c.relkind IN ('r','p','v','m','f') "

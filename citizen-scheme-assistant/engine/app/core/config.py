@@ -19,7 +19,10 @@ DEFAULT_ORIGINS = (
 def load_environment() -> None:
     load_dotenv(ENGINE_DIR / ".env", override=False, interpolate=False)
     os.environ.setdefault("SCHEME_APP_ENV", "development")
-    os.environ.setdefault("SCHEME_DEMO_ENABLED", "1")
+    # Draft/demo routes must be explicitly enabled for local previews. Keeping
+    # the default off prevents them from intercepting published API tests and
+    # ordinary production-style requests.
+    os.environ.setdefault("SCHEME_DEMO_ENABLED", "0")
 
 
 def cors_origins() -> list[str]:

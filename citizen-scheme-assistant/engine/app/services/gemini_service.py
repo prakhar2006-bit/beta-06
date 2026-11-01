@@ -106,7 +106,7 @@ class GeminiService:
             return None
         return genai.Client(
             api_key=key,
-            http_options=types.HttpOptions(timeout=4000),
+            http_options=types.HttpOptions(timeout=25000),
         )
 
     def is_configured(self) -> bool:

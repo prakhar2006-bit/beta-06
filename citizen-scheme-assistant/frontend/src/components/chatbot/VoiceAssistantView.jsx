@@ -18,6 +18,19 @@ import { chatbotApi } from '../../services/chatbotApi';
 import { SchemeResultCard } from './SchemeResultCard';
 import { FormattedMessage } from './FormattedMessage';
 
+const microphoneErrorCode = (error) => {
+  if (error?.code === 'MICROPHONE_UNAVAILABLE' || error?.name === 'NotFoundError') {
+    return 'voiceMicrophoneUnavailable';
+  }
+  if (error?.code === 'MICROPHONE_BUSY' || error?.name === 'NotReadableError' || error?.name === 'AbortError') {
+    return 'voiceMicrophoneBusy';
+  }
+  if (error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError' || error?.name === 'SecurityError') {
+    return 'voicePermissionDenied';
+  }
+  return 'voiceMicrophoneUnavailable';
+};
+
 /**
  * Voice Assistant State Machine:
  * - IDLE
@@ -38,7 +51,7 @@ export const VoiceAssistantView = ({
   messages,
   setMessages,
 }) => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [voiceState, setVoiceState] = useState('IDLE');
   const [interimTranscript, setInterimTranscript] = useState('');
   const [latestAssistantText, setLatestAssistantText] = useState('');
@@ -48,6 +61,7 @@ export const VoiceAssistantView = ({
   const [isMuted, setIsMuted] = useState(false);
   const [isSupported, setIsSupported] = useState(true);
   const [pendingAutoplayAudio, setPendingAutoplayAudio] = useState(null);
+  const [captureStage, setCaptureStage] = useState('idle');
 
   // References for managing active speech recognition & audio playback
   const recognitionRef = useRef(null);
@@ -58,8 +72,40 @@ export const VoiceAssistantView = ({
   const autoRestartTimeoutRef = useRef(null);
   const hasSubmittedTurnRef = useRef(false);
   const accumulatedTranscriptRef = useRef('');
+  const finalTranscriptRef = useRef('');
   const isUserSpeakingRef = useRef(false);
+  const audioCaptureStartedRef = useRef(false);
+  const speechDetectedRef = useRef(false);
+  const microphoneAccessRef = useRef(false);
+  const captureTimeoutRef = useRef(null);
+  const voiceStateRef = useRef(voiceState);
+  const selectedLanguageRef = useRef(selectedLanguage);
+  const conversationIdRef = useRef(conversationId);
+  const isMutedRef = useRef(isMuted);
+  const shouldListenRef = useRef(false);
+  const startInFlightRef = useRef(false);
+  const recognitionGenerationRef = useRef(0);
+  const handleUserUtteranceRef = useRef(null);
+  const playAssistantVoiceRef = useRef(null);
+  const fallbackToBrowserSpeechRef = useRef(null);
+  const resumeListeningLoopRef = useRef(null);
+  const initiateListeningSessionRef = useRef(null);
   const scrollRef = useRef(null);
+  const translateRef = useRef(t);
+
+  // Event handlers from SpeechRecognition and Audio run outside React's render
+  // cycle. Keep the latest values available to those handlers and avoid stale
+  // closures after a language switch or a new chatbot conversation.
+  voiceStateRef.current = voiceState;
+  selectedLanguageRef.current = selectedLanguage;
+  conversationIdRef.current = conversationId;
+  isMutedRef.current = isMuted;
+  translateRef.current = t;
+
+  const updateVoiceState = useCallback((nextState) => {
+    voiceStateRef.current = nextState;
+    if (isComponentMountedRef.current) setVoiceState(nextState);
+  }, []);
 
   // Stop any active audio and speech synthesis
   const cleanupAudio = useCallback(() => {
@@ -81,13 +127,23 @@ export const VoiceAssistantView = ({
 
   // Stop active speech recognition instance
   const stopRecognition = useCallback(() => {
+    recognitionGenerationRef.current += 1;
     if (silenceDebounceTimerRef.current) {
       clearTimeout(silenceDebounceTimerRef.current);
       silenceDebounceTimerRef.current = null;
     }
+    if (captureTimeoutRef.current) {
+      clearTimeout(captureTimeoutRef.current);
+      captureTimeoutRef.current = null;
+    }
     if (recognitionRef.current) {
       try {
         recognitionRef.current.onstart = null;
+        recognitionRef.current.onaudiostart = null;
+        recognitionRef.current.onsoundstart = null;
+        recognitionRef.current.onspeechstart = null;
+        recognitionRef.current.onspeechend = null;
+        recognitionRef.current.onaudioend = null;
         recognitionRef.current.onresult = null;
         recognitionRef.current.onend = null;
         recognitionRef.current.onerror = null;
@@ -98,6 +154,7 @@ export const VoiceAssistantView = ({
       recognitionRef.current = null;
     }
     isUserSpeakingRef.current = false;
+    startInFlightRef.current = false;
   }, []);
 
   // Sync latest message when messages array updates
@@ -118,11 +175,15 @@ export const VoiceAssistantView = ({
 
     const trimmed = spokenText.trim();
     const currentTurn = ++turnIdRef.current;
+    const requestLanguage = selectedLanguageRef.current;
+    const requestConversationId = conversationIdRef.current;
     console.log(`[VoiceAssistant] Submitting user utterance (Turn ${currentTurn}): "${trimmed}"`);
 
+    shouldListenRef.current = false;
     stopRecognition();
     cleanupAudio();
-    setVoiceState('WAITING_FOR_GEMINI');
+    updateVoiceState('WAITING_FOR_GEMINI');
+    setCaptureStage('processing');
     setErrorMessage('');
     setInterimTranscript('');
 
@@ -138,8 +199,8 @@ export const VoiceAssistantView = ({
       // Send to existing intelligent chatbot backend
       const response = await chatbotApi.sendMessage({
         message: trimmed,
-        conversationId,
-        language: selectedLanguage,
+        conversationId: requestConversationId,
+        language: requestLanguage,
       });
 
       if (!isComponentMountedRef.current || currentTurn !== turnIdRef.current) {
@@ -166,23 +227,25 @@ export const VoiceAssistantView = ({
       setLatestSchemes(response.schemes || []);
 
       // Speak response aloud via ElevenLabs or Browser TTS
-      await playAssistantVoice(response.message, selectedLanguage, currentTurn);
+      await playAssistantVoiceRef.current?.(response.message, requestLanguage, currentTurn);
     } catch (err) {
       console.error('[VoiceAssistant] Error processing utterance:', err);
       if (!isComponentMountedRef.current) return;
-      setVoiceState('ERROR');
+      updateVoiceState('ERROR');
       setErrorMessage(
-        selectedLanguage === 'hi'
+        requestLanguage === 'hi'
           ? 'उत्तर प्राप्त करने में समस्या हुई। कृपया पुनः बोलें।'
           : 'Error receiving response from Sahayak. Please try speaking again.'
       );
     }
-  }, [conversationId, selectedLanguage, setConversationId, setMessages, stopRecognition, cleanupAudio]);
+  }, [setConversationId, setMessages, stopRecognition, cleanupAudio, updateVoiceState]);
+  handleUserUtteranceRef.current = handleUserUtterance;
 
   // Turn-taking: Automatically resume listening after assistant finishes speaking
   const resumeListeningLoop = useCallback(() => {
     if (!isComponentMountedRef.current) return;
     console.log('[VoiceAssistant] Resuming continuous listening cycle...');
+    shouldListenRef.current = true;
     cleanupAudio();
     setInterimTranscript('');
 
@@ -192,23 +255,29 @@ export const VoiceAssistantView = ({
 
     // 400ms echo-prevention delay before reopening microphone
     autoRestartTimeoutRef.current = setTimeout(() => {
-      if (isComponentMountedRef.current) {
-        initiateListeningSession();
+      if (isComponentMountedRef.current && shouldListenRef.current) {
+        initiateListeningSessionRef.current?.();
       }
     }, 400);
   }, [cleanupAudio]);
+  resumeListeningLoopRef.current = resumeListeningLoop;
 
   // Play assistant voice via ElevenLabs or Browser SpeechSynthesis
   const playAssistantVoice = useCallback(async (text, lang, turnId) => {
     if (!isComponentMountedRef.current || turnId !== turnIdRef.current) return;
 
-    if (isMuted) {
-      console.log('[VoiceAssistant] Voice response is muted by user; skipping audio');
-      resumeListeningLoop();
+    if (!text || !String(text).trim()) {
+      resumeListeningLoopRef.current?.();
       return;
     }
 
-    setVoiceState('GENERATING_AUDIO');
+    if (isMutedRef.current) {
+      console.log('[VoiceAssistant] Voice response is muted by user; skipping audio');
+      resumeListeningLoopRef.current?.();
+      return;
+    }
+
+    updateVoiceState('GENERATING_AUDIO');
 
     try {
       const speechRes = await chatbotApi.getSpeechAudio(text, lang);
@@ -223,7 +292,7 @@ export const VoiceAssistantView = ({
         audio.onplay = () => {
           console.log('[VoiceAssistant] Audio playback started (ElevenLabs)');
           if (isComponentMountedRef.current && turnId === turnIdRef.current) {
-            setVoiceState('SPEAKING');
+            updateVoiceState('SPEAKING');
             setPendingAutoplayAudio(null);
           }
         };
@@ -236,12 +305,12 @@ export const VoiceAssistantView = ({
             } catch (e) {}
           }
           if (!isComponentMountedRef.current || turnId !== turnIdRef.current) return;
-          resumeListeningLoop();
+          resumeListeningLoopRef.current?.();
         };
 
         audio.onerror = (e) => {
           console.warn('[VoiceAssistant] ElevenLabs audio playback failed, falling back to browser TTS:', e);
-          fallbackToBrowserSpeech(speechRes.fallbackText || text, lang, turnId);
+          fallbackToBrowserSpeechRef.current?.(speechRes.fallbackText || text, lang, turnId);
         };
 
         try {
@@ -250,22 +319,24 @@ export const VoiceAssistantView = ({
           console.warn('[VoiceAssistant] Audio playback blocked by browser autoplay policy:', playErr);
           // Allow single-tap manual playback
           setPendingAutoplayAudio({ audio, text, lang, turnId });
-          setVoiceState('PAUSED');
+          shouldListenRef.current = false;
+          updateVoiceState('PAUSED');
           setErrorMessage(
-            selectedLanguage === 'hi'
+            lang === 'hi'
               ? 'ऑडियो सुनने के लिए नीचे दिए गए बटन पर टैप करें।'
               : 'Tap the button below to listen to Sahayak\'s response.'
           );
         }
       } else {
         // Fallback to browser SpeechSynthesis
-        fallbackToBrowserSpeech(speechRes.fallbackText || text, lang, turnId);
+        fallbackToBrowserSpeechRef.current?.(speechRes.fallbackText || text, lang, turnId);
       }
     } catch (err) {
       console.warn('[VoiceAssistant] TTS error, using browser fallback:', err);
-      fallbackToBrowserSpeech(text, lang, turnId);
+      fallbackToBrowserSpeechRef.current?.(text, lang, turnId);
     }
-  }, [isMuted, resumeListeningLoop, selectedLanguage]);
+  }, [updateVoiceState]);
+  playAssistantVoiceRef.current = playAssistantVoice;
 
   // Fallback to browser SpeechSynthesis
   const fallbackToBrowserSpeech = useCallback((text, lang, turnId) => {
@@ -277,171 +348,288 @@ export const VoiceAssistantView = ({
       () => {
         // On playback started
         if (isComponentMountedRef.current && turnId === turnIdRef.current) {
-          setVoiceState('SPEAKING');
+          updateVoiceState('SPEAKING');
         }
       },
       () => {
         // On playback finished
         if (isComponentMountedRef.current && turnId === turnIdRef.current) {
-          resumeListeningLoop();
+          resumeListeningLoopRef.current?.();
         }
       }
     );
-  }, [resumeListeningLoop]);
+  }, [updateVoiceState]);
+  fallbackToBrowserSpeechRef.current = fallbackToBrowserSpeech;
 
-  // Initiate real SpeechRecognition session with browser permission checks
+  const checkMicrophoneAccess = useCallback(async () => {
+    if (microphoneAccessRef.current) return;
+    if (!navigator.mediaDevices?.getUserMedia) {
+      const error = new Error('Microphone access is unavailable in this browser or context.');
+      error.code = 'MICROPHONE_UNAVAILABLE';
+      throw error;
+    }
+
+    try {
+      const permissionQuery = navigator.permissions?.query
+        ? navigator.permissions.query({ name: 'microphone' })
+        : null;
+      const permission = await Promise.resolve(permissionQuery).catch(() => null);
+      if (permission?.state === 'denied') {
+        const error = new Error('Microphone permission is denied.');
+        error.name = 'NotAllowedError';
+        throw error;
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          channelCount: 1,
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        },
+      });
+      const tracks = stream.getAudioTracks();
+      try {
+        if (!tracks.length || tracks.some((track) => track.readyState !== 'live')) {
+          const error = new Error('No live microphone track was returned.');
+          error.code = 'MICROPHONE_UNAVAILABLE';
+          throw error;
+        }
+      } finally {
+        tracks.forEach((track) => track.stop());
+      }
+      // Let Chrome release the temporary permission-check stream before
+      // SpeechRecognition requests the same input device.
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      microphoneAccessRef.current = true;
+    } catch (error) {
+      microphoneAccessRef.current = false;
+      throw error;
+    }
+  }, []);
+
+  // Start one recognition turn at a time. The explicit microphone check gives
+  // Chrome a real device/permission failure before SpeechRecognition reports
+  // onstart. The temporary stream is stopped before recognition starts so the
+  // two APIs never hold the microphone at the same time.
   const initiateListeningSession = useCallback(async () => {
-    if (!isComponentMountedRef.current) return;
+    if (!isComponentMountedRef.current || startInFlightRef.current) return;
+    if (recognitionRef.current && voiceStateRef.current === 'LISTENING') return;
+    if (recognitionRef.current) stopRecognition();
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       setIsSupported(false);
-      setVoiceState('ERROR');
+      shouldListenRef.current = false;
+      updateVoiceState('ERROR');
       setErrorMessage(
-        selectedLanguage === 'hi'
-          ? 'आपका ब्राउज़र वाक् पहचान का समर्थन नहीं करता है। कृपया Google Chrome या Microsoft Edge का उपयोग करें।'
-          : 'Your browser does not support Speech Recognition. Please use Google Chrome or Microsoft Edge.'
+        translateRef.current('voiceRecognitionUnsupported')
       );
       return;
     }
 
+    if (autoRestartTimeoutRef.current) {
+      clearTimeout(autoRestartTimeoutRef.current);
+      autoRestartTimeoutRef.current = null;
+    }
+
     cleanupAudio();
     stopRecognition();
+    shouldListenRef.current = true;
+    startInFlightRef.current = true;
+    audioCaptureStartedRef.current = false;
+    speechDetectedRef.current = false;
+    setCaptureStage('permission');
     setErrorMessage('');
     setInterimTranscript('');
     hasSubmittedTurnRef.current = false;
     accumulatedTranscriptRef.current = '';
+    finalTranscriptRef.current = '';
 
-    // Check & request microphone permission if needed
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      try {
-        console.log('[VoiceAssistant] Requesting microphone access...');
-        setVoiceState('REQUESTING_PERMISSION');
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        // Immediately release stream so SpeechRecognition can acquire exclusive access
-        stream.getTracks().forEach((track) => track.stop());
-        console.log('[VoiceAssistant] Microphone access verified');
-      } catch (permErr) {
-        console.warn('[VoiceAssistant] Microphone permission denied:', permErr);
-        if (!isComponentMountedRef.current) return;
-        setVoiceState('ERROR');
-        setErrorMessage(
-          selectedLanguage === 'hi'
-            ? 'माइक्रोफ़ोन की अनुमति अस्वीकृत है। कृपया ब्राउज़र सेटिंग्स में माइक्रोफ़ोन की अनुमति दें।'
-            : 'Microphone permission denied. Please allow microphone access in your browser settings.'
-        );
-        return;
-      }
-    }
+    const generation = ++recognitionGenerationRef.current;
+
+    updateVoiceState('REQUESTING_PERMISSION');
 
     try {
-      console.log(`[VoiceAssistant] Initializing SpeechRecognition for language: ${selectedLanguage}`);
+      await checkMicrophoneAccess();
+    } catch (error) {
+      if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current) return;
+      startInFlightRef.current = false;
+      shouldListenRef.current = false;
+      updateVoiceState('ERROR');
+      setErrorMessage(translateRef.current(microphoneErrorCode(error)));
+      return;
+    }
+
+    if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current || !shouldListenRef.current) {
+      startInFlightRef.current = false;
+      return;
+    }
+
+    const submitTranscript = () => {
+      if (
+        !isComponentMountedRef.current ||
+        generation !== recognitionGenerationRef.current ||
+        hasSubmittedTurnRef.current
+      ) return;
+
+      const textToSend = accumulatedTranscriptRef.current.trim();
+      if (!textToSend) return;
+
+      hasSubmittedTurnRef.current = true;
+      shouldListenRef.current = false;
+      console.log(`[VoiceAssistant] Submitting final transcript: "${textToSend}"`);
+      updateVoiceState('PROCESSING_INPUT');
+      stopRecognition();
+      void handleUserUtteranceRef.current?.(textToSend);
+    };
+
+    try {
+      console.log(`[VoiceAssistant] Initializing SpeechRecognition for language: ${selectedLanguageRef.current}`);
       const recognition = new SpeechRecognition();
-      recognition.continuous = true; // Stay active across brief natural pauses
+      // One turn is more reliable than a continuous session: after the user
+      // finishes, onend submits the transcript and the assistant starts the
+      // next turn after its reply.
+      recognition.continuous = false;
       recognition.interimResults = true;
       recognition.maxAlternatives = 1;
-      recognition.lang = selectedLanguage === 'hi' ? 'hi-IN' : 'en-IN';
+      recognition.lang = selectedLanguageRef.current === 'hi' ? 'hi-IN' : 'en-IN';
 
       recognition.onstart = () => {
-        console.log('[VoiceAssistant] Speech recognition session started (onstart)');
-        if (!isComponentMountedRef.current) return;
-        setVoiceState('LISTENING');
+        startInFlightRef.current = false;
+        console.log('[VoiceAssistant] Speech recognition session started');
+        if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current) return;
+        updateVoiceState('REQUESTING_PERMISSION');
+        setCaptureStage('service');
+        isUserSpeakingRef.current = false;
+      };
+
+      recognition.onaudiostart = () => {
+        if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current) return;
+        audioCaptureStartedRef.current = true;
+        if (captureTimeoutRef.current) {
+          clearTimeout(captureTimeoutRef.current);
+          captureTimeoutRef.current = null;
+        }
+        updateVoiceState('LISTENING');
+        setCaptureStage('audio');
+        console.log('[VoiceAssistant] Microphone audio capture started');
+      };
+
+      recognition.onsoundstart = () => {
+        if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current) return;
+        console.log('[VoiceAssistant] Sound detected by recognition service');
+      };
+
+      recognition.onspeechstart = () => {
+        if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current) return;
+        speechDetectedRef.current = true;
         isUserSpeakingRef.current = true;
+        setCaptureStage('speech');
+        console.log('[VoiceAssistant] Speech detected by recognition service');
+      };
+
+      recognition.onspeechend = () => {
+        isUserSpeakingRef.current = false;
+        console.log('[VoiceAssistant] Speech ended');
+      };
+
+      recognition.onaudioend = () => {
+        isUserSpeakingRef.current = false;
+        console.log('[VoiceAssistant] Microphone audio capture ended');
       };
 
       recognition.onresult = (event) => {
-        if (!isComponentMountedRef.current) return;
+        if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current) return;
 
         let finalPart = '';
         let interimPart = '';
-
         for (let i = 0; i < event.results.length; ++i) {
-          const res = event.results[i];
-          if (res.isFinal) {
-            finalPart += res[0].transcript + ' ';
-          } else {
-            interimPart += res[0].transcript;
-          }
+          const transcript = event.results[i]?.[0]?.transcript || '';
+          if (event.results[i].isFinal) finalPart += `${transcript} `;
+          else interimPart += transcript;
         }
 
-        const fullUtterance = (finalPart + interimPart).trim();
-        if (fullUtterance) {
-          accumulatedTranscriptRef.current = fullUtterance;
-          setInterimTranscript(fullUtterance);
-          console.log(`[VoiceAssistant] Transcript update: "${fullUtterance}"`);
+        finalTranscriptRef.current = finalPart.trim();
+        const fullUtterance = `${finalPart} ${interimPart}`.trim();
+        if (!fullUtterance) return;
 
-          // Debounce finalization: 850ms of silence after speech completes the turn
-          if (silenceDebounceTimerRef.current) {
-            clearTimeout(silenceDebounceTimerRef.current);
-          }
+        accumulatedTranscriptRef.current = fullUtterance;
+        setInterimTranscript(fullUtterance);
+        console.log(`[VoiceAssistant] Transcript update: "${fullUtterance}"`);
 
-          silenceDebounceTimerRef.current = setTimeout(() => {
-            if (
-              isComponentMountedRef.current &&
-              !hasSubmittedTurnRef.current &&
-              accumulatedTranscriptRef.current.trim()
-            ) {
-              hasSubmittedTurnRef.current = true;
-              const textToSend = accumulatedTranscriptRef.current.trim();
-              console.log(`[VoiceAssistant] Final utterance captured by silence timeout: "${textToSend}"`);
-              setVoiceState('PROCESSING_INPUT');
-              stopRecognition();
-              handleUserUtterance(textToSend);
-            }
-          }, 850);
-        }
+        // Some browsers do not emit onend immediately after a final result.
+        // Submit after a short silence, while onend remains the final backup.
+        if (silenceDebounceTimerRef.current) clearTimeout(silenceDebounceTimerRef.current);
+        silenceDebounceTimerRef.current = setTimeout(submitTranscript, 1000);
       };
 
       recognition.onerror = (event) => {
+        startInFlightRef.current = false;
         console.warn(`[VoiceAssistant] Recognition error event: ${event.error}`);
-        if (!isComponentMountedRef.current) return;
+        if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current) return;
 
-        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
-          setVoiceState('ERROR');
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed' || event.error === 'audio-capture') {
+          shouldListenRef.current = false;
+          updateVoiceState('ERROR');
           setErrorMessage(
-            selectedLanguage === 'hi'
+            selectedLanguageRef.current === 'hi'
               ? 'माइक्रोफ़ोन की अनुमति अस्वीकृत है। कृपया ब्राउज़र सेटिंग्स में अनुमति दें।'
-              : 'Microphone permission denied. Please allow microphone access in your browser settings.'
+              : translateRef.current('voicePermissionDenied')
+          );
+        } else if (event.error === 'network') {
+          shouldListenRef.current = false;
+          updateVoiceState('ERROR');
+          setErrorMessage(
+            selectedLanguageRef.current === 'hi'
+              ? 'वाक् पहचान सर्वर से संपर्क नहीं हो सका। कृपया इंटरनेट जांचें।'
+              : translateRef.current('voiceRecognitionNetwork')
           );
         } else if (event.error === 'no-speech') {
-          // Normal background silence: do not show scary error, keep listening
-          console.log('[VoiceAssistant] No speech detected in active window');
-        } else if (event.error === 'network') {
-          setVoiceState('ERROR');
+          shouldListenRef.current = false;
+          updateVoiceState('ERROR');
+          setErrorMessage(translateRef.current('voiceNoSpeech'));
+          console.log('[VoiceAssistant] No speech detected in this turn');
+        } else if (event.error !== 'aborted') {
+          shouldListenRef.current = false;
+          updateVoiceState('ERROR');
           setErrorMessage(
-            selectedLanguage === 'hi'
-              ? 'वाक् पहचान सर्वर से संपर्क नहीं हो सका। कृपया इंटरनेट जांचें।'
-              : 'Speech recognition network error. Please check your connection.'
+            selectedLanguageRef.current === 'hi'
+              ? 'आवाज़ पहचान में समस्या हुई। कृपया फिर से प्रयास करें।'
+              : translateRef.current('voiceRecognitionFailed')
           );
         } else {
-          console.log(`[VoiceAssistant] Recoverable speech error: ${event.error}`);
+          console.log(`[VoiceAssistant] Recognition stopped: ${event.error}`);
         }
       };
 
       recognition.onend = () => {
+        startInFlightRef.current = false;
+        if (recognitionRef.current === recognition) recognitionRef.current = null;
+        if (silenceDebounceTimerRef.current) {
+          clearTimeout(silenceDebounceTimerRef.current);
+          silenceDebounceTimerRef.current = null;
+        }
+        if (captureTimeoutRef.current) {
+          clearTimeout(captureTimeoutRef.current);
+          captureTimeoutRef.current = null;
+        }
         console.log('[VoiceAssistant] Recognition session stopped (onend)');
-        if (!isComponentMountedRef.current) return;
+        if (!isComponentMountedRef.current || generation !== recognitionGenerationRef.current) return;
 
         // If an utterance was accumulated and not yet submitted, finalize it now
-        if (
-          !hasSubmittedTurnRef.current &&
-          accumulatedTranscriptRef.current &&
-          accumulatedTranscriptRef.current.trim()
-        ) {
-          hasSubmittedTurnRef.current = true;
-          const textToSend = accumulatedTranscriptRef.current.trim();
-          console.log(`[VoiceAssistant] Submitting final transcript on session end: "${textToSend}"`);
-          setVoiceState('PROCESSING_INPUT');
-          handleUserUtterance(textToSend);
+        if (!hasSubmittedTurnRef.current && accumulatedTranscriptRef.current.trim()) {
+          submitTranscript();
           return;
         }
 
-        // If still supposed to be listening and user did not speak yet, restart smoothly
-        if (voiceState === 'LISTENING') {
+        // Browsers can end a recognition turn during silence. Restart only
+        // while the user still expects listening, never after a submit/pause.
+        if (shouldListenRef.current && voiceStateRef.current === 'LISTENING') {
           autoRestartTimeoutRef.current = setTimeout(() => {
-            if (isComponentMountedRef.current && voiceState === 'LISTENING') {
+            if (isComponentMountedRef.current && shouldListenRef.current) {
               console.log('[VoiceAssistant] Keeping listening session active');
-              initiateListeningSession();
+              initiateListeningSessionRef.current?.();
             }
           }, 300);
         }
@@ -449,13 +637,34 @@ export const VoiceAssistantView = ({
 
       recognitionRef.current = recognition;
       recognition.start();
+      captureTimeoutRef.current = setTimeout(() => {
+        if (
+          isComponentMountedRef.current &&
+          generation === recognitionGenerationRef.current &&
+          !audioCaptureStartedRef.current
+        ) {
+          shouldListenRef.current = false;
+          updateVoiceState('ERROR');
+          setErrorMessage(translateRef.current('voiceAudioCaptureFailed'));
+          stopRecognition();
+        }
+      }, 5000);
     } catch (err) {
+      startInFlightRef.current = false;
+      recognitionRef.current = null;
+      shouldListenRef.current = false;
       console.warn('[VoiceAssistant] Failed to start recognition instance:', err);
       if (isComponentMountedRef.current) {
-        setVoiceState('PAUSED');
+        updateVoiceState('ERROR');
+        setErrorMessage(
+          selectedLanguageRef.current === 'hi'
+            ? 'माइक्रोफ़ोन शुरू नहीं हो सका। कृपया फिर से प्रयास करें।'
+            : translateRef.current('voiceMicrophoneUnavailable')
+        );
       }
     }
-  }, [cleanupAudio, stopRecognition, selectedLanguage, handleUserUtterance, voiceState]);
+  }, [cleanupAudio, stopRecognition, updateVoiceState]);
+  initiateListeningSessionRef.current = initiateListeningSession;
 
   // Initialize SpeechRecognition on mount
   useEffect(() => {
@@ -465,52 +674,65 @@ export const VoiceAssistantView = ({
 
     return () => {
       isComponentMountedRef.current = false;
+      shouldListenRef.current = false;
+      turnIdRef.current += 1;
       cleanupAudio();
       stopRecognition();
       if (autoRestartTimeoutRef.current) {
         clearTimeout(autoRestartTimeoutRef.current);
+        autoRestartTimeoutRef.current = null;
       }
       if (silenceDebounceTimerRef.current) {
         clearTimeout(silenceDebounceTimerRef.current);
+        silenceDebounceTimerRef.current = null;
       }
     };
-  }, []);
+  }, [cleanupAudio, stopRecognition, initiateListeningSession]);
 
   // User interruption while assistant is speaking
   const handleInterrupt = useCallback(() => {
     console.log('[VoiceAssistant] User interrupted assistant');
     turnIdRef.current++; // Invalidate active audio turn
+    shouldListenRef.current = true;
     cleanupAudio();
+    stopRecognition();
     chatbotApi.unlockAudioContext();
-    initiateListeningSession();
-  }, [cleanupAudio, initiateListeningSession]);
+    initiateListeningSessionRef.current?.();
+  }, [cleanupAudio, stopRecognition]);
 
   // Toggle Pause / Resume
   const toggleListening = useCallback(() => {
     chatbotApi.unlockAudioContext();
-    if (voiceState === 'SPEAKING') {
+    if (voiceStateRef.current === 'SPEAKING') {
       handleInterrupt();
-    } else if (voiceState === 'LISTENING' || voiceState === 'REQUESTING_PERMISSION') {
+    } else if (voiceStateRef.current === 'LISTENING' || voiceStateRef.current === 'REQUESTING_PERMISSION') {
       console.log('[VoiceAssistant] User paused listening');
+      shouldListenRef.current = false;
       stopRecognition();
-      setVoiceState('PAUSED');
+      updateVoiceState('PAUSED');
     } else {
       console.log('[VoiceAssistant] User started listening');
-      initiateListeningSession();
+      shouldListenRef.current = true;
+      initiateListeningSessionRef.current?.();
     }
-  }, [voiceState, handleInterrupt, stopRecognition, initiateListeningSession]);
+  }, [handleInterrupt, stopRecognition, updateVoiceState]);
 
   // Switch conversation language
   const handleLanguageSwitch = useCallback((newLang) => {
     console.log(`[VoiceAssistant] Switching language to: ${newLang}`);
+    selectedLanguageRef.current = newLang;
     setSelectedLanguage(newLang);
     turnIdRef.current++;
+    shouldListenRef.current = true;
     cleanupAudio();
     stopRecognition();
+    updateVoiceState('PAUSED');
     setTimeout(() => {
-      initiateListeningSession();
+      if (isComponentMountedRef.current && shouldListenRef.current) {
+        initiateListeningSessionRef.current?.();
+      }
     }, 150);
-  }, [cleanupAudio, stopRecognition, initiateListeningSession]);
+  }, [cleanupAudio, stopRecognition, updateVoiceState]);
 
   // Play pending autoplay-restricted audio on user tap
   const handlePlayPendingAudio = useCallback(async () => {
@@ -522,11 +744,15 @@ export const VoiceAssistantView = ({
         setErrorMessage('');
       } catch (err) {
         console.warn('[VoiceAssistant] Manual audio play failed, falling back:', err);
-        fallbackToBrowserSpeech(pendingAutoplayAudio.text, pendingAutoplayAudio.lang, pendingAutoplayAudio.turnId);
+        fallbackToBrowserSpeechRef.current?.(
+          pendingAutoplayAudio.text,
+          pendingAutoplayAudio.lang,
+          pendingAutoplayAudio.turnId
+        );
         setPendingAutoplayAudio(null);
       }
     }
-  }, [pendingAutoplayAudio, fallbackToBrowserSpeech]);
+  }, [pendingAutoplayAudio]);
 
   return (
     <div className="flex flex-col h-[520px] sm:h-[580px] w-full max-w-sm sm:max-w-md bg-gradient-to-b from-slate-900 via-slate-950 to-black text-white rounded-3xl border border-slate-800 shadow-2xl overflow-hidden animate-slide-up select-none">
@@ -547,13 +773,13 @@ export const VoiceAssistantView = ({
             </div>
             <p className="text-[10px] text-slate-400">
               {voiceState === 'REQUESTING_PERMISSION' && (
-                <span className="text-amber-400 font-semibold animate-pulse">● Requesting microphone access...</span>
+                <span className="text-amber-400 font-semibold animate-pulse">● {t('voiceRequestingPermission')}</span>
               )}
               {voiceState === 'LISTENING' && (
-                <span className="text-emerald-400 font-semibold animate-pulse">● Listening naturally...</span>
+                <span className="text-emerald-400 font-semibold animate-pulse">● {t(captureStage === 'speech' ? 'voiceSpeechDetected' : 'voiceListening')}</span>
               )}
               {voiceState === 'PROCESSING_INPUT' && (
-                <span className="text-cyan-400 font-semibold animate-pulse">● Capturing your speech...</span>
+                <span className="text-cyan-400 font-semibold animate-pulse">● {t('voiceProcessing')}</span>
               )}
               {voiceState === 'WAITING_FOR_GEMINI' && (
                 <span className="text-amber-400 font-semibold animate-pulse">● Searching verified schemes...</span>
@@ -637,7 +863,7 @@ export const VoiceAssistantView = ({
             onClick={initiateListeningSession}
             className="text-[11px] underline font-bold text-rose-300 hover:text-white shrink-0"
           >
-            Retry
+            {t('voiceRetry')}
           </button>
         </div>
       )}

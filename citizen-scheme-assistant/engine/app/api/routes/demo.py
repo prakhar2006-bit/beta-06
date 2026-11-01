@@ -162,6 +162,20 @@ def headers(response):
     response.headers['X-Scheme-Catalog']='DEMO-UNVERIFIED'
 
 
+def local_response(payload, response):
+    """Return demo DTOs without applying published-catalog response models.
+
+    The local catalogue deliberately exposes draft/demo metadata that is not
+    part of the published ``SchemeList``/``SchemeDetail`` contracts. Returning
+    a concrete response bypasses FastAPI's published response-model filtering
+    while preserving the cache and catalogue headers set by the demo route.
+    """
+    return JSONResponse(
+        content=jsonable_encoder(payload),
+        headers=dict(response.headers),
+    )
+
+
 def today():
     return datetime.now(timezone(timedelta(hours=5,minutes=30))).date()
 

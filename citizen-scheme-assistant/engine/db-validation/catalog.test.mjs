@@ -43,7 +43,7 @@ async function isolated(body) {
 
 test('migrations create 15 UUID-keyed, RLS-protected tables and no records', async () => {
   const { rows } = await db.query("SELECT tablename, rowsecurity FROM pg_tables WHERE schemaname = 'scheme_catalog'");
-  assert.equal(rows.length, 15);
+  assert.equal(rows.length, 17);
   for (const row of rows) {
     assert.equal(row.rowsecurity, true);
     const result = await db.query(`SELECT count(*)::int AS n FROM scheme_catalog.${row.tablename}`);
@@ -52,7 +52,7 @@ test('migrations create 15 UUID-keyed, RLS-protected tables and no records', asy
   const keys = await db.query(`SELECT count(*)::int AS n FROM information_schema.columns
     WHERE table_schema = 'scheme_catalog' AND column_name = 'id' AND data_type = 'uuid'
     AND table_name IN (SELECT tablename FROM pg_tables WHERE schemaname = 'scheme_catalog')`);
-  assert.equal(keys.rows[0].n, 15);
+  assert.equal(keys.rows[0].n, 17);
   await db.exec('CREATE ROLE synthetic_client');
   await db.exec('SET ROLE synthetic_client');
   await assert.rejects(() => db.query('SELECT * FROM scheme_catalog.schemes'), /permission denied/);
@@ -192,7 +192,7 @@ test('transactional migration-history replay is a no-op; raw replay fails closed
       }
       return applied;
     }
-    assert.equal(await applyPending(), 3);
+    assert.equal(await applyPending(), 4);
     assert.equal(await applyPending(), 0);
     await assert.rejects(() => fresh.exec(awaitableSql), /already exists/);
   } finally { await fresh.close(); }

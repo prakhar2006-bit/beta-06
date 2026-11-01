@@ -7,14 +7,34 @@
 import { apiClient } from './apiClient';
 import { MOCK_SCHEMES } from '../mock/mockSchemes';
 
+const readSessionValue = (key, fallback = null) => {
+  try {
+    return typeof sessionStorage === 'undefined' ? fallback : sessionStorage.getItem(key) ?? fallback;
+  } catch {
+    return fallback;
+  }
+};
+
+const readSessionJson = (key, fallback = {}) => {
+  try {
+    const value = readSessionValue(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
+let browserSpeechTimer = null;
+let browserSpeechGeneration = 0;
+
 export const chatbotApi = {
   /**
    * Send a message to YojanaMitra AI Assistant
    */
   async sendMessage({ message, conversationId = null, language = 'en' }) {
     // 1. Gather active citizen profile from ephemeral sessionStorage if available
-    const savedAnswers = JSON.parse(sessionStorage.getItem('yojanamitra_answers') || '{}');
-    const sessionId = sessionStorage.getItem('yojanamitra_session_id');
+    const savedAnswers = readSessionJson('yojanamitra_answers');
+    const sessionId = readSessionValue('yojanamitra_session_id');
 
     const profileContext = {
       state: savedAnswers.q_state || null,
@@ -203,8 +223,13 @@ export const chatbotApi = {
       // Cancel any ongoing speech
       window.speechSynthesis.cancel();
 
+      if (browserSpeechTimer) clearTimeout(browserSpeechTimer);
+      const generation = ++browserSpeechGeneration;
+
       // Defer slightly (60ms) to bypass Chrome's asynchronous cancel bug
-      setTimeout(() => {
+      browserSpeechTimer = setTimeout(() => {
+        browserSpeechTimer = null;
+        if (generation !== browserSpeechGeneration) return;
         try {
           const utterance = new SpeechSynthesisUtterance(cleanText);
           const isHindi = language === 'hi' || /[\u0900-\u097F]/.test(cleanText);
@@ -233,9 +258,11 @@ export const chatbotApi = {
           }
 
           let hasEnded = false;
+          let resumeTimer = null;
           const finishOnce = () => {
             if (hasEnded) return;
             hasEnded = true;
+            if (resumeTimer) clearInterval(resumeTimer);
             console.log('[VoiceAssistant] Playback completed (Browser TTS)');
             if (onEnd) onEnd();
           };
@@ -252,7 +279,7 @@ export const chatbotApi = {
 
           // Chromium long speech bug fix: Chrome pauses speech after 14s.
           // Resume periodically until speech finishes.
-          const resumeTimer = setInterval(() => {
+          resumeTimer = setInterval(() => {
             if (hasEnded) {
               clearInterval(resumeTimer);
             } else if (window.speechSynthesis.speaking) {
@@ -280,6 +307,11 @@ export const chatbotApi = {
    * Cancel any active browser speech
    */
   stopBrowserTTS() {
+    browserSpeechGeneration += 1;
+    if (browserSpeechTimer) {
+      clearTimeout(browserSpeechTimer);
+      browserSpeechTimer = null;
+    }
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
       window.__activeUtterance = null;

@@ -9,12 +9,12 @@ import { getDocumentSample } from '../../data/documentSamples';
  * Conditionally shows "View Sample" if a specimen is available.
  */
 export default function DocumentCard({ doc, onViewSample, className = '' }) {
-  const { currentLanguage, t } = useLanguage();
+  const { language, t, getLocalized: localize } = useLanguage();
 
   const getLocalized = (field) => {
     if (!field) return '';
     if (typeof field === 'string') return field;
-    return field[currentLanguage] || field.en || Object.values(field)[0] || '';
+    return localize(field) || field[language] || field.en || '';
   };
 
   const sample = getDocumentSample(doc);
@@ -84,4 +84,3 @@ export default function DocumentCard({ doc, onViewSample, className = '' }) {
     </div>
   );
 }
-

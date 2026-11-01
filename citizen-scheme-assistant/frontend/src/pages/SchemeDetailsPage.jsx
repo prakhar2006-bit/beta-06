@@ -40,6 +40,51 @@ const CRITICALITY_LABELS = {
   DISQUALIFIER: { en: 'Must not apply', hi: 'लागू नहीं होना चाहिए' },
 };
 
+const textValue = (value) => {
+  if (!value) return '';
+  if (typeof value === 'string') return value;
+  if (typeof value.text === 'string') return value.text;
+  return value.en || value.hi || '';
+};
+
+const normalizedCriteria = (scheme) => {
+  if (!Array.isArray(scheme?.criteria)) return [];
+  return scheme.criteria.map((criterion, index) => ({
+    id: criterion.id || criterion.source_ids?.join('-') || index,
+    criticality: criterion.criticality || 'MANDATORY',
+    explanation_if_met: textValue(criterion.explanation_if_met || criterion.text),
+    explanation_if_violated: textValue(criterion.explanation_if_violated),
+  })).filter((criterion) => criterion.explanation_if_met);
+};
+
+const normalizedDocuments = (scheme) => (Array.isArray(scheme?.required_documents)
+  ? scheme.required_documents.map((document, index) => ({
+    ...document,
+    id: document.id || document.item_key || index,
+    title: document.title || document.document_type,
+    guidance: document.guidance || document.condition_text || document.requirement,
+    optional: document.requirement !== 'required',
+  }))
+  : []);
+
+const normalizedApplicationSteps = (scheme) => {
+  if (Array.isArray(scheme?.application_steps)) return scheme.application_steps;
+  if (Array.isArray(scheme?.application_guidance?.steps)) {
+    return scheme.application_guidance.steps.map((step, index) => ({
+      step_number: index + 1,
+      description: step,
+    }));
+  }
+  if (Array.isArray(scheme?.application_routes)) {
+    return scheme.application_routes.map((route, index) => ({
+      step_number: index + 1,
+      title: route.mode,
+      description: route.instructions,
+    }));
+  }
+  return [];
+};
+
 export const SchemeDetailsPage = () => {
   // ---------------------------------------------------------------
   // ALL HOOKS GO HERE, ABOVE EVERY EARLY RETURN (Rules of Hooks).
@@ -81,7 +126,10 @@ export const SchemeDetailsPage = () => {
 
   // Stale-rules check (moved up from below the early returns: this was the crash).
   // scheme is null on the first render, so everything is read safely.
-  const lastChecked = scheme?.official_source?.last_checked_date ?? null;
+  const lastChecked = scheme?.last_checked_date
+    || scheme?.official_source?.last_checked_date
+    || scheme?.sources?.[0]?.last_checked_date
+    || null;
 
   const isStale = useMemo(() => {
     if (!lastChecked) return false;
@@ -129,16 +177,25 @@ export const SchemeDetailsPage = () => {
   }
 
   const schemeName = getLocalized(scheme.name);
-  const schemeDesc = getLocalized(scheme.description);
-  const benefits = getLocalized(scheme.benefits);
-  const officialSource = scheme.official_source || {};
+  const schemeDesc = getLocalized(scheme.description || scheme.eligibility_text);
+  const benefits = [
+    scheme.benefit_highlight,
+    ...(Array.isArray(scheme.benefits) ? scheme.benefits.map((benefit) => textValue(benefit.description || benefit)) : []),
+  ].filter(Boolean);
+  const firstSource = scheme.sources?.[0] || {};
+  const officialSource = {
+    ...firstSource,
+    ...(scheme.official_source || {}),
+    url: scheme.official_source?.url || firstSource.url || firstSource.original_url,
+    issuing_ministry: scheme.official_source?.issuing_ministry || scheme.organization_name,
+  };
   const isCentral = scheme.level === 'central';
-  const criteria = scheme.criteria || [];
-  const documents = scheme.required_documents || [];
-  const applicationSteps = scheme.application_steps || [];
-  const categoryLabel = CATEGORY_LABELS[scheme.category]
+  const criteria = normalizedCriteria(scheme);
+  const documents = normalizedDocuments(scheme);
+  const applicationSteps = normalizedApplicationSteps(scheme);
+  const categoryLabel = scheme.category && (CATEGORY_LABELS[scheme.category]
     ? getLocalized(CATEGORY_LABELS[scheme.category])
-    : scheme.category.replace('-', ' ');
+    : scheme.category.replace('-', ' '));
 
 
   return (
@@ -278,14 +335,14 @@ export const SchemeDetailsPage = () => {
         </div>
 
         {/* Benefits Section */}
-        {benefits && (
+         {benefits.length > 0 && (
           <div className="glass-panel rounded-[32px] shadow-glass p-6 sm:p-8 mb-8 border border-white/80">
             <div className="flex items-center gap-2 text-slate-900 font-bold text-base sm:text-lg mb-4">
               <CheckCircle className="w-5 h-5 text-emerald-600" />
               <h2>{t('benefitsHeading', 'Key Benefits & Entitlements')}</h2>
             </div>
-            <div className="bg-emerald-500/10 rounded-2xl p-5 border border-emerald-300/60 text-xs sm:text-sm text-emerald-950 leading-relaxed font-semibold">
-              {benefits}
+             <div className="bg-emerald-500/10 rounded-2xl p-5 border border-emerald-300/60 text-xs sm:text-sm text-emerald-950 leading-relaxed font-semibold space-y-2">
+              {benefits.map((benefit, index) => <p key={`${benefit}-${index}`}>{benefit}</p>)}
             </div>
           </div>
         )}
@@ -367,18 +424,14 @@ export const SchemeDetailsPage = () => {
             </div>
 
             <div className="space-y-6">
-              {applicationSteps.map((step) => (
-                <div key={step.step_number} className="flex items-start gap-4">
+              {applicationSteps.map((step, index) => (
+                <div key={`${step.step_number || index + 1}-${textValue(step.description)}`} className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-xs">
-                    {step.step_number}
+                    {step.step_number || index + 1}
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900 mb-1">
-                      {getLocalized(step.title)}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                      {getLocalized(step.description)}
-                    </p>
+                    {step.title && <h4 className="text-sm font-bold text-slate-900 mb-1">{getLocalized(step.title)}</h4>}
+                    {step.description && <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">{getLocalized(step.description)}</p>}
                   </div>
                 </div>
               ))}
